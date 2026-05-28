@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0d2240">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Quiz Instructor Fitness · 100 intrebari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0d2240;
+  --navy-light: #16345c;
+  --orange: #f7941d;
+  --orange-bright: #ff9e1b;
+  --orange-deep: #e07d00;
+  --bg: #0a1828;
+  --bg-card: #112a47;
+  --bg-card-light: #16365c;
+  --text: #f3f6fa;
+  --text-soft: #b4c2d4;
+  --text-muted: #6f8298;
+  --green: #3ec46d;
+  --green-bg: #1a3a2a;
+  --red: #ff5a4d;
+  --red-bg: #3a1f1d;
+  --line: #1f3a5c;
+  --shadow: 0 8px 28px -8px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(247, 148, 29, 0.10) 0%, transparent 55%),
+    radial-gradient(circle at 90% 100%, rgba(22, 52, 92, 0.5) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+  position: relative;
+}
+
+/* === HEADER === */
+header.masthead {
+  text-align: center;
+  padding: 24px 0 20px;
+  position: relative;
+}
+
+.logo-mark {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 0 0 4px rgba(247,148,29,0.2), 0 6px 20px -6px rgba(247,148,29,0.6);
+}
+
+.eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+h1.title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px, 9vw, 52px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+h1.title em {
+  font-style: normal;
+  color: var(--orange);
+  display: block;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-soft);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* === STATS BANNER === */
+.stats-banner {
+  background: linear-gradient(135deg, var(--navy-light), var(--navy));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-around;
+  margin: 24px 0;
+  text-align: center;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stats-banner .stat-item .val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+}
+
+.stats-banner .stat-item .val.accent { color: var(--orange); }
+
+.stats-banner .stat-item .lab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.stats-banner .reset-mini {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stats-banner .reset-mini:active { color: var(--orange); }
+
+/* === SECTION LABEL === */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* === BIG PRIMARY BUTTON (random) === */
+.primary-mode {
+  width: 100%;
+  background: linear-gradient(135deg, var(--orange-bright), var(--orange-deep));
+  border: none;
+  border-radius: 18px;
+  padding: 26px 24px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--navy);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(247,148,29,0.7);
+  transition: transform 0.15s;
+}
+
+.primary-mode:active { transform: scale(0.98); }
+
+.primary-mode .icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.primary-mode h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.primary-mode p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.primary-mode .arrow {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+/* === MODE GRID === */
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.mode-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 16px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  transition: transform 0.15s, border-color 0.15s;
+  position: relative;
+}
+
+.mode-card:active { transform: scale(0.97); border-color: var(--orange); }
+
+.mode-card .icon { font-size: 22px; margin-bottom: 8px; display: block; }
+
+.mode-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.mode-card p {
+  font-size: 12.5px;
+  color: var(--text-soft);
+  margin-top: 5px;
+  line-height: 1.35;
+}
+
+/* === CATEGORY CARDS === */
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.15s, border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--orange);
+}
+
+.cat-card:active { transform: scale(0.98); border-color: var(--orange); }
+
+.cat-card .cat-icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--bg-card-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cat-card .cat-info { flex: 1; }
+
+.cat-card .cat-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.cat-card .cat-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.cat-card .cat-best {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  color: var(--orange);
+  font-weight: 700;
+  text-align: right;
+}
+
+.cat-card .cat-arrow {
+  font-size: 20px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* === QUIZ SCREEN === */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  gap: 12px;
+}
+
+.back-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  font-weight: 600;
+  padding: 8px 14px;
+}
+
+.back-btn:active { background: var(--bg-card-light); }
+
+.quiz-title-mini {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--orange);
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.progress-info .stat strong { color: var(--text); font-size: 17px; }
+
+.progress-bar {
+  height: 6px;
+  background: var(--bg-card);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0 24px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--orange-bright));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* === QUESTION CARD === */
+.question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+}
+
+.q-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.q-number {
+  background: var(--orange);
+  color: var(--navy);
+  padding: 4px 11px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.q-category { color: var(--text-muted); }
+
+.q-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+
+.option {
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 15px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text);
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.4;
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  position: relative;
+  width: 100%;
+}
+
+.option:active:not(.locked) { transform: scale(0.99); }
+
+.option .letter {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-card-light);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  margin-top: -1px;
+  transition: all 0.15s;
+}
+
+.option .opt-text { flex: 1; padding-top: 3px; }
+
+.option.selected { border-color: var(--orange); background: var(--bg-card-light); }
+.option.selected .letter { background: var(--orange); color: var(--navy); }
+
+.option.correct { border-color: var(--green); background: var(--green-bg); }
+.option.correct .letter { background: var(--green); color: #fff; }
+
+.option.incorrect { border-color: var(--red); background: var(--red-bg); }
+.option.incorrect .letter { background: var(--red); color: #fff; }
+
+.option.locked { cursor: default; }
+
+.option .indicator {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  opacity: 0;
+}
+
+.option.correct .indicator, .option.incorrect .indicator { opacity: 1; }
+
+/* === FEEDBACK === */
+.feedback {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--bg);
+  border-left: 4px solid var(--orange);
+  display: none;
+}
+
+.feedback.show { display: block; animation: fadeIn 0.25s ease; }
+.feedback.correct { border-left-color: var(--green); }
+.feedback.wrong { border-left-color: var(--red); }
+
+.feedback .label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.feedback.correct .label { color: var(--green); }
+.feedback.wrong .label { color: var(--red); }
+
+.feedback .text { font-size: 15px; color: var(--text-soft); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === ACTIONS === */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 15px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background: var(--orange);
+  color: var(--navy);
+  transition: transform 0.1s, background 0.15s;
+  flex: 1;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-soft);
+  border: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* === RESULTS === */
+.results {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.results .medal { font-size: 56px; margin-bottom: 8px; }
+
+.results .label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.score-display {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(64px, 22vw, 100px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+}
+
+.score-display .slash { color: var(--text-muted); font-weight: 500; }
+.score-display .total { color: var(--text-muted); font-size: 0.5em; }
+
+.score-percent {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  color: var(--orange);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.results-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin: 20px 0;
+}
+
+.results-stats .num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.results-stats .num.green { color: var(--green); }
+.results-stats .num.red { color: var(--red); }
+
+.results-stats .lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.results-message {
+  font-size: 16px;
+  color: var(--text-soft);
+  margin: 18px auto;
+  max-width: 380px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.results .actions { margin-top: 24px; }
+
+/* === REVIEW LIST === */
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  margin: 24px 0 14px;
+  justify-content: center;
+}
+
+.filter-chip {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 7px 15px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.filter-chip.active { background: var(--orange); color: var(--navy); border-color: var(--orange); }
+
+.review-list {
+  margin-top: 10px;
+  text-align: left;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.review-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+}
+
+.review-item:last-child { border-bottom: none; }
+
+.review-item .num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  width: 26px;
+  flex-shrink: 0;
+  padding-top: 2px;
+  font-weight: 600;
+}
+
+.review-item .body { flex: 1; }
+.review-item .body .q { color: var(--text); margin-bottom: 4px; font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+.review-item .body .a { font-size: 13px; color: var(--text-soft); }
+.review-item .status { font-size: 18px; align-self: flex-start; padding-top: 2px; }
+
+/* === FLOATING HOME === */
+.home-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--navy);
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px -6px rgba(247,148,29,0.7);
+  z-index: 10;
+}
+
+.home-btn:active { transform: scale(0.92); }
+.home-btn.show { display: flex; }
+
+/* Footer */
+.brand-footer {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.brand-footer strong { color: var(--text-soft); }
+
+/* Screens */
+.screen { display: none; }
+.screen.active { display: block; animation: pageFade 0.3s ease; }
+
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============== HOME ============== -->
+  <div id="screen-home" class="screen active">
+    <header class="masthead">
+      <div class="logo-mark">🏋️</div>
+      <div class="eyebrow">Fitness Education School · 2024/2025</div>
+      <h1 class="title">Quiz Instructor<em>Fitness</em></h1>
+      <div class="subtitle">100 de intrebari · Anatomie, Nutritie &amp; Fitness</div>
+    </header>
+
+    <div class="stats-banner" id="stats-banner" style="display:none;">
+      <button class="reset-mini" id="reset-stats">Reset</button>
+      <div class="stat-item"><div class="val" id="stat-answered">0</div><div class="lab">Raspunse</div></div>
+      <div class="stat-item"><div class="val accent" id="stat-correct">0</div><div class="lab">Corecte</div></div>
+      <div class="stat-item"><div class="val" id="stat-accuracy">—</div><div class="lab">Acuratete</div></div>
+      <div class="stat-item"><div class="val" id="stat-streak">0</div><div class="lab">Streak</div></div>
+    </div>
+
+    <div class="section-label">Mod recomandat</div>
+    <button class="primary-mode" data-mode="shuffle">
+      <span class="icon">🎲</span>
+      <h3>Quiz Aleator</h3>
+      <p>Toate 100 amestecate + raspunsuri in ordine random</p>
+      <span class="arrow">→</span>
+    </button>
+
+    <div class="section-label">Alte moduri</div>
+    <div class="mode-grid">
+      <button class="mode-card" data-mode="all">
+        <span class="icon">📋</span>
+        <h3>Toate la rand</h3>
+        <p>Cele 100 in ordinea din brosura</p>
+      </button>
+      <button class="mode-card" data-mode="exam">
+        <span class="icon">⏱️</span>
+        <h3>Simulare examen</h3>
+        <p>30 random, scor la final</p>
+      </button>
+      <button class="mode-card" data-mode="review">
+        <span class="icon">🔁</span>
+        <h3>Doar gresite</h3>
+        <p>Reia ce ai gresit</p>
+      </button>
+      <button class="mode-card" data-mode="exam50">
+        <span class="icon">🎯</span>
+        <h3>Test 50</h3>
+        <p>50 random, scor la final</p>
+      </button>
+    </div>
+
+    <div class="section-label">Pe categorii</div>
+    <div class="cat-grid" id="cat-grid"></div>
+
+    <div class="brand-footer">
+      <strong>Fitness Education School</strong><br>
+      0747.227.878 · www.fitness-education.ro<br>
+      Quiz pentru studiu personal, bazat pe brosura cu 100 de intrebari.
+    </div>
+  </div>
+
+  <!-- ============== QUIZ ============== -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-header">
+      <button class="back-btn" id="back-home">← Acasa</button>
+      <div class="quiz-title-mini" id="quiz-title-mini"></div>
+    </div>
+    <div class="progress-info" style="justify-content:space-between; padding:0 2px;">
+      <div class="stat"><span id="q-current">1</span> <span style="color:var(--text-muted)">/</span> <strong id="q-total">100</strong></div>
+      <div class="stat" id="score-live"><strong>0</strong> corecte</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+    <div class="question-card" id="question-card"></div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" id="prev-btn">←</button>
+      <button class="btn btn-ghost" id="skip-btn">Sari</button>
+      <button class="btn" id="next-btn">Urmatoarea →</button>
+    </div>
+  </div>
+
+  <!-- ============== RESULTS ============== -->
+  <div id="screen-results" class="screen">
+    <div class="results">
+      <div class="medal" id="results-medal">🎉</div>
+      <div class="label" id="results-label">Rezultat final</div>
+      <div class="score-display">
+        <span id="final-score">0</span><span class="slash">/</span><span class="total" id="final-total">0</span>
+      </div>
+      <div class="score-percent" id="final-percent">0%</div>
+      <div class="results-stats">
+        <div><div class="num green" id="final-correct">0</div><div class="lbl">Corecte</div></div>
+        <div><div class="num red" id="final-wrong">0</div><div class="lbl">Gresite</div></div>
+        <div><div class="num" id="final-skipped">0</div><div class="lbl">Sarite</div></div>
+      </div>
+      <div class="results-message" id="results-message"></div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" id="restart-btn" style="flex:1;">Reia</button>
+        <button class="btn" id="results-home-btn">Acasa</button>
+      </div>
+
+      <div class="filter-chips">
+        <button class="filter-chip active" data-filter="all">Toate</button>
+        <button class="filter-chip" data-filter="wrong">Gresite</button>
+        <button class="filter-chip" data-filter="right">Corecte</button>
+      </div>
+      <div class="review-list" id="review-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<button class="home-btn" id="home-btn-float">⌂</button>
+
+<script>
+const QUIZ_DATA = {"categories": {"anatomie": "Anatomie", "nutritie": "Nutritie", "fitness": "Fitness"}, "questions": [{"cat": "anatomie", "q": "Timpul necesar somnului pentru o refacere completa si de calitate este:", "opts": ["De 6 ore", "De 10 ore", "De 8 ore"], "a": 2}, {"cat": "anatomie", "q": "Miscarea de rotatie a mainii prin care policele se roteste lateral si palma priveste in sus se numeste:", "opts": ["Pronatie", "Supinatie", "Abductie"], "a": 1}, {"cat": "anatomie", "q": "Cum se numeste miscarea de apropiere a doua segmente alaturate ale corpului?", "opts": ["Adductie", "Extensie", "Flexie"], "a": 2}, {"cat": "anatomie", "q": "Muschii gambei sunt:", "opts": ["Gemeni si solear", "Deltoizi", "Pectorali"], "a": 0}, {"cat": "anatomie", "q": "Muschii spatelui si ai cefei sunt:", "opts": ["Pectorali", "Oblici", "Trapez si dorsali"], "a": 2}, {"cat": "anatomie", "q": "Ridicarea umerilor este realizata de muschiul:", "opts": ["Triceps sural", "Trapez", "Pectorali"], "a": 1}, {"cat": "anatomie", "q": "In contractie izometrica se modifica:", "opts": ["Lungimea muschiului", "Tensiunea muschiului", "Ambele"], "a": 1}, {"cat": "anatomie", "q": "Muschiul umarului se numeste:", "opts": ["Pectoral", "Fesier", "Deltoid"], "a": 2}, {"cat": "anatomie", "q": "Cate regiuni are coloana vertebrala?", "opts": ["3", "4", "5"], "a": 2}, {"cat": "anatomie", "q": "Care sunt cele 4 curburi ale coloanei vertebrale?", "opts": ["Lombara, laterala, interioara, sacrala", "Cervicala, toracala, lombara, sacrala", "Toracala, interioara, sacrala, laterala"], "a": 1}, {"cat": "anatomie", "q": "Scheletul osos al capului are:", "opts": ["22 oase", "25 oase", "19 oase"], "a": 0}, {"cat": "anatomie", "q": "Centura scapulara este formata din:", "opts": ["Radius, ulna", "Clavicula, omoplat", "Tarsiene, metatarsiene"], "a": 1}, {"cat": "anatomie", "q": "Deformarile care pot aparea la nivelul coloanei vertebrale sunt:", "opts": ["Fractura, lordoza, cifoza", "Cifoza, lordoza, scolioza", "Luxatie, artrita, cifoza"], "a": 1}, {"cat": "anatomie", "q": "Proprietatile fibrei musculare sunt:", "opts": ["Contractilitatea, elasticitatea, extensibilitatea, excitabilitatea", "Contractilitatea, elasticitatea, tonicitatea, troficitatea", "Contractilitatea, elasticitatea, densitatea, excitabilitatea"], "a": 0}, {"cat": "anatomie", "q": "Tipurile de muschi sunt:", "opts": ["Netezi, striati, cardiac", "Netezi, fini, cardiac", "Striati, subtiri, cardiac"], "a": 0}, {"cat": "anatomie", "q": "Muschii antebratului se insereaza pe:", "opts": ["Humerus, metacarpiene", "Humerus, carpiene", "Clavicula, falange"], "a": 1}, {"cat": "anatomie", "q": "Principala miscare pe care o face muschiul pectoral este:", "opts": ["Adductia bratelor", "Flexia bratelor", "Abductia bratelor"], "a": 0}, {"cat": "anatomie", "q": "Care nu sunt grupe de muschi antagoniste?", "opts": ["Pectoral-dorsal", "Femural posterior-fesier", "Biceps-triceps"], "a": 1}, {"cat": "anatomie", "q": "Din grupa de muschi stabilizatori nu fac parte:", "opts": ["Muschii lombari", "Abdomenul", "Muschii glutei"], "a": 2}, {"cat": "anatomie", "q": "Puterea reprezinta:", "opts": ["Rapiditatea miscarii", "Abilitatea de a contracta muschii la maximum intr-o explozie de miscari", "Abilitatea unui muschi de a se contracta in mod repetat"], "a": 1}, {"cat": "anatomie", "q": "Cate tipuri somatice exista?", "opts": ["Actomorf, mezomorf, ezomorf", "Ectomorf, mezomorf, encomorf", "Ectomorf, mezomorf, endomorf"], "a": 2}, {"cat": "anatomie", "q": "Muschiul biceps brahial este situat:", "opts": ["Pe partea anterioara a humerusului", "Pe partea posterioara a humerusului", "Pe partea laterala a humerusului"], "a": 0}, {"cat": "anatomie", "q": "Deltoidul este impartit in:", "opts": ["Anterior, median, posterior", "Anterior, lateral, dorsal", "Anterior, mijlociu, posterior"], "a": 0}, {"cat": "anatomie", "q": "Cum se calculeaza Frecventa Cardiaca Maxima (FC MAX)?", "opts": ["220 - varsta", "210 - varsta", "200 - varsta"], "a": 0}, {"cat": "anatomie", "q": "Pe ce parte se afla bicepsul femural?", "opts": ["Pe partea posterioara a coapsei", "Pe partea anterioara a coapsei", "Pe partea mediana a coapsei"], "a": 0}, {"cat": "anatomie", "q": "Cum se clasifica oasele?", "opts": ["Oase lungi / oase scurte / oase late", "Oase lungi / oase scurte / oase moi", "Oase moi / oase tari / oase mobile"], "a": 0}, {"cat": "anatomie", "q": "Din ce este format sistemul osos?", "opts": ["Oase", "Ligament", "Oase, cartilagii si ligamente"], "a": 2}, {"cat": "anatomie", "q": "Care este cel mai lung os din corp?", "opts": ["Craniul", "Femurul", "Scarita"], "a": 1}, {"cat": "anatomie", "q": "Oasele late se gasesc in componenta:", "opts": ["Membrelor inferioare", "Bazinului", "Coloanei vertebrale"], "a": 1}, {"cat": "anatomie", "q": "Oasele scurte sunt implicate in miscari:", "opts": ["De mare amplitudine", "De mica amplitudine", "Nu sunt implicate in miscare"], "a": 1}, {"cat": "anatomie", "q": "Antebratul este format din:", "opts": ["Radius", "Ulna", "Radius si ulna"], "a": 2}, {"cat": "anatomie", "q": "Cate capete are muschiul deltoid?", "opts": ["2 capete - anterior si posterior", "3 capete - anterior, mijlociu, posterior", "4 capete - deltoid mic, mediu, mijlociu si mare"], "a": 1}, {"cat": "anatomie", "q": "Din cate vertebre este constituita coloana vertebrala?", "opts": ["36", "46", "34"], "a": 2}, {"cat": "anatomie", "q": "Muschiul deltoid este folosit la:", "opts": ["Abdomen", "Ridicari laterale ale bratelor", "Extensii ale trunchiului"], "a": 1}, {"cat": "anatomie", "q": "Inclinarea capului si rotirea lui este realizata de muschii:", "opts": ["Membrelor superioare", "Membrelor inferioare", "Gatului"], "a": 2}, {"cat": "anatomie", "q": "Care este planul care imparte corpul in doua jumatati simetrice, dreapta si stanga?", "opts": ["Frontal", "Sagital", "Transversal"], "a": 1}, {"cat": "anatomie", "q": "Axul longitudinal este axul:", "opts": ["Grosimii corpului", "Latimii corpului", "Lungimii corpului"], "a": 2}, {"cat": "anatomie", "q": "Contractilitatea este proprietatea muschilor de a:", "opts": ["Se scurta", "Reveni la forma lor initiala", "Se alungi"], "a": 0}, {"cat": "anatomie", "q": "Muschiul biceps femural realizeaza miscarea de:", "opts": ["Extensie a genunchiului", "Flexie a genunchiului", "Niciuna"], "a": 1}, {"cat": "anatomie", "q": "Oasele care formeaza scheletul mainii se numesc:", "opts": ["Carpiene, metacarpiene, falange", "Radius, ulna, falange", "Femur, tibie, metacarpiene"], "a": 0}, {"cat": "nutritie", "q": "Care este formula de calcul a indicelui de masa corporala?", "opts": ["kg/cm2", "kg/cm", "cm2/kg"], "a": 2}, {"cat": "nutritie", "q": "Care este pulsul optim pentru arderea grasimilor?", "opts": ["65%", "75%", "85%"], "a": 1}, {"cat": "nutritie", "q": "Carui tip somatic se recomanda regimul hipercaloric?", "opts": ["Endomorf", "Ectomorf", "Mezomorf"], "a": 1}, {"cat": "nutritie", "q": "Cate calorii contine 1 g de proteina?", "opts": ["6 calorii", "4 calorii", "7 calorii"], "a": 1}, {"cat": "nutritie", "q": "Care este necesarul zilnic de proteina pentru hipertrofie musculara?", "opts": ["4g/kg corp", "6g/kg corp", "2g/kg corp"], "a": 2}, {"cat": "nutritie", "q": "Ce rol au carbohidratii?", "opts": ["Energetic", "Plastic", "De constructie"], "a": 0}, {"cat": "nutritie", "q": "Din ce este compusa hrana?", "opts": ["Fructe si legume", "Carne", "Alimente"], "a": 2}, {"cat": "nutritie", "q": "Din categoriile macronutrientilor nu fac parte:", "opts": ["Vitaminele", "Proteinele", "Lipidele"], "a": 0}, {"cat": "nutritie", "q": "Dupa antrenament este recomandat sa folosim:", "opts": ["Proteina cu absorbtie lenta", "Proteina cu absorbtie medie", "Proteina cu absorbtie rapida"], "a": 2}, {"cat": "nutritie", "q": "Neoglucogeneza este procesul prin care corpul transforma:", "opts": ["Grasimile in proteine", "Grasimile in zahar", "Grasimea in minerale"], "a": 1}, {"cat": "nutritie", "q": "Cum se face hidratarea corecta a organismului?", "opts": ["Consumam o cantitate foarte mare de apa o singura data pe zi", "Consumam apa constant pe tot parcursul zilei fara sa ajungem la senzatia de sete", "Consumam apa doar atunci cand simtim ca nu mai putem de sete"], "a": 1}, {"cat": "nutritie", "q": "Carui tip somatic se recomanda regimul hipercaloric? (II)", "opts": ["Endomorf", "Ectomorf", "Mezomorf"], "a": 1}, {"cat": "nutritie", "q": "Un macronutrient este:", "opts": ["Proteina", "Vitamina C", "Vitamina B"], "a": 0}, {"cat": "nutritie", "q": "Rapoartele recomandate pentru un stil de viata sanatos sunt:", "opts": ["Glucide 50-55%, Proteine 15-20%, Lipide 30-35%", "Glucide 40-45%, Proteine 15-20%, Lipide 30-35%", "Glucide 50-55%, Proteine 15-20%, Lipide 10-15%"], "a": 0}, {"cat": "nutritie", "q": "IMC pentru normoponderabilitate este cuprins intre:", "opts": ["35-39 % kg/mp", "18,5-24,9 % kg/mp", "30-34,9 % kg/mp"], "a": 1}, {"cat": "nutritie", "q": "Care este necesarul zilnic de fibre alimentare?", "opts": ["100g", "30g", "70g"], "a": 1}, {"cat": "nutritie", "q": "Cele mai importante surse de calciu sunt?", "opts": ["Legumele verzi", "Lactatele", "Oul"], "a": 1}, {"cat": "nutritie", "q": "Sub ce forma sunt absorbite proteinele?", "opts": ["Acizi grasi", "Glucoza", "Aminoacizi"], "a": 2}, {"cat": "nutritie", "q": "Care este principalul rol al lipidelor?", "opts": ["Functional", "Structural", "Energetic"], "a": 2}, {"cat": "nutritie", "q": "Care este valoarea normala a grasimii viscerale?", "opts": ["1%", "2-5%", "10%"], "a": 1}, {"cat": "fitness", "q": "Care sunt planurile corpului uman?", "opts": ["Sagital, frontal, transversal", "Longitudinal, frontal, transversal", "Lateral, proximal, distal"], "a": 0}, {"cat": "fitness", "q": "Din articulatia femuro-tibiala se pot executa miscari de:", "opts": ["Flexie si extensie", "Adductie", "Rotatie"], "a": 0}, {"cat": "fitness", "q": "Care sunt muschii principali actionati in timpul unei genuflexiuni?", "opts": ["Fesier, cvadriceps", "Fesier, biceps femural", "Biceps femural, cvadriceps"], "a": 0}, {"cat": "fitness", "q": "Combinatia dintre doua exercitii, cel de izolare fiind primul, cu pauza scurta, reprezinta o tehnica de:", "opts": ["Preobosire musculara", "Postobosire musculara", "Piramidala"], "a": 0}, {"cat": "fitness", "q": "Muschii gluteali sunt folositi la:", "opts": ["Flotari", "Tractiuni", "Genuflexiuni"], "a": 2}, {"cat": "fitness", "q": "Care este cel mai important lucru intr-un antrenament de fitness?", "opts": ["Incalzirea", "Numarul repetarilor", "Timpul"], "a": 0}, {"cat": "fitness", "q": "Antrenamentul de hipertrofie inseamna?", "opts": ["Cresterea masei musculare", "Scadere ponderala", "Tonifiere"], "a": 0}, {"cat": "fitness", "q": "Care este modul cel mai eficient de a slabi din jurul abdomenului?", "opts": ["Facand exercitii pentru abdomen", "Facand exercitii de tip aerob", "Tinand cont la alimentatie"], "a": 2}, {"cat": "fitness", "q": "Pentru ce se recomanda executarea a peste 15 repetari pe serie?", "opts": ["Dezvoltarea rezistentei la efort", "Cresterea ritmului cardiac", "Pierderea tesutului adipos"], "a": 0}, {"cat": "fitness", "q": "Tipurile de prize in functie de pozitia palmelor:", "opts": ["Pronatie si supinatie", "Pronatie, supinatie, neutru si mixta", "Ingusta si larga"], "a": 1}, {"cat": "fitness", "q": "Care este principiul incalzirii?", "opts": ["Incalzire generala", "Incalzire specifica", "10 min. cardio, incalzire generala, incalzire specifica"], "a": 2}, {"cat": "fitness", "q": "Care este scopul folosirii greutatilor mari?", "opts": ["Dezvoltarea tonusului muscular", "Cresterea masei musculare", "Cresterea rezistentei la efort"], "a": 1}, {"cat": "fitness", "q": "Cate articulatii sunt implicate in miscare la exercitiul de izolare?", "opts": ["Minim o articulatie", "2 articulatii", "O singura articulatie"], "a": 2}, {"cat": "fitness", "q": "Ce tip de fibre musculare sunt folosite in antrenamentele cu greutati?", "opts": ["Albe", "Rosii", "Roz"], "a": 0}, {"cat": "fitness", "q": "Ce tip de contractie este cea mai folosita pentru dezvoltarea masei musculare?", "opts": ["Izotonica", "Izometrica", "Izokinetica"], "a": 0}, {"cat": "fitness", "q": "Care este muschiul principal implicat in ridicarea picioarelor?", "opts": ["Iliopsoas", "Dreptul abdominal", "Oblicul extern"], "a": 0}, {"cat": "fitness", "q": "Cate repetari se recomanda pentru dezvoltarea masei musculare?", "opts": ["1-4", "8-12", "15-20"], "a": 1}, {"cat": "fitness", "q": "Ce tip de miscare executam la antrenamentul bicepsului la banca Scott?", "opts": ["Flexia antebratului pe brat", "Extensia antebratului pe brat", "Abductia bratului"], "a": 0}, {"cat": "fitness", "q": "Ce tip de contractie este folosirea miscarii negative la un exercitiu?", "opts": ["Concentrica", "Excentrica", "Izometrica"], "a": 1}, {"cat": "fitness", "q": "Care sunt exercitiile de izolare?", "opts": ["Flotari", "Extensia piciorului la aparat", "Impins la piept cu bara"], "a": 1}, {"cat": "fitness", "q": "Antrenamentul specific muschiului cardiac este:", "opts": ["Cardiovascular", "Anaerobic", "Izometric"], "a": 0}, {"cat": "fitness", "q": "Ridicarile de gantere laterale sunt pentru:", "opts": ["Triceps", "Deltoid", "Biceps"], "a": 1}, {"cat": "fitness", "q": "Exercitiul Flotari la paralele cu gantere deasupra capului este un exercitiu pentru:", "opts": ["Triceps", "Biceps", "Deltoid"], "a": 0}, {"cat": "fitness", "q": "Printre tehnicile de crestere in masa musculara putem intalni:", "opts": ["Seriile piramidale, seriile descrescatoare, superseriile", "Seriile concentrate, circuitul, seriile gigant", "Repetarile partiale, repetarile impartite, semi-repetarile"], "a": 0}, {"cat": "fitness", "q": "Combinatia dintre doua exercitii, cel de izolare fiind al doilea, reprezinta o tehnica de:", "opts": ["Preobosire musculara", "Postobosire musculara", "Piramidala"], "a": 1}, {"cat": "fitness", "q": "Exercitiul \"Ramat la aparat\" ce muschi lucreaza?", "opts": ["Biceps brachial", "Marele dorsal", "Triceps"], "a": 1}, {"cat": "fitness", "q": "Exercitiul \"Impins culcat cu bara\" lucreaza:", "opts": ["Pectoral", "Psoas iliac", "Cvadriceps"], "a": 0}, {"cat": "fitness", "q": "Antrenamentul care are ca scop hipertrofia musculara trebuie sa se efectueze:", "opts": ["Dimineata", "Pe stomacul gol", "Cu 4-6 repetari/serie"], "a": 2}, {"cat": "fitness", "q": "Antrenamentul pectoralilor se poate realiza:", "opts": ["La banca Larry Scott", "Cu gantere", "Cu funia"], "a": 1}, {"cat": "fitness", "q": "Care este rolul antrenorului personal?", "opts": ["Sa verifice abonamentele clientilor salii", "Sa elaboreze planuri de antrenament personalizate si sa asiste clientul pe toata durata antrenamentului", "Sa se ocupe in mod egal de toti clientii"], "a": 1}, {"cat": "fitness", "q": "Miscarea prin care 2 segmente articulate se apropie unul de celalalt se numeste:", "opts": ["Flexie", "Rotatie", "Abductie"], "a": 0}, {"cat": "fitness", "q": "Priza mixta inseamna:", "opts": ["Palma orientata in priza pronatie si cealalta palma orientata in priza supinatie", "Palmele sunt orientate inspre corp", "Palmele sunt orientate in jos"], "a": 0}, {"cat": "fitness", "q": "Seriile descrescatoare (drop set) sunt executate:", "opts": ["La un singur post de lucru cu greutate descrescatoare", "La doua posturi de lucru, la primul exercitiu executam 10 repetari, la al doilea numai 6 repetari", "La trei posturi de lucru, numarul repetarilor scade de la un post de lucru la altul"], "a": 0}, {"cat": "fitness", "q": "La seriile descrescatoare (drop set) se descarca bara de 1/3 din greutate dupa:", "opts": ["12 repetari", "Epuizare", "20 repetari"], "a": 1}, {"cat": "fitness", "q": "Avantajul exercitiilor unilaterale:", "opts": ["Economisim timp, pentru ca executam exercitiul numai cu un singur membru", "Membrele lucreaza izolat, astfel incarcatura de lucru este distribuita egal pe cele doua membre", "Cu ele putem evita fenomenul de supra-antrenament"], "a": 1}, {"cat": "fitness", "q": "Un superset este alcatuit din:", "opts": ["5 exercitii diferite, pentru aceeasi grupa musculara", "8 exercitii diferite, pentru grupe musculare antagoniste", "2-3 exercitii diferite, pentru aceeasi grupa musculara sau pentru grupe musculare antagoniste"], "a": 2}, {"cat": "fitness", "q": "Care termen nu reprezinta o postura in timpul antrenamentului?", "opts": ["Alergat", "Asezat", "Stand"], "a": 0}, {"cat": "fitness", "q": "Partea finala a fiecarui antrenament este:", "opts": ["Revenirea post-efort", "Incalzirea", "Antrenamentul propriu-zis"], "a": 0}, {"cat": "fitness", "q": "Avantajul exercitiilor unilaterale: (II)", "opts": ["Economisim timp, pentru ca executam exercitiul numai cu un singur membru", "Membrele lucreaza izolat, astfel incarcatura de lucru este distribuita egal pe cele doua membre", "Cu ele putem evita fenomenul de supra-antrenament"], "a": 1}, {"cat": "fitness", "q": "Genuflexiunile se pot efectua:", "opts": ["La paralele", "La aparatul pentru cvadricepsi", "Cu bara olimpica"], "a": 2}]};
+</script>
+<script>
+// ============== STATE ==============
+const STORAGE_KEY = 'fitness_quiz_100_v1';
+
+const state = {
+  mode: null,
+  questions: [],
+  optionOrder: [],
+  currentIdx: 0,
+  selected: {},
+  answered: {},
+  isExam: false,
+  showFeedback: true,
+  titleLabel: '',
+};
+
+let stats = {
+  perQuestion: {},
+  catBest: {},        // { anatomie: 92, nutritie: 80, ... }  best % per category
+  totalAnswered: 0,
+  totalCorrect: 0,
+  streak: 0,
+  bestStreak: 0,
+};
+
+const CAT_ICONS = { anatomie: '🦴', nutritie: '🥗', fitness: '💪' };
+
+// ============== STORAGE ==============
+function loadStats() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) stats = { ...stats, ...JSON.parse(raw) };
+  } catch (e) {}
+}
+function saveStats() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stats)); } catch (e) {}
+}
+function resetStats() {
+  if (!confirm('Resetezi toate statisticile?')) return;
+  stats = { perQuestion: {}, catBest: {}, totalAnswered: 0, totalCorrect: 0, streak: 0, bestStreak: 0 };
+  saveStats();
+  renderHome();
+}
+
+// ============== HELPERS ==============
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function getAccuracy() {
+  if (stats.totalAnswered === 0) return null;
+  return Math.round((stats.totalCorrect / stats.totalAnswered) * 100);
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('home-btn-float').classList.toggle('show', id !== 'screen-home');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function escapeHtml(s) {
+  if (typeof s !== 'string') s = String(s);
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Build all questions with stable ids
+const ALL_QUESTIONS = QUIZ_DATA.questions.map((q, i) => ({ ...q, id: 'q' + i }));
+
+// ============== HOME ==============
+function renderHome() {
+  const banner = document.getElementById('stats-banner');
+  if (stats.totalAnswered > 0) {
+    banner.style.display = 'flex';
+    document.getElementById('stat-answered').textContent = stats.totalAnswered;
+    document.getElementById('stat-correct').textContent = stats.totalCorrect;
+    const acc = getAccuracy();
+    document.getElementById('stat-accuracy').textContent = acc !== null ? acc + '%' : '—';
+    document.getElementById('stat-streak').textContent = stats.bestStreak;
+  } else {
+    banner.style.display = 'none';
+  }
+
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = '';
+  for (const [key, name] of Object.entries(QUIZ_DATA.categories)) {
+    const count = ALL_QUESTIONS.filter(q => q.cat === key).length;
+    const best = stats.catBest[key];
+    const bestHtml = best !== undefined ? `<div class="cat-best">Best<br>${best}%</div>` : '<div class="cat-arrow">›</div>';
+    const btn = document.createElement('button');
+    btn.className = 'cat-card';
+    btn.innerHTML = `
+      <div class="cat-icon">${CAT_ICONS[key] || '📘'}</div>
+      <div class="cat-info">
+        <div class="cat-name">${escapeHtml(name)}</div>
+        <div class="cat-count">${count} intrebari</div>
+      </div>
+      ${bestHtml}
+    `;
+    btn.addEventListener('click', () => startMode('cat', key));
+    grid.appendChild(btn);
+  }
+}
+
+// ============== START MODE ==============
+function startMode(mode, param) {
+  state.showFeedback = true;
+  state.isExam = false;
+  state.selected = {};
+  state.answered = {};
+  state.currentIdx = 0;
+
+  if (mode === 'shuffle') {
+    state.mode = 'shuffle';
+    state.titleLabel = 'Quiz Aleator';
+    state.questions = shuffle(ALL_QUESTIONS);
+  } else if (mode === 'all') {
+    state.mode = 'all';
+    state.titleLabel = 'Toate la rand';
+    state.questions = [...ALL_QUESTIONS];
+  } else if (mode === 'exam') {
+    state.mode = 'exam';
+    state.isExam = true;
+    state.showFeedback = false;
+    state.titleLabel = 'Simulare examen';
+    state.questions = shuffle(ALL_QUESTIONS).slice(0, 30);
+  } else if (mode === 'exam50') {
+    state.mode = 'exam50';
+    state.isExam = true;
+    state.showFeedback = false;
+    state.titleLabel = 'Test 50';
+    state.questions = shuffle(ALL_QUESTIONS).slice(0, 50);
+  } else if (mode === 'review') {
+    state.mode = 'review';
+    state.titleLabel = 'Doar gresite';
+    const wrongIds = Object.entries(stats.perQuestion)
+      .filter(([id, s]) => s.lastResult === 'wrong' || (s.attempts > 0 && s.correct < s.attempts))
+      .map(([id]) => id);
+    if (wrongIds.length === 0) {
+      alert('Nu ai gresit inca nicio intrebare. Joaca putin si revino!');
+      return;
+    }
+    state.questions = shuffle(ALL_QUESTIONS.filter(q => wrongIds.includes(q.id)));
+  } else if (mode === 'cat') {
+    state.mode = 'cat:' + param;
+    state.titleLabel = QUIZ_DATA.categories[param];
+    state.questions = shuffle(ALL_QUESTIONS.filter(q => q.cat === param));
+  }
+
+  // Option order: shuffle except for "all" mode (keep brochure order there)
+  state.optionOrder = state.questions.map(q => {
+    if (state.mode === 'all') return q.opts.map((_, i) => i);
+    return shuffle(q.opts.map((_, i) => i));
+  });
+
+  document.getElementById('q-total').textContent = state.questions.length;
+  document.getElementById('score-live').style.display = state.isExam ? 'none' : 'block';
+  document.getElementById('quiz-title-mini').textContent = state.titleLabel;
+
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// ============== RENDER ==============
+function renderQuestion() {
+  const idx = state.currentIdx;
+  const q = state.questions[idx];
+  const order = state.optionOrder[idx];
+  const card = document.getElementById('question-card');
+  const letters = ['A', 'B', 'C', 'D'];
+
+  const isLocked = !!state.answered[idx];
+  const selectedOptIdx = state.selected[idx];
+  const catName = QUIZ_DATA.categories[q.cat] || '';
+
+  let optionsHTML = '';
+  order.forEach((origIdx, displayIdx) => {
+    let cls = 'option';
+    if (isLocked && state.showFeedback) {
+      if (origIdx === q.a) cls += ' correct locked';
+      else if (origIdx === selectedOptIdx) cls += ' incorrect locked';
+      else cls += ' locked';
+    } else if (selectedOptIdx === origIdx) {
+      cls += ' selected';
+    }
+    const indicator = isLocked && state.showFeedback
+      ? (origIdx === q.a ? '<span class="indicator">✓</span>'
+         : (origIdx === selectedOptIdx ? '<span class="indicator">✗</span>' : ''))
+      : '';
+    optionsHTML += `
+      <button class="${cls}" data-orig="${origIdx}">
+        <span class="letter">${letters[displayIdx]}</span>
+        <span class="opt-text">${escapeHtml(q.opts[origIdx])}</span>
+        ${indicator}
+      </button>`;
+  });
+
+  let feedbackHTML = '';
+  if (isLocked && state.showFeedback) {
+    const correctLetter = letters[order.indexOf(q.a)];
+    const wasCorrect = selectedOptIdx === q.a;
+    feedbackHTML = `
+      <div class="feedback show ${wasCorrect ? 'correct' : 'wrong'}">
+        <div class="label">${wasCorrect ? '✓ Corect!' : '✗ Gresit'}</div>
+        <div class="text">${wasCorrect ? 'Bravo, asa e.' : 'Raspunsul corect: ' + correctLetter + ') ' + escapeHtml(q.opts[q.a])}</div>
+      </div>`;
+  }
+
+  card.innerHTML = `
+    <div class="q-meta">
+      <span class="q-number">${idx + 1}</span>
+      <span class="q-category">${CAT_ICONS[q.cat] || ''} ${escapeHtml(catName)}</span>
+    </div>
+    <div class="q-text">${escapeHtml(q.q)}</div>
+    <div class="options">${optionsHTML}</div>
+    ${feedbackHTML}`;
+
+  card.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => selectOption(parseInt(btn.dataset.orig)));
+  });
+
+  document.getElementById('q-current').textContent = idx + 1;
+  document.getElementById('progress-fill').style.width = ((idx + 1) / state.questions.length * 100) + '%';
+
+  const correctSoFar = Object.entries(state.answered).filter(
+    ([qIdx]) => state.selected[qIdx] === state.questions[qIdx].a
+  ).length;
+  document.getElementById('score-live').querySelector('strong').textContent = correctSoFar;
+
+  document.getElementById('prev-btn').disabled = idx === 0;
+  const nextBtn = document.getElementById('next-btn');
+  const skipBtn = document.getElementById('skip-btn');
+  nextBtn.textContent = (idx === state.questions.length - 1) ? 'Finalizeaza →' : 'Urmatoarea →';
+  skipBtn.style.display = (state.isExam || isLocked) ? 'none' : 'block';
+}
+
+// ============== SELECT ==============
+function selectOption(origIdx) {
+  const qIdx = state.currentIdx;
+  if (state.isExam) {
+    state.selected[qIdx] = origIdx;
+    renderQuestion();
+    return;
+  }
+  if (state.answered[qIdx]) return;
+
+  const q = state.questions[qIdx];
+  state.selected[qIdx] = origIdx;
+  state.answered[qIdx] = true;
+  const wasCorrect = origIdx === q.a;
+
+  recordAnswer(q, wasCorrect);
+  saveStats();
+  renderQuestion();
+}
+
+function recordAnswer(q, wasCorrect) {
+  const pq = stats.perQuestion[q.id] || { attempts: 0, correct: 0, lastResult: null };
+  pq.attempts += 1;
+  if (wasCorrect) pq.correct += 1;
+  pq.lastResult = wasCorrect ? 'right' : 'wrong';
+  stats.perQuestion[q.id] = pq;
+  stats.totalAnswered += 1;
+  if (wasCorrect) {
+    stats.totalCorrect += 1;
+    stats.streak += 1;
+    if (stats.streak > stats.bestStreak) stats.bestStreak = stats.streak;
+  } else {
+    stats.streak = 0;
+  }
+}
+
+// ============== NAV ==============
+function goNext() {
+  if (state.currentIdx >= state.questions.length - 1) { finishQuiz(); return; }
+  state.currentIdx += 1;
+  renderQuestion();
+}
+function goPrev() {
+  if (state.currentIdx === 0) return;
+  state.currentIdx -= 1;
+  renderQuestion();
+}
+function skipQuestion() {
+  if (state.currentIdx >= state.questions.length - 1) { finishQuiz(); return; }
+  state.currentIdx += 1;
+  renderQuestion();
+}
+
+// ============== FINISH ==============
+function finishQuiz() {
+  if (state.isExam) {
+    state.questions.forEach((q, idx) => {
+      if (state.selected[idx] !== undefined) {
+        state.answered[idx] = true;
+        recordAnswer(q, state.selected[idx] === q.a);
+      }
+    });
+    saveStats();
+  }
+
+  let correct = 0, wrong = 0, skipped = 0;
+  state.questions.forEach((q, idx) => {
+    if (state.selected[idx] === undefined) skipped++;
+    else if (state.selected[idx] === q.a) correct++;
+    else wrong++;
+  });
+
+  const total = state.questions.length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+  // Update category best if this was a category run with no skips
+  if (state.mode.startsWith('cat:') && skipped === 0) {
+    const key = state.mode.slice(4);
+    if (stats.catBest[key] === undefined || pct > stats.catBest[key]) {
+      stats.catBest[key] = pct;
+      saveStats();
+    }
+  }
+
+  document.getElementById('results-label').textContent = state.titleLabel || 'Rezultat final';
+  document.getElementById('final-score').textContent = correct;
+  document.getElementById('final-total').textContent = total;
+  document.getElementById('final-percent').textContent = pct + '%';
+  document.getElementById('final-correct').textContent = correct;
+  document.getElementById('final-wrong').textContent = wrong;
+  document.getElementById('final-skipped').textContent = skipped;
+
+  const medal = document.getElementById('results-medal');
+  const msg = document.getElementById('results-message');
+  if (pct === 100) { medal.textContent = '🏆'; msg.textContent = 'Punctaj maxim! Esti pregatit pentru examen.'; }
+  else if (pct >= 85) { medal.textContent = '🥇'; msg.textContent = 'Excelent! Mai cizelezi cateva detalii si esti gata.'; }
+  else if (pct >= 70) { medal.textContent = '🥈'; msg.textContent = 'Bine! Reia categoriile unde ai gresit.'; }
+  else if (pct >= 50) { medal.textContent = '🥉'; msg.textContent = 'Pe drumul bun. Mai exerseaza definitiile.'; }
+  else { medal.textContent = '📚'; msg.textContent = 'Mai e de lucru. Ia-o sistematic, pe categorii.'; }
+
+  renderReviewList('all');
+  showScreen('screen-results');
+}
+
+// ============== REVIEW ==============
+function renderReviewList(filter) {
+  const list = document.getElementById('review-list');
+  let html = '';
+  state.questions.forEach((q, idx) => {
+    const sel = state.selected[idx];
+    const isCorrect = sel === q.a;
+    const wasAnswered = sel !== undefined;
+    if (filter === 'wrong' && (isCorrect || !wasAnswered)) return;
+    if (filter === 'right' && !isCorrect) return;
+
+    const correctAnsText = escapeHtml(q.opts[q.a]);
+    let statusIcon, answerHtml;
+    if (!wasAnswered) { statusIcon = '⊘'; answerHtml = `<span style="color:var(--green)">Corect: ${correctAnsText}</span>`; }
+    else if (isCorrect) { statusIcon = '✓'; answerHtml = `Raspuns: ${escapeHtml(q.opts[sel])}`; }
+    else { statusIcon = '✗'; answerHtml = `Tu: ${escapeHtml(q.opts[sel])} · <span style="color:var(--green)">Corect: ${correctAnsText}</span>`; }
+
+    html += `
+      <div class="review-item">
+        <div class="num">${idx + 1}</div>
+        <div class="body">
+          <div class="q">${escapeHtml(q.q)}</div>
+          <div class="a">${answerHtml}</div>
+        </div>
+        <div class="status">${statusIcon}</div>
+      </div>`;
+  });
+  if (!html) html = '<div style="text-align:center;color:var(--text-muted);padding:20px;">Niciun element aici.</div>';
+  list.innerHTML = html;
+}
+
+// ============== EVENTS ==============
+document.querySelectorAll('[data-mode]').forEach(el => {
+  el.addEventListener('click', () => startMode(el.dataset.mode));
+});
+document.getElementById('back-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('home-btn-float').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('results-home-btn').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('next-btn').addEventListener('click', goNext);
+document.getElementById('prev-btn').addEventListener('click', goPrev);
+document.getElementById('skip-btn').addEventListener('click', skipQuestion);
+document.getElementById('restart-btn').addEventListener('click', () => {
+  if (!state.mode) return;
+  if (state.mode.startsWith('cat:')) startMode('cat', state.mode.slice(4));
+  else startMode(state.mode);
+});
+document.getElementById('reset-stats').addEventListener('click', resetStats);
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderReviewList(chip.dataset.filter);
+  });
+});
+
+// ============== INIT ==============
+loadStats();
+renderHome();
+
+</script>
+
+</body>
+</html>
