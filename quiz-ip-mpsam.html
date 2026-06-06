@@ -301,7 +301,7 @@ function renderQuestion(){
     let cls='option';
     if(isLocked&&state.showFeedback){if(origIdx===q.a)cls+=' correct locked';else if(origIdx===selectedOptIdx)cls+=' incorrect locked';else cls+=' locked'}
     else if(selectedOptIdx===origIdx)cls+=' selected';
-    const indicator=isLocked&&state.showFeedback?(origIdx===q.a?'<span class="indicator">✓</span>':(origIdx===selectedOptIdx?'<span class="indicator">✗</span>':'))':'';
+    const indicator = isLocked && state.showFeedback ? (origIdx === q.a ? '<span class="indicator">✓</span>' : (origIdx === selectedOptIdx ? '<span class="indicator">✗</span>' : '')) : '';
     optionsHTML+=`<button class="${cls}" data-orig="${origIdx}"><span class="letter">${letters[displayIdx]}</span><span class="opt-text">${escapeHtml(q.opts[origIdx])}</span>${indicator}</button>`
   });
   let feedbackHTML='';
