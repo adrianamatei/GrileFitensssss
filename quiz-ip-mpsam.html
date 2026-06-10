@@ -4,142 +4,429 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a0e1a">
-<title>Grile IP &amp; MPSAM · 100 intrebari</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Grile IP &amp; FIS · 220 intrebari</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0e1a;--bg-elev:#131826;--bg-elev-2:#1c2238;--bg-card:#161b2b;--line:#252b42;--line-bright:#353d5c;--text:#e6ebf5;--text-soft:#aab2c8;--text-muted:#6b7390;--accent:#7c5cff;--accent-bright:#9c85ff;--accent-glow:rgba(124,92,255,0.4);--cyan:#14b8d4;--green:#2ec27e;--green-bg:#0f2d1f;--red:#ff5772;--red-bg:#2d121a;--amber:#f59e0b;--shadow:0 8px 32px -8px rgba(0,0,0,0.6);--shadow-glow:0 0 0 1px rgba(124,92,255,0.2),0 12px 40px -12px var(--accent-glow)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-body{min-height:100vh;min-height:100dvh;background-image:radial-gradient(ellipse at 0% 0%,rgba(124,92,255,0.08) 0%,transparent 50%),radial-gradient(ellipse at 100% 100%,rgba(20,184,212,0.06) 0%,transparent 50%);background-attachment:fixed}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.4;z-index:0;background-image:linear-gradient(to right,rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.015) 1px,transparent 1px);background-size:32px 32px}
-.container{max-width:720px;margin:0 auto;padding:20px 16px 100px;position:relative;z-index:1}
-header.masthead{text-align:center;padding:28px 0 24px}
-.logo-mark{width:56px;height:56px;margin:0 auto 18px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--text);box-shadow:0 0 0 4px rgba(124,92,255,0.1),0 10px 28px -8px var(--accent-glow)}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:10px;font-weight:500}
-h1.title{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(32px,8vw,48px);line-height:1;letter-spacing:-.03em;color:var(--text);margin-bottom:6px}
-h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.subtitle{font-size:14px;color:var(--text-soft);margin-top:12px;font-weight:500}
-.subtitle code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-elev);padding:2px 7px;border-radius:5px;color:var(--accent-bright);border:1px solid var(--line)}
-.stats-banner{background:var(--bg-elev);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;justify-content:space-around;margin:22px 0;text-align:center;position:relative;flex-wrap:wrap;gap:12px}
-.stats-banner .stat-item .val{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1;color:var(--text)}
-.stats-banner .stat-item .val.accent{background:linear-gradient(135deg,var(--accent-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.stats-banner .stat-item .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-top:4px;font-weight:600}
-.stats-banner .reset-mini{position:absolute;top:8px;right:12px;background:none;border:none;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;letter-spacing:.1em;text-transform:uppercase}
-.stats-banner .reset-mini:active{color:var(--red)}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin:28px 0 14px;display:flex;align-items:center;gap:12px;font-weight:600}
-.section-label::before{content:'//';color:var(--accent);margin-right:-4px}
-.section-label::after{content:'';flex:1;height:1px;background:var(--line)}
-.primary-mode{width:100%;background:linear-gradient(135deg,var(--accent),#6244e0);border:none;border-radius:16px;padding:24px 22px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text);position:relative;overflow:hidden;box-shadow:var(--shadow-glow);transition:transform .15s}
-.primary-mode::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(ellipse at center,rgba(255,255,255,.1) 0%,transparent 60%);pointer-events:none}
-.primary-mode:active{transform:scale(.98)}
-.primary-mode .icon{font-family:'JetBrains Mono',monospace;font-size:14px;color:rgba(255,255,255,.8);margin-bottom:6px;font-weight:600;letter-spacing:.1em}
-.primary-mode h3{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;line-height:1;letter-spacing:-.02em}
-.primary-mode p{font-size:14px;font-weight:500;margin-top:6px;color:rgba(255,255,255,.85)}
-.primary-mode .arrow{position:absolute;top:50%;right:22px;transform:translateY(-50%);font-size:24px;font-weight:700}
-.mode-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-.mode-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:12px;padding:16px 14px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text);transition:transform .15s,border-color .15s,background .15s}
-.mode-card:active{transform:scale(.97);border-color:var(--accent);background:var(--bg-elev-2)}
-.mode-card .icon{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-bright);margin-bottom:8px;font-weight:600;letter-spacing:.12em}
-.mode-card h3{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
-.mode-card p{font-size:12.5px;color:var(--text-soft);margin-top:4px;line-height:1.35}
-.cat-grid{display:grid;grid-template-columns:1fr;gap:10px}
-.cat-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text);display:flex;align-items:center;gap:14px;transition:transform .15s,border-color .15s;position:relative}
-.cat-card:active{transform:scale(.98);border-color:var(--accent)}
-.cat-card .cat-icon{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:44px;height:44px;border-radius:10px;background:var(--bg-elev-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent-bright)}
-.cat-card .cat-info{flex:1}
-.cat-card .cat-name{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;line-height:1.15}
-.cat-card .cat-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:3px;font-weight:500;letter-spacing:.05em}
-.cat-card .cat-best{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-bright);font-weight:700;text-align:right}
-.cat-card .cat-arrow{font-size:18px;color:var(--text-muted);font-weight:700}
-.quiz-header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px}
-.back-btn{background:var(--bg-elev);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--text-soft);font-weight:600;padding:8px 12px}
-.back-btn:active{background:var(--bg-elev-2)}
-.quiz-title-mini{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--accent-bright);flex:1;text-align:center;letter-spacing:.04em;text-transform:uppercase}
-.progress-info{display:flex;align-items:center;justify-content:space-between;padding:0 2px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-soft);font-weight:600}
-.progress-info .stat strong{color:var(--text);font-size:15px}
-.progress-bar{height:5px;background:var(--bg-elev);border-radius:3px;overflow:hidden;margin:8px 0 20px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:3px;transition:width .3s ease}
-.question-card{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;box-shadow:var(--shadow)}
-.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.q-number{background:var(--accent);color:var(--text);padding:3px 10px;border-radius:6px;font-weight:700}
-.q-category{color:var(--text-muted)}
-.q-text{font-family:'Inter',sans-serif;font-size:18px;line-height:1.4;font-weight:600;color:var(--text);margin-bottom:20px;letter-spacing:-.005em}
-.options{display:flex;flex-direction:column;gap:9px}
-.option{background:var(--bg-elev);border:1.5px solid var(--line);border-radius:11px;padding:14px 15px;cursor:pointer;font-family:inherit;color:var(--text);text-align:left;font-size:15px;line-height:1.4;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s,background .15s,transform .1s;position:relative;width:100%}
-.option:active:not(.locked){transform:scale(.99)}
-.option .letter{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--text-muted);background:var(--bg-elev-2);width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:7px;margin-top:-1px;transition:all .15s}
-.option .opt-text{flex:1;padding-top:4px}
-.option.selected{border-color:var(--accent);background:var(--bg-elev-2)}
-.option.selected .letter{background:var(--accent);color:var(--text)}
-.option.correct{border-color:var(--green);background:var(--green-bg)}
-.option.correct .letter{background:var(--green);color:#fff}
-.option.incorrect{border-color:var(--red);background:var(--red-bg)}
-.option.incorrect .letter{background:var(--red);color:#fff}
-.option.locked{cursor:default}
-.option .indicator{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;opacity:0}
-.option.correct .indicator,.option.incorrect .indicator{opacity:1}
-.feedback{margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--bg-elev);border-left:3px solid var(--accent);display:none}
-.feedback.show{display:block;animation:fadeIn .25s ease}
-.feedback.correct{border-left-color:var(--green)}
-.feedback.wrong{border-left-color:var(--red)}
-.feedback .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:5px}
-.feedback.correct .label{color:var(--green)}
-.feedback.wrong .label{color:var(--red)}
-.feedback .text{font-size:14px;color:var(--text-soft);line-height:1.45}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
-.actions{display:flex;gap:9px;margin-top:18px;align-items:center}
-.btn{font-family:'Inter',sans-serif;font-size:14px;letter-spacing:.01em;font-weight:700;padding:14px 18px;cursor:pointer;border:none;border-radius:11px;background:var(--accent);color:var(--text);transition:transform .1s,background .15s;flex:1}
-.btn:active{transform:scale(.97)}
-.btn-secondary{background:var(--bg-elev);color:var(--text-soft);border:1px solid var(--line);flex:0 0 auto;padding:14px 16px}
-.btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--line);flex:0 0 auto;padding:14px 16px}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-.results{background:var(--bg-card);border:1px solid var(--line);border-radius:18px;padding:32px 22px;text-align:center;box-shadow:var(--shadow)}
-.results .medal{font-size:48px;margin-bottom:6px}
-.results .label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:10px;font-weight:600}
-.score-display{font-family:'JetBrains Mono',monospace;font-size:clamp(56px,18vw,88px);font-weight:700;line-height:1;color:var(--text)}
-.score-display .slash{color:var(--text-muted)}
-.score-display .total{color:var(--text-muted);font-size:.5em}
-.score-percent{font-family:'JetBrains Mono',monospace;font-size:24px;background:linear-gradient(135deg,var(--accent-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:18px;font-weight:700}
-.results-stats{display:flex;justify-content:center;gap:28px;margin:18px 0}
-.results-stats .num{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;line-height:1}
-.results-stats .num.green{color:var(--green)}
-.results-stats .num.red{color:var(--red)}
-.results-stats .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-top:5px;font-weight:600}
-.results-message{font-size:15px;color:var(--text-soft);margin:16px auto;max-width:380px;line-height:1.45}
-.results .actions{margin-top:22px}
-.filter-chips{display:flex;gap:8px;margin:22px 0 12px;justify-content:center}
-.filter-chip{background:var(--bg-elev);border:1px solid var(--line);border-radius:16px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;color:var(--text-soft);font-weight:600}
-.filter-chip.active{background:var(--accent);color:var(--text);border-color:var(--accent)}
-.review-list{margin-top:8px;text-align:left;border-top:1px solid var(--line);padding-top:16px}
-.review-item{padding:13px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
-.review-item:last-child{border-bottom:none}
-.review-item .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);width:28px;flex-shrink:0;padding-top:2px;font-weight:600}
-.review-item .body{flex:1}
-.review-item .body .q{color:var(--text);margin-bottom:4px;font-size:14px;font-weight:600;line-height:1.3}
-.review-item .body .a{font-size:12.5px;color:var(--text-soft);line-height:1.4}
-.review-item .status{font-size:16px;align-self:flex-start;padding-top:2px}
-.home-btn{position:fixed;bottom:18px;right:18px;width:50px;height:50px;border-radius:50%;background:var(--accent);color:var(--text);border:none;cursor:pointer;font-size:22px;display:none;align-items:center;justify-content:center;box-shadow:0 8px 28px -8px var(--accent-glow);z-index:10}
-.home-btn:active{transform:scale(.92)}
-.home-btn.show{display:flex}
-.brand-footer{text-align:center;margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);line-height:1.6;letter-spacing:.04em}
-.new-badge{display:inline-block;background:linear-gradient(135deg,var(--green),#1a8a55);color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:8px;vertical-align:middle}
-.screen{display:none}
-.screen.active{display:block;animation:pageFade .3s ease}
-@keyframes pageFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+:root {
+  --bg: #0a0e1a;
+  --bg-elev: #131826;
+  --bg-elev-2: #1c2238;
+  --bg-card: #161b2b;
+  --line: #252b42;
+  --line-bright: #353d5c;
+  --text: #e6ebf5;
+  --text-soft: #aab2c8;
+  --text-muted: #6b7390;
+  --accent: #7c5cff;
+  --accent-bright: #9c85ff;
+  --accent-glow: rgba(124, 92, 255, 0.4);
+  --cyan: #14b8d4;
+  --amber: #f59e0b;
+  --green: #2ec27e;
+  --green-bg: #0f2d1f;
+  --red: #ff5772;
+  --red-bg: #2d121a;
+  --shadow: 0 8px 32px -8px rgba(0,0,0,0.6);
+  --shadow-glow: 0 0 0 1px rgba(124,92,255,0.2), 0 12px 40px -12px var(--accent-glow);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh; min-height: 100dvh;
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(124, 92, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(20, 184, 212, 0.06) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; opacity: 0.4; z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 20px 16px 100px; position: relative; z-index: 1; }
+
+header.masthead { text-align: center; padding: 28px 0 24px; }
+.logo-mark {
+  width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700;
+  color: var(--text);
+  box-shadow: 0 0 0 4px rgba(124,92,255,0.1), 0 10px 28px -8px var(--accent-glow);
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent-bright); margin-bottom: 10px; font-weight: 500;
+}
+h1.title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(32px, 8vw, 48px); line-height: 1; letter-spacing: -0.03em;
+  color: var(--text); margin-bottom: 6px;
+}
+h1.title em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent-bright), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle { font-size: 14px; color: var(--text-soft); margin-top: 12px; font-weight: 500; }
+.subtitle code {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--bg-elev);
+  padding: 2px 7px; border-radius: 5px; color: var(--accent-bright); border: 1px solid var(--line);
+}
+
+.stats-banner {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px;
+  padding: 16px 18px; display: flex; justify-content: space-around;
+  margin: 22px 0; text-align: center; position: relative; flex-wrap: wrap; gap: 12px;
+}
+.stats-banner .stat-item .val {
+  font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700;
+  line-height: 1; color: var(--text);
+}
+.stats-banner .stat-item .val.accent {
+  background: linear-gradient(135deg, var(--accent-bright), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stats-banner .stat-item .lab {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-muted); margin-top: 4px; font-weight: 600;
+}
+.stats-banner .reset-mini {
+  position: absolute; top: 8px; right: 12px; background: none; border: none;
+  color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.stats-banner .reset-mini:active { color: var(--red); }
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-muted); margin: 28px 0 14px;
+  display: flex; align-items: center; gap: 12px; font-weight: 600;
+}
+.section-label::before { content: '//'; color: var(--accent); margin-right: -4px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+.primary-mode {
+  width: 100%; background: linear-gradient(135deg, var(--accent), #6244e0);
+  border: none; border-radius: 16px; padding: 24px 22px; cursor: pointer; text-align: left;
+  font-family: inherit; color: var(--text); position: relative; overflow: hidden;
+  box-shadow: var(--shadow-glow); transition: transform 0.15s;
+}
+.primary-mode::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.primary-mode:active { transform: scale(0.98); }
+.primary-mode .icon {
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; color: rgba(255,255,255,0.8);
+  margin-bottom: 6px; font-weight: 600; letter-spacing: 0.1em;
+}
+.primary-mode h3 {
+  font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800;
+  line-height: 1; letter-spacing: -0.02em;
+}
+.primary-mode p {
+  font-size: 14px; font-weight: 500; margin-top: 6px; color: rgba(255,255,255,0.85);
+}
+.primary-mode .arrow {
+  position: absolute; top: 50%; right: 22px; transform: translateY(-50%);
+  font-size: 24px; font-weight: 700;
+}
+
+/* Special "featured" mode for Grile Radu FIS */
+.featured-mode {
+  width: 100%; background: linear-gradient(135deg, #d97f00, var(--amber));
+  border: none; border-radius: 16px; padding: 22px; cursor: pointer; text-align: left;
+  font-family: inherit; color: #1a0e00; position: relative; overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.3), 0 12px 40px -12px rgba(245,158,11,0.5);
+  transition: transform 0.15s;
+}
+.featured-mode:active { transform: scale(0.98); }
+.featured-mode .icon {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  margin-bottom: 6px; font-weight: 700; letter-spacing: 0.08em;
+  color: rgba(0,0,0,0.6);
+}
+.featured-mode h3 {
+  font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 800;
+  line-height: 1; letter-spacing: -0.01em;
+}
+.featured-mode p {
+  font-size: 13.5px; font-weight: 600; margin-top: 5px; color: rgba(0,0,0,0.75);
+}
+.featured-mode .arrow {
+  position: absolute; top: 50%; right: 20px; transform: translateY(-50%);
+  font-size: 22px; font-weight: 700;
+}
+
+.mode-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;
+}
+.mode-card {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 14px; cursor: pointer; text-align: left; font-family: inherit;
+  color: var(--text); transition: transform 0.15s, border-color 0.15s, background 0.15s;
+}
+.mode-card:active { transform: scale(0.97); border-color: var(--accent); background: var(--bg-elev-2); }
+.mode-card .icon {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-bright);
+  margin-bottom: 8px; font-weight: 600; letter-spacing: 0.12em;
+}
+.mode-card h3 {
+  font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700;
+  line-height: 1.1; letter-spacing: -0.01em;
+}
+.mode-card p { font-size: 12.5px; color: var(--text-soft); margin-top: 4px; line-height: 1.35; }
+
+.cat-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.cat-card {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; cursor: pointer; text-align: left; font-family: inherit;
+  color: var(--text); display: flex; align-items: center; gap: 14px;
+  transition: transform 0.15s, border-color 0.15s; position: relative;
+}
+.cat-card:active { transform: scale(0.98); border-color: var(--accent); }
+.cat-card.featured {
+  border-color: rgba(245,158,11,0.3); background: linear-gradient(135deg, var(--bg-elev), rgba(245,158,11,0.05));
+}
+.cat-card.featured .cat-icon { color: var(--amber); border-color: rgba(245,158,11,0.3); }
+.cat-card .cat-icon {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+  width: 44px; height: 44px; border-radius: 10px; background: var(--bg-elev-2);
+  border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--accent-bright);
+}
+.cat-card .cat-info { flex: 1; }
+.cat-card .cat-name {
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  line-height: 1.2;
+}
+.cat-card .cat-count {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);
+  margin-top: 3px; font-weight: 500; letter-spacing: 0.05em;
+}
+.cat-card .cat-best {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent-bright);
+  font-weight: 700; text-align: right;
+}
+.cat-card.featured .cat-best { color: var(--amber); }
+.cat-card .cat-arrow { font-size: 18px; color: var(--text-muted); font-weight: 700; }
+
+.quiz-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 12px;
+}
+.back-btn {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 8px;
+  cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  letter-spacing: 0.06em; color: var(--text-soft); font-weight: 600; padding: 8px 12px;
+}
+.back-btn:active { background: var(--bg-elev-2); }
+.quiz-title-mini {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+  color: var(--accent-bright); flex: 1; text-align: center; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.progress-info {
+  display: flex; align-items: center; justify-content: space-between; padding: 0 2px;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-soft);
+  font-weight: 600;
+}
+.progress-info .stat strong { color: var(--text); font-size: 15px; }
+.progress-bar {
+  height: 5px; background: var(--bg-elev); border-radius: 3px; overflow: hidden; margin: 8px 0 20px;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--cyan));
+  border-radius: 3px; transition: width 0.3s ease;
+}
+
+.question-card {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 24px 22px; box-shadow: var(--shadow);
+}
+.q-meta {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; font-weight: 600; flex-wrap: wrap;
+}
+.q-number {
+  background: var(--accent); color: var(--text); padding: 3px 10px;
+  border-radius: 6px; font-weight: 700;
+}
+.q-category { color: var(--text-muted); }
+.q-text {
+  font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.4; font-weight: 600;
+  color: var(--text); margin-bottom: 20px; letter-spacing: -0.005em;
+}
+.options { display: flex; flex-direction: column; gap: 9px; }
+.option {
+  background: var(--bg-elev); border: 1.5px solid var(--line); border-radius: 11px;
+  padding: 14px 15px; cursor: pointer; font-family: inherit; color: var(--text);
+  text-align: left; font-size: 15px; line-height: 1.4;
+  display: flex; gap: 12px; align-items: flex-start;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  position: relative; width: 100%;
+}
+.option:active:not(.locked) { transform: scale(0.99); }
+.option .letter {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+  color: var(--text-muted); background: var(--bg-elev-2);
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; border-radius: 7px; margin-top: -1px; transition: all 0.15s;
+}
+.option .opt-text { flex: 1; padding-top: 4px; }
+.option.selected { border-color: var(--accent); background: var(--bg-elev-2); }
+.option.selected .letter { background: var(--accent); color: var(--text); }
+.option.correct { border-color: var(--green); background: var(--green-bg); }
+.option.correct .letter { background: var(--green); color: #fff; }
+.option.incorrect { border-color: var(--red); background: var(--red-bg); }
+.option.incorrect .letter { background: var(--red); color: #fff; }
+.option.locked { cursor: default; }
+.option .indicator {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 18px; opacity: 0;
+}
+.option.correct .indicator, .option.incorrect .indicator { opacity: 1; }
+
+.feedback {
+  margin-top: 16px; padding: 14px 16px; border-radius: 10px;
+  background: var(--bg-elev); border-left: 3px solid var(--accent); display: none;
+}
+.feedback.show { display: block; animation: fadeIn 0.25s ease; }
+.feedback.correct { border-left-color: var(--green); }
+.feedback.wrong { border-left-color: var(--red); }
+.feedback .label {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 700; margin-bottom: 5px;
+}
+.feedback.correct .label { color: var(--green); }
+.feedback.wrong .label { color: var(--red); }
+.feedback .text { font-size: 14px; color: var(--text-soft); line-height: 1.45; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+.actions { display: flex; gap: 9px; margin-top: 18px; align-items: center; }
+.btn {
+  font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 0.01em;
+  font-weight: 700; padding: 14px 18px; cursor: pointer; border: none; border-radius: 11px;
+  background: var(--accent); color: var(--text);
+  transition: transform 0.1s, background 0.15s; flex: 1;
+}
+.btn:active { transform: scale(0.97); }
+.btn-secondary {
+  background: var(--bg-elev); color: var(--text-soft); border: 1px solid var(--line);
+  flex: 0 0 auto; padding: 14px 16px;
+}
+.btn-ghost {
+  background: transparent; color: var(--text-muted); border: 1px solid var(--line);
+  flex: 0 0 auto; padding: 14px 16px;
+}
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.results {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 32px 22px; text-align: center; box-shadow: var(--shadow);
+}
+.results .medal { font-size: 48px; margin-bottom: 6px; }
+.results .label {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent-bright); margin-bottom: 10px; font-weight: 600;
+}
+.score-display {
+  font-family: 'JetBrains Mono', monospace; font-size: clamp(56px, 18vw, 88px);
+  font-weight: 700; line-height: 1; color: var(--text);
+}
+.score-display .slash { color: var(--text-muted); }
+.score-display .total { color: var(--text-muted); font-size: 0.5em; }
+.score-percent {
+  font-family: 'JetBrains Mono', monospace; font-size: 24px;
+  background: linear-gradient(135deg, var(--accent-bright), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 18px; font-weight: 700;
+}
+.results-stats { display: flex; justify-content: center; gap: 28px; margin: 18px 0; }
+.results-stats .num {
+  font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; line-height: 1;
+}
+.results-stats .num.green { color: var(--green); }
+.results-stats .num.red { color: var(--red); }
+.results-stats .lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); margin-top: 5px; font-weight: 600;
+}
+.results-message {
+  font-size: 15px; color: var(--text-soft); margin: 16px auto;
+  max-width: 380px; line-height: 1.45;
+}
+.results .actions { margin-top: 22px; }
+
+.filter-chips { display: flex; gap: 8px; margin: 22px 0 12px; justify-content: center; }
+.filter-chip {
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 16px;
+  padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+  color: var(--text-soft); font-weight: 600;
+}
+.filter-chip.active { background: var(--accent); color: var(--text); border-color: var(--accent); }
+
+.review-list {
+  margin-top: 8px; text-align: left; border-top: 1px solid var(--line); padding-top: 16px;
+}
+.review-item { padding: 13px 0; border-bottom: 1px solid var(--line); display: flex; gap: 10px; }
+.review-item:last-child { border-bottom: none; }
+.review-item .num {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted);
+  width: 28px; flex-shrink: 0; padding-top: 2px; font-weight: 600;
+}
+.review-item .body { flex: 1; }
+.review-item .body .q { color: var(--text); margin-bottom: 4px; font-size: 14px; font-weight: 600; line-height: 1.3; }
+.review-item .body .a { font-size: 12.5px; color: var(--text-soft); line-height: 1.4; }
+.review-item .status { font-size: 16px; align-self: flex-start; padding-top: 2px; }
+
+.home-btn {
+  position: fixed; bottom: 18px; right: 18px; width: 50px; height: 50px;
+  border-radius: 50%; background: var(--accent); color: var(--text);
+  border: none; cursor: pointer; font-size: 22px; display: none;
+  align-items: center; justify-content: center;
+  box-shadow: 0 8px 28px -8px var(--accent-glow); z-index: 10;
+}
+.home-btn:active { transform: scale(0.92); }
+.home-btn.show { display: flex; }
+
+.brand-footer {
+  text-align: center; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);
+  line-height: 1.6; letter-spacing: 0.04em;
+}
+
+.screen { display: none; }
+.screen.active { display: block; animation: pageFade 0.3s ease; }
+@keyframes pageFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
+
 <div class="container">
 
   <div id="screen-home" class="screen active">
     <header class="masthead">
       <div class="logo-mark">{ }</div>
-      <div class="eyebrow">// Examen IP &amp; MPSAM</div>
+      <div class="eyebrow">// Examen IP &amp; FIS</div>
       <h1 class="title">Grile <em>Consolidate</em></h1>
       <div class="subtitle">
-        <code>100</code> intrebari · Ingineria Programarii &amp; Managementul Proiectelor
+        <code>220</code> intrebari · IP, MPSAM &amp; Grile Radu FIS
       </div>
     </header>
 
@@ -155,7 +442,14 @@ h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bri
     <button class="primary-mode" data-mode="shuffle">
       <div class="icon">SHUFFLE_MODE</div>
       <h3>Quiz Aleator</h3>
-      <p>Toate 100 amestecate + raspunsuri in ordine random</p>
+      <p>Toate 220 amestecate + raspunsuri in ordine random</p>
+      <span class="arrow">→</span>
+    </button>
+
+    <button class="featured-mode" data-mode="radu">
+      <div class="icon">⭐ NOU · GRILE RADU FIS</div>
+      <h3>Grile Radu FIS</h3>
+      <p>Set 1 + Set 2 amestecate (135 intrebari)</p>
       <span class="arrow">→</span>
     </button>
 
@@ -164,17 +458,17 @@ h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bri
       <button class="mode-card" data-mode="all">
         <div class="icon">SEQ</div>
         <h3>Toate la rand</h3>
-        <p>100 in ordine, cu feedback</p>
+        <p>220 in ordine, cu feedback</p>
       </button>
       <button class="mode-card" data-mode="exam">
         <div class="icon">EXAM_25</div>
         <h3>Simulare 25</h3>
         <p>25 random, scor la final</p>
       </button>
-      <button class="mode-card" data-mode="exam40">
-        <div class="icon">EXAM_40</div>
-        <h3>Test 40</h3>
-        <p>40 random, scor la final</p>
+      <button class="mode-card" data-mode="exam50">
+        <div class="icon">EXAM_50</div>
+        <h3>Test 50</h3>
+        <p>50 random, scor la final</p>
       </button>
       <button class="mode-card" data-mode="review">
         <div class="icon">REVIEW</div>
@@ -187,7 +481,7 @@ h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bri
     <div class="cat-grid" id="cat-grid"></div>
 
     <div class="brand-footer">
-      100 intrebari consolidate · IP + MPSAM<br>
+      220 intrebari · IP + MPSAM + Grile Radu FIS<br>
       Quiz pentru studiu personal · Progresul se salveaza local
     </div>
   </div>
@@ -198,7 +492,7 @@ h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bri
       <div class="quiz-title-mini" id="quiz-title-mini"></div>
     </div>
     <div class="progress-info">
-      <div class="stat"><span id="q-current">1</span> <span style="color:var(--text-muted)">/</span> <strong id="q-total">100</strong></div>
+      <div class="stat"><span id="q-current">1</span> <span style="color:var(--text-muted)">/</span> <strong id="q-total">220</strong></div>
       <div class="stat" id="score-live"><strong>0</strong> corecte</div>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
@@ -236,150 +530,337 @@ h1.title em{font-style:normal;background:linear-gradient(135deg,var(--accent-bri
       <div class="review-list" id="review-list"></div>
     </div>
   </div>
+
 </div>
 
 <button class="home-btn" id="home-btn-float">⌂</button>
 
 <script>
-const QUIZ_DATA = {"categories":{"ip":"Ingineria Programarii","mpsam":"Managementul Proiectelor (MPSAM)"},"questions":[{"n":1,"cat":"ip","q":"Notiunea de timp real implica:","opts":["proprietatea de a reactiona in conditii reale ale sistemului","reactia sistemului in conditii precizate","proprietatea de a reactiona la schimbari in proces, intr-un timp mai mic decat o limita prestabilita","timp minim de reactie"],"a":2},{"n":2,"cat":"ip","q":"Intr-un sistem de conducere de proces interactioneaza urmatoarele componente:","opts":["software, hardware","programe, calculatoare, interfete de proces, manuale de utilizare","echipamente, software, proceduri de operare, operator uman","interfete, sisteme de reglare, sisteme de calcul"],"a":2},{"n":3,"cat":"ip","q":"Obiectivele ingineriei programarii stabilesc:","opts":["dezideratele activitatii de proiectare software","modele de proiectare","principii care trebuie urmate la proiectare","modelele si principiile de proiectare"],"a":2},{"n":4,"cat":"ip","q":"Obiectivele ingineriei programarii sunt:","opts":["modularitatea, confirmabilitatea, adaptabilitatea, eficienta","adaptabilitatea, eficienta, fiabilitatea, perceptibilitatea","adaptabilitatea, eficienta, modularitatea, confirmabilitatea, eficienta","modularitatea, abstractizarea, ascunderea, eficienta, fiabilitatea, perceptibilitatea, confirmabilitatea"],"a":1},{"n":5,"cat":"ip","q":"Adaptabilitatea (flexibilitatea) se refera la:","opts":["obiectivul de realizare a unor programe care sa poata fi usor adaptate pentru conditii diferite de functionare","obiectivul de realizare a unor programe adaptate unor situatii concrete de functionare","principiul de programare prin care programul trebuie sa fie usor de modificat","principiul de proiectare prin care se cere proiectantului sa se adapteze usor la noi cerinte"],"a":0},{"n":6,"cat":"ip","q":"Modularitatea inseamna:","opts":["delimitarea unor secvente de program, cu intrari si iesiri bine precizate, intre care se stabilesc relatii ierarhice sau de colaborare","stabilirea unor ierarhii in program","determinarea unor secvente de program","stabilirea riguroasa a intrarilor si iesirilor"],"a":0},{"n":7,"cat":"ip","q":"Principiile ingineriei programarii se refera la:","opts":["modalitatile de atingere a obiectivelor ingineriei programarii","modele folosite in procesul de proiectare","scopurile programarii","destinatia activitatii de programare"],"a":0},{"n":8,"cat":"ip","q":"Ingineria programarii se ocupa cu:","opts":["aplicarea unor principii de programare structurata, astfel incat sa creasca fiabilitatea produselor-program","utilizarea intr-o maniera disciplinata, sistematica si cu pricepere a unor metode si instrumente asociate, adecvate, avand in vedere anumite obiective si principii de baza","folosirea unor instrumente software adecvate, astfel incat sa creasca productivitatea activitatii de programare","organizarea corecta a activitatii de programare intr-o firma de software"],"a":1},{"n":9,"cat":"ip","q":"Prototipizarea este o paradigma a ingineriei programarii care se refera la:","opts":["construirea aplicatiilor prin metoda top-down","construirea unui prototip al programului si modificarea acestuia","proiectarea folosind descrieri-tip ale modulelor de program disponibile","dezvoltarea rapida a unui model simplificat al programului, interactiunea cu clientul si adaugarea ulterioara a functiilor omise"],"a":3},{"n":10,"cat":"ip","q":"O paradigma in ingineria software este:","opts":["un model folosit exclusiv in programarea orientata obiect","o anumita abordare a procesului de proiectare software, care descrie cum se realizeaza elemente de proiectare, ce metode, unelte si proceduri se aplica la fiecare faza","un standard de codificare adoptat de firme de software","un instrument de testare software"],"a":1},{"n":11,"cat":"ip","q":"Ce sunt regulile euristice de proiectare?","opts":["reguli rezultate din aplicarea teoriilor euristice","reguli rezultate din experienta practica","metodologii de proiectare ale organizatiilor software","metode sistematice de proiectare"],"a":1},{"n":12,"cat":"ip","q":"Cate module de program pot fi subordonate unui modul, conform regulilor euristice de proiectare?","opts":["de obicei intre 3-4 si 7, iar daca fan-out este mai mare de 9 sau mai mic de 3-4, este necesara reproiectarea","maxim 5 si minim 2","intre 3 si 6","mai mult de 4"],"a":0},{"n":13,"cat":"ip","q":"Proiectarea structurata se realizeaza prin:","opts":["folosirea proiectarii top-down si a unor structuri standard de control al programului: procesare secventiala, decizie, reunire","proiectarea ingrijita a programelor, astfel incat acestea sa aiba o structura clara","folosirea unor structuri standard de control al programului: procesare secventiala, decizie, reunire","proiectarea top-down si modularizare structurala"],"a":0},{"n":14,"cat":"ip","q":"Metoda MASCOT presupune, printre altele, elaborarea unei diagrame (numite ACR) care reflecta:","opts":["structurile de date si de apel folosite in program","relatiile dintre structurile de date si structurile de program","tranzactiile de sistem","fluxurile de date din program, care isi au obarsiile in dispozitivele de intrare si se termina intotdeauna la dispozitivele de iesire"],"a":3},{"n":15,"cat":"ip","q":"Intr-o diagrama ACR (MASCOT) apar reprezentate urmatoarele entitati:","opts":["taskuri si dispozitive","taskuri, conducte, cutii postale, dispozitive, semafoare, blocuri eveniment","module de program, functii, canale, rezervoare","taskuri(activitati), dispozitive, canale, rezervoare"],"a":3},{"n":16,"cat":"ip","q":"Etapele de aplicare a metodologiei MASCOT sunt:","opts":["proiectare generala, proiectare in detaliu, asistenta tehnica","proiectare preliminara de ansamblu, proiectare detaliata, implementare si testare","specificatii, programare, implementare","analiza de sistem, analiza de proces, proiectare de detaliu"],"a":1},{"n":17,"cat":"ip","q":"De ce sunt necesare taskurile de \"luare la cunostinta\" intr-un sistem de telemecanica?","opts":["deoarece operatorul trebuie sa confirme ca a luat la cunostinta de evenimentele din proces si sunt necesare alte taskuri decat cele de tratare a evenimentelor, din pricina asincronismului reactiilor operatorului cu evenimentele din proces","deoarece evenimentele din proces trebuie aduse la cunostinta sistemului","deoarece telecomenzile trebuie confirmate de catre operator","deoarece sistemul trebuie sa reactioneze suficient de rapid la evenimentele din proces"],"a":0},{"n":18,"cat":"ip","q":"Intr-un sistem de telemecanica, efectuarea unei telecomenzi parcurge urmatoarele etape:","opts":["selectie, executie","selectie, confirmare","selectie, executie, confirmare din proces","trimiterea telecomenzii, raspunsul procesului"],"a":2},{"n":19,"cat":"ip","q":"Redundanta statica se aplica prin:","opts":["multiplicarea paralela a unei functii de procesare si compararea rezultatelor","dublarea unei functii","verificarea unor conditii de functionare corecta","compararea unor rezultate"],"a":0},{"n":20,"cat":"ip","q":"Redundanta dinamica se realizeaza prin:","opts":["efectuarea unor teste de acceptanta si eventuala rulare a unei versiuni alternative","dublarea unei functii","efectuarea unor teste de acceptanta si rularea obligatorie a unei versiuni alternative","testarea starii taskurilor"],"a":0},{"n":21,"cat":"ip","q":"\"Ascunderea\" este utila pentru:","opts":["mai buna structurare a programului","definirea unor restrictii de acces si \"ascunderea\" detaliilor nesemnificative ale unui modul de program","definirea unor interfete complexe","ascunderea detaliilor referitoare la tratarea erorilor"],"a":1},{"n":22,"cat":"ip","q":"Documentatia software de proiectare este necesara pentru:","opts":["prezentarea produsului","prezentarea produsului si relatiile cu clientii","elaborarea unui prototip","activitatea de asistenta tehnica si refolosire software"],"a":3},{"n":23,"cat":"ip","q":"Configuratia larg distribuita utilizeaza:","opts":["legatura multipunct","field-bus","retele WAN si protocoale de comunicatii potrivite","protocoale de comunicatie Novell si retele LAN"],"a":2},{"n":24,"cat":"ip","q":"La Windows NT 4 concurenta era implementata prin:","opts":["preemptiune, cu ordonarea dupa 31 prioritati pe cate 4 paliere (IDLE, NORMAL, HIGH, REALTIME)","preemptiune, cu ordonarea dupa 31 prioritati, ordonate pe 2 paliere: 4 clase de prioritate si 5 niveluri pe fiecare clasa","multithreading","intreruperi event-driven cu planificare circulara (round-robin)"],"a":1},{"n":25,"cat":"ip","q":"Categoriile de prestatori (server) in arhitectura client-server la Windows NT 4 sunt:","opts":["Monitorul, WIN32, DLL","Windows NT Executive, WIN32","I/O Manager, Win NT Executive, WIN32","NTFS, HPFS, FAT"],"a":1},{"n":26,"cat":"ip","q":"Un fir de executie in Windows NT 4 este:","opts":["un proces","un task","un modul de program care realizeaza apeluri DLL","o cale de executie in interiorul unui proces"],"a":3},{"n":27,"cat":"ip","q":"Sistemul UNIX nu este foarte raspandit in conducerea de proces deoarece prezinta:","opts":["pret ridicat","lipsa de unitate, sintaxa criptica, lipsa de interfete grafice si de software","nepotrivire cu necesitatile de timp real","imposibilitatea implementarii multitaskingului"],"a":1},{"n":28,"cat":"ip","q":"Familiile mai reprezentative de sisteme de operare dedicate sunt:","opts":["OS-2, WARP, QNX, OS-9","OS-9, QNX, Windows 95 CE","OS-9, QNX, VxWorks/Microworks","OS-900, QTRM, RTS"],"a":2},{"n":29,"cat":"ip","q":"Sistemele de operare dedicate folosesc pentru alocarea unitatii centrale:","opts":["prioritati fixe","256 prioritati","mesaje si variabile","planificarea circulara (round-robin)"],"a":0},{"n":30,"cat":"ip","q":"Sistemele de operare dedicate folosesc pentru comunicare:","opts":["mesaje si variabile comune","protocoale TCP/IP","semnale hardware","intreruperi software"],"a":0},{"n":31,"cat":"ip","q":"Penetrabilitatea sistemelor de operare este:","opts":["Raspandirea si asimilarea de catre specialisti si utilizatori","Gradul de securitate al sistemului","Capacitatea de a rezista atacurilor externe","Numarul de utilizatori simultani acceptati"],"a":0},{"n":32,"cat":"ip","q":"Caracteristica esentiala a modelului in V de dezvoltare software este:","opts":["fiecare pas de proiectare este asociat cu pasul corespunzator din etapa de testare pentru verificarea corectei implementari a cerintelor si a aspectelor de proiectare, asociere realizata prin conlucrarea directa a echipelor implicate; aripa stanga poate fi reexecutata pentru a imbunatati cerintele, proiectarea sau codificarea","testele de acceptanta valideaza cerintele prin asocierea testelor cu specificatiile, prin conlucrarea dintre client si dezvoltator; aripa stanga poate fi reexecutata","realizarea unui produs dezvoltat partial, care sa permita clientilor si proiectantilor sa examineze anumite aspecte ale produsului pentru a putea coda mai usor; codarea este in varful V-ului"],"a":0},{"n":33,"cat":"ip","q":"Modelul de dezvoltare in spirala presupune:","opts":["o abordare iterativa in cadrul careia, la fiecare iteratie, prin analiza riscurilor se compara diferitele alternative din punct de vedere al cerintelor si constrangerilor, iar prototipizarea verifica fezabilitatea inainte ca o anumita alternativa sa fie aleasa","o abordare secventiala cu etape bine definite","dezvoltarea rapida a unor prototipuri fara analiza de riscuri","planificarea rigida a tuturor etapelor de la inceput"],"a":0},{"n":34,"cat":"ip","q":"Dezvoltarea iterativa furnizeaza clientului o versiune de program care:","opts":["contine de la inceput toate functiile si cu fiecare versiune noua acestea sunt perfectionate si performantele imbunatatite","contine de la inceput un set restrans de functionalitati si cu fiecare versiune noua se adauga altele noi","permite instruirea clientului si adaugarea de functii noi"],"a":0},{"n":35,"cat":"ip","q":"Metoda de dezvoltare software Cleanroom este bazata pe:","opts":["Metode formale","Metode euristice","Metode stohastice","Metode orientate pe obiecte"],"a":0},{"n":36,"cat":"ip","q":"Problema dublei intretineri rezulta daca:","opts":["mai multi proiectanti au drepturi pentru acces si modificare simultana a acelorasi date","se mentin copii multiple ale aceluiasi cod sursa","doi proiectanti actualizeaza simultan acelasi cod sursa si astfel este posibil sa se suprascrie unele modificari in copia distribuita"],"a":1},{"n":37,"cat":"ip","q":"Ce este o revizie?","opts":["o noua versiune destinata a inlocui versiunea veche si care reflecta evolutia in depanarea si imbunatatirea modulului ca functionalitate si performante","o noua versiune care realizeaza aceleasi functionalitati pentru situatii usor diferite si care este destinata a fi o alternativa interschimbabila cu alta simultana","un mecanism care arata organizarea unui set de variatii si relatiile dintre acestea"],"a":0},{"n":38,"cat":"ip","q":"Un sistem Delta de stocare de versiuni:","opts":["cuprinde conventiile de nume folosite pentru a discerne intre situatiile in care fisiere diferite reprezinta versiuni diferite ale aceluiasi produs","reprezinta toate versiunile prin utilizarea unei singure copii ale codului sursa si diferentele dintre versiuni sunt marcate prin compilare conditionata","memoreaza o singura versiune completa si le reprezinta pe celelalte prin retinerea diferentelor de la una la alta"],"a":2},{"n":39,"cat":"ip","q":"Un proces de \"descarcare\" (Charge-out) in cazul unui sistem de gestiune a configuratiilor realizeaza:","opts":["copierea unui modul din depozitul de baza in spatiul de lucru al programatorului si apoi blocarea accesului (lock) la acest modul astfel incat nimeni altcineva sa nu mai poata realiza un alt proces de descarcare","copierea unui modul de program din depozitul de baza in spatiul de lucru al programatorului si apoi stergerea acestuia din depozit","crearea unei noi revizii in depozit si eliminarea blocarii accesului astfel incat alti programatori sa poata realiza mai departe revizii"],"a":0},{"n":40,"cat":"ip","q":"Un proces de \"incarcare\" (Charge-in) in cazul unui sistem de gestiune a configuratiilor realizeaza:","opts":["copierea unui modul de program din depozitul de baza in spatiul de lucru al programatorului si apoi stergerea acestuia din depozit","copierea unui modul din depozitul de baza in spatiul de lucru al programatorului si blocarea accesului","crearea unei noi revizii in depozit si eliminarea blocarii accesului astfel incat alti programatori sa poata realiza mai departe revizii"],"a":2},{"n":41,"cat":"ip","q":"O aplicatie informatica de gestiune a configuratiilor permite stocarea:","opts":["tuturor fisierelor unui proiect, indiferent de destinatia informatiei (cod-sursa, documentatii, planificari, etc), stocate intr-un depozit si sub forma tuturor versiunilor create de proiectantii din cadrul echipei","doar a fisierelor de cod sursa","doar a documentatiei tehnice","doar a fisierelor executabile"],"a":0},{"n":42,"cat":"ip","q":"In acceptiunea UML, relatiile dintre clase sunt:","opts":["moduri, constrangeri, stereotipuri, asociatii, compozitii, generalizare, dependenta, multiplicitate","asociatii, agregare, compozitii, generalizare, dependenta","asociatii, agregare, cazuri de utilizare, actori, compozitie, generalizare, multiplicitate"],"a":1},{"n":43,"cat":"ip","q":"Ce reprezinta in UML o diagrama de tip \"use case\" (caz de utilizare)?","opts":["o diagrama structurata a claselor","o agregare de componente","un caz de utilizare reprezentand interactiunile dintre actori si sistem"],"a":2},{"n":44,"cat":"ip","q":"Ce este o stare in abordarea UML?","opts":["o diagrama reprezentand relatiile dintre diferitele componente ale unui sistem","o conditie de existenta a unui sistem care persista pentru o perioada semnificativa de timp","o conditie de existenta a unui obiect care persista pentru o perioada semnificativa de timp si poate fi distinsa intr-un anumit mod de alta astfel de conditie de existenta"],"a":2},{"n":45,"cat":"ip","q":"Un mesaj (UML) este:","opts":["o interfata grafica intre utilizator si sistem","o relatie de mostenire intre clase","o abstractie a unei unitati de comunicare intre un obiect sursa si un obiect destinatie"],"a":2},{"n":46,"cat":"ip","q":"Cand o clasa trebuie sa gestioneze un numar de obiecte de aceeasi clasa, o abordare potrivita in proiectare ar fi sa se adauge:","opts":["un model (pattern) de proiectare","o clasa observator intre clasa primara si setul de obiecte","o clasa container intre clasa primara si setul de obiecte"],"a":2},{"n":47,"cat":"ip","q":"Strategia de identificare a obiectelor numita \"sublinierea substantivelor\" permite depistarea:","opts":["doar a claselor si atributelor","doar a metodelor si functiilor","unor asociatii, unor obiecte, clase, atribute, metode si generalizari"],"a":2},{"n":48,"cat":"ip","q":"Implementarea asociatiilor se poate realiza prin:","opts":["pentru asociatii \"1 la 1\" cu pointeri, referinte sau declaratii inline de clase, iar asociatiile \"1 la mai multi\" se implementeaza de multe ori cu pattern \"container\"","doar prin pointeri pentru toate tipurile de asociatii","doar prin tabele de hash"],"a":0},{"n":49,"cat":"ip","q":"Ce fel de relatii sunt implementate in codul sursa cu ierarhia Animal -> caine, peste, pisica?","opts":["specializare","agregare","compozitie","dependenta"],"a":0},{"n":50,"cat":"ip","q":"In modelul (pattern) Rendezvous participa urmatoarele obiecte:","opts":["Rendezvous, Lock, Thread","Rendezvous, Lock, Client, Context, Thread","Rendezvous, Wait, Semaphore, Client, Context, Thread"],"a":0},{"n":51,"cat":"ip","q":"Sablonul Factory:","opts":["ofera o interfata unificata pentru un set de interfete dintr-un subsistem","este un cadru compus din doua sabloane Observer","defineste o interfata pentru crearea unui obiect, dar lasa subclasele sa decida ce clasa trebuie instantiata"],"a":2},{"n":52,"cat":"ip","q":"Un sablon Facade ofera:","opts":["un mecanism de creare de obiecte","un cadru pentru sincronizarea thread-urilor","o interfata unificata pentru un set de interfete dintr-un subsistem"],"a":2},{"n":53,"cat":"ip","q":"Model-View-Controller este:","opts":["un limbaj de modelare vizuala","un cadru compus din doua sabloane Observer","un protocol de comunicatie","un sistem de operare in timp real"],"a":1},{"n":54,"cat":"ip","q":"Sablonul Smart Pointer elimina unele surse de erori din practica utilizarii pointerilor obisnuiti, astfel:","opts":["folosesc constructorii pentru a initializa cu NULL sau a forta preconditii pentru ca pointerii sa indice spre obiecte valide; determina daca memoria trebuie eliberata cand nu mai e necesara; daca eliberarea memoriei nu se face corect, smart pointers pot automat detecta conditia ca obiectul nu mai exista si sa refuze accesul","sterg automat obiectele la iesirea din domeniu de vizibilitate, fara nicio verificare","inlocuiesc complet pointerii obisnuiti cu referinte"],"a":0},{"n":55,"cat":"ip","q":"Solutia pentru sablonul Real-Time Observer consta in aceea ca:","opts":["clientii solicita periodic date de la server prin polling","serverul trimite date periodic fara ca clientii sa se inregistreze","un singur obiect (Server) furnizeaza automat date pentru clientii sai (Observers) care in prealabil s-au inregistrat la Server cu Subscribe(); acestea sunt clase abstracte care au clase derivate (Concrete Server si Concrete Observer) care adauga comportamentul specializat pentru situatia concreta de functionare"],"a":2},{"n":56,"cat":"ip","q":"Middleware este:","opts":["un software de conectivitate care consta dintr-un set de servicii care permit rularea proceselor multiple pe una sau mai multe echipamente/masini in vederea interactiunii de-a lungul unei retele","un sistem de operare dedicat","un protocol de comunicatii industriale","un limbaj de programare pentru sisteme in timp real"],"a":0},{"n":57,"cat":"ip","q":"Analiza software este:","opts":["procesul de testare a aplicatiilor software","aceea dintre disciplinele existente in domeniul Software care determina ce trebuie facut, preluand problema clientului si exprimand-o intr-un mod inteligibil de catre dezvoltator","procesul de scriere a codului sursa","activitatea de intretinere a aplicatiilor"],"a":1},{"n":58,"cat":"ip","q":"Analiza orientata pe obiecte (OOA - Object Oriented Analysis) este:","opts":["crearea unui model OO plecand de la cerintele externe (un model al domeniului problemei)","implementarea claselor si obiectelor","testarea aplicatiilor orientate pe obiecte"],"a":0},{"n":59,"cat":"ip","q":"Nivelurile cerintelor software sunt urmatoarele:","opts":["functionale, nefunctionale, de performanta","tehnice, economice, sociale","de business, utilizator, functionale"],"a":2},{"n":60,"cat":"ip","q":"Activitatile de proiectare software cuprind urmatoarele:","opts":["codificarea, testarea si livrarea","analiza, proiectarea si mentenanta","proiectarea arhitecturii, specificarea abstracta, proiectarea componentelor si a interfetelor, proiectarea structurilor de date, proiectarea algoritmilor"],"a":2},{"n":61,"cat":"ip","q":"Specificatiile urmaresc:","opts":["descrierea modului intern de functionare a aplicatiei","descrierea limbajului de programare utilizat","descrierea comunicarii dintre aplicatia software (vazuta ca o cutie neagra) si mediul (multimea tuturor actorilor - a entitatilor exterioare cu care aplicatia interactioneaza in mod semnificativ)"],"a":2},{"n":62,"cat":"ip","q":"Obiectivul primordial al proiectarii software este sa se ajunga la o descriere care sa permita:","opts":["delimitarea exacta a muncii in cadrul echipei si pe de alta parte continuarea cu actiunea de codificare (scriere de cod-sursa) in cadrul careia fiecare proiectant sa stie exact ce sa faca pentru a scrie codul ca activitate de rutina","estimarea costurilor finale","selectarea limbajului de programare"],"a":0},{"n":63,"cat":"ip","q":"Sistemele pentru conducere de proces ridica probleme speciale, care maresc gradul de dificultate al proiectarii si implementarii, deoarece:","opts":["sunt foarte costisitoare","impun cerinte speciale privind siguranta in functionare (sisteme safety-critical), respectiv cele mai multe au cerinte privind raspunsul in timp real","necesita echipe mari de programatori","folosesc limbaje de programare speciale"],"a":1},{"n":64,"cat":"ip","q":"Uzual, Service Oriented Architecture (SOA) se bazeaza pe:","opts":["protocoale proprietare ale fiecarui furnizor","standarde de acces specifice Serviciilor WEB (SOAP, REST), interfetele Serviciilor WEB sunt descrise in termeni de WSDL pentru a putea fi inregistrate in directori publici si cautate in depozite UDDI iar suportul pentru transportul informatiei este formatul XML","comunicatii directe intre aplicatii fara standarde comune"],"a":1},{"n":65,"cat":"ip","q":"In cadrul arhitecturii three-tier, nivelele aplicatiei sunt:","opts":["Prezentare, Logica aplicatiei (business logic), acces la date","Client, Server, Baza de date","Interfata, Procesare, Stocare","Web, Aplicatie, Date"],"a":0},{"n":66,"cat":"ip","q":"Obiectivul partenerilor furnizori pentru industria auto care au definit impreuna AUTOSAR (Automotive Open System Architecture) este de:","opts":["a crea si stabili standarde deschise pentru arhitecturile software, care vor oferi o infrastructura de baza, pentru a ajuta la dezvoltarea de software de vehicule, interfete utilizator si de management pentru toate domeniile specifice industriei auto","a crea un sistem de operare dedicat exclusiv vehiculelor electrice","a standardiza limbajele de programare folosite in industria auto"],"a":0},{"n":67,"cat":"ip","q":"Testele de integrare verifica daca:","opts":["aplicatia functioneaza corect in mediul in care va fi folosita","fiecare unitate individuala de cod este corecta","cerintele clientului sunt respectate","performantele sistemului sunt optime"],"a":0},{"n":68,"cat":"ip","q":"In cadrul testelor de acceptanta:","opts":["Sistemul este testat conform descrierii cerintelor clientului","Sunt testate unitatile individuale de cod","Este verificata integrarea componentelor","Sunt testate performantele sistemului"],"a":0},{"n":69,"cat":"ip","q":"Inspectia codului:","opts":["se face automat cu instrumente specializate","se foloseste la testele de modul si presupune pregatirea actiunii prin desemnarea unei echipe, prezentarea prealabila a codului, studiul acesteia, formularea unei liste de obiective si organizarea unei sedinte de analiza; se verifica inclusiv corectitudinea algoritmilor, performantele, interfetele, etc.","se face exclusiv de catre autorul codului","este optionala si se face la cererea clientului"],"a":1},{"n":70,"cat":"ip","q":"Atingerea unui prag fixat pentru increderea in software este:","opts":["Un obiectiv de calitate","O metrica de performanta","Un criteriu de oprire a testarii"],"a":2},{"n":71,"cat":"ip","q":"In depanarea aplicatiilor in cadrul intretinerii, este bine daca:","opts":["repornim serverul la fiecare eroare","ignoram erorile minore","avem un log al utilizatorilor, al activitatilor, al erorilor, al utilizatorilor care au modificat inregistrari in baza de date"],"a":2},{"n":72,"cat":"ip","q":"[PROBLEMA] Regulatorul numeric dintr-un sistem de pozitionare este:","opts":["un program care ruleaza o singura data la pornire","un calculator simplu de date","un calcul care se efectueaza in bucla infinita, furnizand o comanda catre sistemul de pozitionare pe baza intrarii de pozitie si a unei prescrieri"],"a":2},{"n":73,"cat":"ip","q":"[PROBLEMA] Mecanismul watchdog functioneaza astfel:","opts":["reseteaza procesorul la intervale fixe de timp","monitorizeaza consumul de energie al sistemului","periodic, o secventa software apelata printr-o intrerupere de la un ceas hw verifica daca un indicator a fost resetat de la precedentul apel; daca nu a fost resetat inseamna ca secventa principala de program s-a blocat si nu a putut reseta indicatorul; in acest caz secventa produce un restart special"],"a":2},{"n":74,"cat":"ip","q":"[PROBLEMA] Redundanta dinamica pentru masurarea pozitiei poate fi implementata astfel:","opts":["se folosesc doi senzori identici si se face media","o secventa software apelata dupa masurarea pozitiei verifica daca de la precedenta apelare pozitia s-a modificat cu o valoare \"plauzibila\"; daca testul semnaleaza ca masurarea este suspicioasa, se semnaleaza eroare de masura","se ignora masuratorile aberante"],"a":1},{"n":75,"cat":"ip","q":"[PROBLEMA] Pentru scrierea cerintelor sistemului, vom organiza sedinte-interviu cu clientii. O sedinta nu va dura mai mult de:","opts":["1 ora","2-3 ore","4-5 ore","o zi intreaga"],"a":1},{"n":76,"cat":"ip","q":"[PROBLEMA] In sedinta de interviu cu clientii, noi, ca reprezentanti ai proiectantului software, ne vom stradui sa ascultam doleantele clientului mai mult de:","opts":["jumatate din timp","80% (patru cincimi) din timp","o treime din timp","90% din timp"],"a":1},{"n":77,"cat":"ip","q":"[PROBLEMA] Pentru dezvoltarea produsului se va folosi dezvoltarea agila SCRUM. In timpul Sprint-ului:","opts":["nu se admit modificari care ar putea afecta tinta Sprint-ului","clientul poate adauga oricand cerinte noi","echipa lucreaza fara obiective clare","se pot schimba prioritatile zilnic"],"a":0},{"n":78,"cat":"mpsam","q":"Complexitatea Halstead a unui program estimeaza numarul de linii de cod dintr-un program pe baza:","opts":["numarului de functii si clase","numarului de operatori si operanzi si numarul de aparitii in program al acestora","numarului de linii comentate","structurii ierarhice a modulelor"],"a":1},{"n":79,"cat":"mpsam","q":"Modelul COCOMO de estimare a efortului de proiectare da o estimare asupra efortului de proiectare prin:","opts":["numarul de pagini de documentatie","cerintele si experienta echipei (3 clase de proiecte) si ordinul de marime al proiectului","numarul de teste automate","complexitatea interfetei utilizator"],"a":1},{"n":80,"cat":"mpsam","q":"In cadrul proiectelor software, procesele primare sunt:","opts":["planificare, executie, control, finalizare","achizitie, furnizare, dezvoltare, utilizare, intretinere","analiza, proiectare, codificare, testare","documentare, testare, validare, audit"],"a":1},{"n":81,"cat":"mpsam","q":"Structura de alocare a activitatilor (WBS) este:","opts":["un grafic Gantt al activitatilor","o matrice de responsabilitati","o structura de tip arbore prin care intreaga activitate ce trebuie desfasurata este defalcata pe pachete care sunt impartite in elemente","o diagrama de retea cu activitati"],"a":2},{"n":82,"cat":"mpsam","q":"Marja de timp este:","opts":["durata totala a proiectului","timpul pierdut din cauza intarzierilor","timpul de care se dispune ca rezerva pentru efectuarea unei activitati in plus fata de durata sa estimata"],"a":2},{"n":83,"cat":"mpsam","q":"Analiza Pareto este:","opts":["o metoda de estimare a costurilor","o tehnica formala pentru gasirea schimbarilor care vor aduce cele mai mari beneficii, conform principiului ca prin realizarea a 20% din volumul de lucru se poate genera 80% din avantajul realizarii intregii lucrari","o metoda de planificare a resurselor umane","un model de calitate software"],"a":1},{"n":84,"cat":"mpsam","q":"Conform Maslow, indivizii sunt motivati de:","opts":["nevoile de rang superior in primul rand","nevoile de rang inferior pana in momentul in care acestea sunt satisfacute, dupa care acestea inceteaza sa mai motiveze si incepe sa se manifeste tendinta spre nevoile de rang superior","exclusiv de nevoile financiare","in mod egal de toate tipurile de nevoi"],"a":1},{"n":85,"cat":"mpsam","q":"In practica, succesul unei tactici de imbunatatire a motivarii personalului depinde de:","opts":["exclusiv de marimea salariului","statutul relatiilor din firma, atitudinea sindicatelor, claritatea cu care sunt diagnosticate problemele, modul in care este aplicata tactica de motivare a personalului, stilul de management adoptat","exclusiv de stilul de management","numarul de angajati din firma"],"a":1},{"n":86,"cat":"mpsam","q":"Modelul Cascada (Waterfall) de dezvoltare software presupune:","opts":["executarea in paralel a tuturor etapelor de dezvoltare","parcurgerea etapelor in cascada, una dupa alta, un stagiu de dezvoltare trebuind terminat inainte de a incepe urmatorul","reluarea ciclica a tuturor etapelor la fiecare iteratie","eliminarea etapei de testare pentru a reduce costurile"],"a":1},{"n":87,"cat":"mpsam","q":"In economia unei lucrari software, conform Modelului Cascada, ce procent reprezinta de regula codificarea?","opts":["40-50% din efortul total","16-20% din efortul total","60% din efortul total","5% din efortul total"],"a":1},{"n":88,"cat":"mpsam","q":"In cadrul Modelului V de dezvoltare software, testul de acceptanta este efectuat de:","opts":["echipa de programatori, pentru validarea codului sursa","managerul de proiect, pentru validarea bugetului","client, mai degraba decat de programatori, pentru a valida cerintele prin asocierea unor pasi de testare cu fiecare element din lista de cerinte","echipa de arhitectura, pentru validarea proiectarii"],"a":2},{"n":89,"cat":"mpsam","q":"Diferenta dintre dezvoltarea incrementala si dezvoltarea iterativa este:","opts":["nu exista nicio diferenta, termenii sunt sinonimi","in dezvoltarea incrementala se adauga functionalitati noi la fiecare versiune, pe cand in cea iterativa se livreaza un sistem intreg de la inceput si se imbunatateste functionalitatea fiecarui subsistem cu fiecare varianta noua","in dezvoltarea iterativa se adauga functionalitati noi la fiecare versiune, pe cand in cea incrementala se livreaza un sistem complet de la inceput","dezvoltarea incrementala este specifica proiectelor mici, iar cea iterativa proiectelor mari"],"a":1},{"n":90,"cat":"mpsam","q":"Modelul Spirala de dezvoltare software combina:","opts":["activitatea de codificare cu activitatea de documentare","activitatea de dezvoltare cu managementul de risc, pentru a minimiza si controla riscul","activitatea de testare cu activitatea de analiza a cerintelor","metodologia Cascada cu metodologia Agile"],"a":1},{"n":91,"cat":"mpsam","q":"Un prototip software este:","opts":["versiunea finala, completa a unui produs software","un set de teste automate pentru validarea sistemului","un produs partial finalizat care face posibila examinarea unor aspecte ale sistemului propus de catre cumparator si producator","documentatia tehnica detaliata a unui sistem"],"a":2},{"n":92,"cat":"mpsam","q":"In Manifestul Agile, se pune accent pe:","opts":["procese si unelte mai degraba decat pe indivizi si interactiuni","negociere contractuala mai degraba decat colaborare cu clientul","urmarea unui plan mai degraba decat raspuns la schimbari","indivizi si interactiuni, software care functioneaza, colaborare cu clientul si raspuns la schimbari"],"a":3},{"n":93,"cat":"mpsam","q":"Cei trei piloni ai Scrum sunt:","opts":["planificare, executie, retrospectiva","transparenta, inspectie si adaptare","Sprint, Product Backlog, Daily Scrum","viteza, calitate, cost"],"a":1},{"n":94,"cat":"mpsam","q":"Un Sprint in Scrum are durata de:","opts":["maxim o luna","exact doua saptamani, intotdeauna","minim 3 luni","o zi lucratoare"],"a":0},{"n":95,"cat":"mpsam","q":"Calitatea produsului software este privita din trei perspective. Care dintre urmatoarele NU este una dintre ele?","opts":["calitatea produsului in sine","calitatea procesului care conduce la produs","calitatea limbajului de programare utilizat","calitatea produsului in contextul mediului de afaceri (business) in care va fi utilizat"],"a":2},{"n":96,"cat":"mpsam","q":"Conform statisticilor ingineriei software, ce procent din erori apartin etapei de analiza?","opts":["aproximativ 10%","aproximativ 40%","aproximativ 60%","aproximativ 80%"],"a":2},{"n":97,"cat":"mpsam","q":"Care dintre urmatoarele reprezinta una dintre cele trei categorii generale de clienti ai unui proiect, conform cursului?","opts":["programatorii, testerii si arhitectii proiectului","persoanele direct implicate in proiect, clientii proiectului si alte persoane cointeresate","managerii de linie, managerii de proiect si directorii executivi","furnizorii, partenerii si subcontractorii"],"a":1},{"n":98,"cat":"mpsam","q":"Succesul unui proiect se masoara prin urmatoarele trei categorii principale de indicatori:","opts":["profit, cota de piata si notorietatea brandului","numarul de linii de cod, numarul de teste trecute si viteza de executie","predarea livrabilelor, obtinerea beneficiilor asociate proiectului si satisfactia clientului","incadrarea in buget, respectarea termenelor si numarul de angajati"],"a":2},{"n":99,"cat":"mpsam","q":"Intretinerea unui program software poate reprezenta pana la ce procent din costul total?","opts":["10%","30%","60%","90%"],"a":2},{"n":100,"cat":"mpsam","q":"Localizarea, ca principiu al ingineriei software, se refera la:","opts":["traducerea interfetei utilizator in mai multe limbi","punerea in vecinatatea fizica a elementelor cu legaturi intre ele (ex: functii langa structurile de date folosite)","amplasarea serverelor cat mai aproape de utilizatori","identificarea proprietatilor esentiale ale unor entitati aparent diferite"],"a":1}]};
+const QUIZ_DATA = {"categories": {"ip": "Ingineria Programarii", "mpsam": "Managementul Proiectelor (MPSAM)", "radu1": "Grile Radu FIS - Set 1 (60 grile)", "radu2": "Grile Radu FIS - Set 2 (75 grile)"}, "questions": [{"n": 1, "cat": "ip", "q": "Notiunea de timp real implica:", "opts": ["proprietatea de a reactiona in conditii reale ale sistemului", "reactia sistemului in conditii precizate", "proprietatea de a reactiona la schimbari in proces, intr-un timp mai mic decat o limita prestabilita", "timp minim de reactie"], "a": 2}, {"n": 2, "cat": "ip", "q": "Intr-un sistem de conducere de proces interactioneaza urmatoarele componente:", "opts": ["software, hardware", "programe, calculatoare, interfete de proces, manuale de utilizare", "echipamente, software, proceduri de operare, operator uman", "interfete, sisteme de reglare, sisteme de calcul"], "a": 2}, {"n": 3, "cat": "ip", "q": "Obiectivele ingineriei programarii stabilesc:", "opts": ["dezideratele activitatii de proiectare software", "modele de proiectare", "principii care trebuie urmate la proiectare", "modelele si principiile de proiectare"], "a": 2}, {"n": 4, "cat": "ip", "q": "Obiectivele ingineriei programarii sunt:", "opts": ["modularitatea, confirmabilitatea, adaptabilitatea, eficienta", "adaptabilitatea, eficienta, fiabilitatea, perceptibilitatea", "adaptabilitatea, eficienta, modularitatea, confirmabilitatea, eficienta", "modularitatea, abstractizarea, ascunderea, eficienta, fiabilitatea, perceptibilitatea, confirmabilitatea"], "a": 1}, {"n": 5, "cat": "ip", "q": "Adaptabilitatea (flexibilitatea) se refera la:", "opts": ["obiectivul de realizare a unor programe care sa poata fi usor adaptate pentru conditii diferite de functionare", "obiectivul de realizare a unor programe adaptate unor situatii concrete de functionare", "principiul de programare prin care programul trebuie sa fie usor de modificat", "principiul de proiectare prin care se cere proiectantului sa se adapteze usor la noi cerinte"], "a": 0}, {"n": 6, "cat": "ip", "q": "Modularitatea inseamna:", "opts": ["delimitarea unor secvente de program, cu intrari si iesiri bine precizate, intre care se stabilesc relatii ierarhice sau de colaborare", "stabilirea unor ierarhii in program", "determinarea unor secvente de program", "stabilirea riguroasa a intrarilor si iesirilor"], "a": 0}, {"n": 7, "cat": "ip", "q": "Principiile ingineriei programarii se refera la:", "opts": ["modalitatile de atingere a obiectivelor ingineriei programarii", "modele folosite in procesul de proiectare", "scopurile programarii", "destinatia activitatii de programare"], "a": 0}, {"n": 8, "cat": "ip", "q": "Ingineria programarii se ocupa cu:", "opts": ["aplicarea unor principii de programare structurata, astfel incat sa creasca fiabilitatea produselor-program", "utilizarea intr-o maniera disciplinata, sistematica si cu pricepere a unor metode si instrumente asociate, adecvate, avand in vedere anumite obiective si principii de baza", "folosirea unor instrumente software adecvate", "organizarea corecta a activitatii de programare intr-o firma"], "a": 1}, {"n": 9, "cat": "ip", "q": "Prototipizarea este o paradigma a ingineriei programarii care se refera la:", "opts": ["construirea aplicatiilor prin metoda top-down", "construirea unui prototip al programului si modificarea acestuia", "dezvoltarea rapida a unui model simplificat al programului, interactiunea cu clientul si adaugarea ulterioara a functiilor omise"], "a": 2}, {"n": 10, "cat": "ip", "q": "Metodologia inseamna:", "opts": ["o anumita abordare a procesului de proiectare software, care descrie cum se realizeaza elemente de proiectare, ce metode, unelte si proceduri se aplica la fiecare faza", "o metoda de proiectare structurata", "modalitatea de aplicare a regulilor euristice", "o tehnica de programare orientata pe obiecte"], "a": 0}, {"n": 11, "cat": "ip", "q": "Strategia de identificare a obiectelor se bazeaza pe:", "opts": ["identificarea conceptelor stabile din domeniul aplicatiei", "identificarea claselor existente in biblioteci", "identificarea actorilor din sistem", "identificarea diagramelor de stare"], "a": 0}, {"n": 12, "cat": "ip", "q": "Cate module de program pot fi subordonate unui modul, conform regulilor euristice de proiectare?", "opts": ["de obicei intre 3-4 si 7, iar daca fan-out este mai mare de 9 sau mai mic de 3-4, este necesara reproiectarea", "maxim 5 si minim 2", "intre 3 si 6", "mai mult de 4"], "a": 0}, {"n": 13, "cat": "ip", "q": "Proiectarea structurata se realizeaza prin:", "opts": ["folosirea proiectarii top-down si a unor structuri standard de control al programului: procesare secventiala, decizie, reuniune", "proiectarea ingrijita a programelor, astfel incat acestea sa aiba o structura clara", "folosirea unor structuri standard de control al programului: procesare secventiala, decizie, reuniune", "proiectarea top-down si modularizare structurala"], "a": 0}, {"n": 14, "cat": "ip", "q": "Ce sunt regulile euristice de proiectare?", "opts": ["reguli rezultate din aplicarea teoriilor euristice", "metodologii de proiectare ale organizatiilor software", "reguli rezultate din experienta practica", "metode sistematice de proiectare"], "a": 2}, {"n": 15, "cat": "ip", "q": "Redundanta dinamica se realizeaza prin:", "opts": ["efectuarea unor teste de acceptanta si eventual rulare a unei versiuni alternative", "dublarea unei functii", "efectuarea unor teste de acceptanta si rularea unei versiuni alternative", "testarea starii taskurilor"], "a": 0}, {"n": 16, "cat": "ip", "q": "Documentatia software de proiectare este necesara pentru:", "opts": ["elaborarea unui prototip", "prezentarea produsului", "prezentarea produsului si relatiile cu clientii", "activitatea de asistenta tehnica si refolosire software"], "a": 3}, {"n": 17, "cat": "ip", "q": "De ce sunt necesare taskurile de \"luare la cunostinta\" intr-un sistem de telemecanica?", "opts": ["deoarece operatorul trebuie sa confirme ca a luat la cunostinta de evenimentele din proces si sunt necesare alte taskuri decat cele de tratare a evenimentelor, din pricina asincronismului reactiilor operatorului cu evenimentele din proces", "deoarece evenimentele din proces trebuie aduse la cunostinta sistemului", "deoarece telecomenzile trebuie confirmate de catre operator", "deoarece sistemul trebuie sa reactioneze suficient de rapid la evenimentele din proces"], "a": 0}, {"n": 18, "cat": "ip", "q": "Intr-un sistem de telemecanica, efectuarea unei telecomenzi parcurge urmatoarele etape:", "opts": ["selectie, executie", "trimiterea telecomenzii, raspunsul procesului", "selectie, executie, confirmare din proces", "selectie, confirmare"], "a": 2}, {"n": 19, "cat": "ip", "q": "Familiile mai reprezentative de sisteme de operare dedicate sunt:", "opts": ["OS-9, QNX, VxWorks/Microworks", "OS-2 WARP, QNX, OS-9", "OS-9, QNX, Windows 95 CE", "OS-9000, QTRM, RTS"], "a": 0}, {"n": 20, "cat": "ip", "q": "Sistemele de operare dedicate folosesc pentru comunicare:", "opts": ["mesaje si variabile comune", "mesaje", "cutii postale si semafoare", "zone tampon si conducte"], "a": 1}, {"n": 21, "cat": "ip", "q": "\"Ascunderea\" este utila pentru:", "opts": ["mai buna structurare a programului", "definirea unor restrictii de acces si \"ascunderea\" detaliilor nesemnificative ale unui modul de program", "definirea unor interfete complexe", "ascunderea detaliilor referitoare la tratarea erorilor"], "a": 1}, {"n": 22, "cat": "ip", "q": "Documentatia software de proiectare este necesara pentru:", "opts": ["prezentarea produsului", "prezentarea produsului si relatiile cu clientii", "activitatea de asistenta tehnica si refolosire software", "elaborarea unui prototip"], "a": 2}, {"n": 23, "cat": "ip", "q": "Configuratia larg distribuita utilizeaza:", "opts": ["legatura multipunct", "retele WAN si protocoale de comunicatii potrivite", "field-bus", "protocoale de comunicatie Novell si retele LAN"], "a": 1}, {"n": 24, "cat": "ip", "q": "Metoda MASCOT presupune, printre altele, elaborarea unei diagrame (numite ACR) care reflecta:", "opts": ["structurile de date si de apel folosite in program", "relatiile dintre structurile de date si structurile de program", "tranzactiile din sistem", "fluxurile de date din program, care isi au obirsiile in Dispozitivele de intrare si se termina totdeauna la Dispozitive de iesire"], "a": 3}, {"n": 25, "cat": "ip", "q": "Metodele de testare/punere la punct folosite in cadrul metodologiei MASCOT sunt:", "opts": ["testare in echipa mare, testare in echipa restransa", "testare generala, testare de detaliu", "programare, implementare", "testare pentru echipa mare, testare pentru echipa mica, testare pentru implementare"], "a": 0}, {"n": 26, "cat": "ip", "q": "Ce este o revizie?", "opts": ["o noua versiune destinata a inlocui versiunea veche si care reflecta evolutia in depanarea si imbunatatirea modulului", "o noua versiune care realizeaza aceleasi functionalitati pentru situatii usor diferite", "un mecanism notational care arata organizarea unui set de variatii"], "a": 0}, {"n": 27, "cat": "ip", "q": "Atingerea unui prag fixat pentru increderea in software este:", "opts": ["un criteriu de optimizare a proiectarii software", "o modalitate de implementare a imbunatatirii sigurantei in functionare", "un criteriu de oprire a testarii"], "a": 2}, {"n": 28, "cat": "ip", "q": "In depanarea aplicatiilor in cadrul intretinerii, este bine daca:", "opts": ["repornim serverul la fiecare eroare", "ignoram erorile minore", "avem un log al utilizatorilor, al activitatilor, al erorilor"], "a": 2}, {"n": 29, "cat": "ip", "q": "O aplicatie de tip task este, de regula:", "opts": ["un program care ruleaza o singura data la pornire", "un calculator simplu de date", "un calcul care se efectueaza in bucla infinita, functionand asincron fata de alte taskuri"], "a": 2}, {"n": 30, "cat": "ip", "q": "Mecanismul de watchdog functioneaza astfel:", "opts": ["reseteaza procesorul la intervale fixe de timp", "monitorizeaza consumul de energie al sistemului", "periodic, o secventa software apelata printr-o intrerupere de tip timer verifica buna functionare a aplicatiei"], "a": 2}, {"n": 31, "cat": "ip", "q": "Pentru validarea masuratorilor unui senzor critic se foloseste:", "opts": ["se folosesc doi senzori identici si se face media valorilor", "o secventa software apelata dupa masurarea pozitiei verifica plauzibilitatea valorilor obtinute", "se ignora masuratorile aberante"], "a": 1}, {"n": 32, "cat": "ip", "q": "Caracteristica esentiala a modelului in V de dezvoltare software este:", "opts": ["fiecare pas de proiectare este asociat cu pasul corespunzator din etapa de testare pentru verificarea corectei implementari a cerintelor si a aspectelor de proiectare; aripa stanga poate fi reexecutata", "testele de acceptanta valideaza cerintele prin asocierea testelor cu specificatiile", "realizarea unui produs dezvoltat partial, care sa permita clientilor si proiectantilor sa examineze anumite aspecte"], "a": 0}, {"n": 33, "cat": "ip", "q": "Modelul iterativ de dezvoltare software:", "opts": ["are mai multe iteratii in care se reiau toate etapele si la fiecare iteratie se finalizeaza o versiune partiala a produsului", "are o singura iteratie", "reia faza de testare iterativ", "testeaza la final"], "a": 0}, {"n": 34, "cat": "ip", "q": "Dezvoltarea iterativa furnizeaza clientului o versiune de program care:", "opts": ["contine de la inceput toate functiile si cu fiecare versiune noua acestea sunt perfectionate", "contine de la inceput un set restrans de functionalitati si cu fiecare versiune noua se adauga altele noi", "permite instruirea clientului si adaugarea de functii noi"], "a": 0}, {"n": 35, "cat": "ip", "q": "Ciclul de viata al software-ului contine fazele:", "opts": ["analiza, proiectare, codificare, testare, validare, instalare, intretinere", "analiza, proiectare, codificare, testare", "analiza, proiectare, codificare, testare, instalare"], "a": 0}, {"n": 36, "cat": "ip", "q": "Problema dublei intretineri rezulta daca:", "opts": ["mai multi proiectanti au drepturi pentru acces si modificare simultana a acelorasi date", "se mentin copii multiple ale aceluiasi cod sursa", "doi proiectanti actualizeaza simultan acelasi cod sursa"], "a": 1}, {"n": 37, "cat": "ip", "q": "Un sistem Delta de stocare de versiuni:", "opts": ["cuprinde conventiile de nume folosite pentru a discerne intre situatii", "reprezinta toate versiunile prin utilizarea unei singure copii", "memoreaza o singura versiune completa si le reprezinta pe celelalte prin retinerea diferentelor de la una la alta"], "a": 2}, {"n": 38, "cat": "ip", "q": "Un sistem de gestiune a configuratiilor permite:", "opts": ["stocarea tuturor fisierelor unui proiect, indiferent de destinatia informatiei, stocate intr-un depozit sub forma tuturor versiunilor create", "stocarea unei singure versiuni a fiecarui fisier", "stocarea doar a codului sursa"], "a": 0}, {"n": 39, "cat": "ip", "q": "Un proces de \"incarcare\" (Charge-in) in cazul unui sistem de gestiune a configuratiilor realizeaza:", "opts": ["copierea unui modul din depozitul de baza in spatiul de lucru al programatorului si blocarea accesului", "copierea unui modul de program din depozitul de baza in spatiul de lucru al programatorului", "crearea unei noi revizii in depozit si eliminarea blocarii accesului astfel incat alti proiectanti sa poata face revizii"], "a": 0}, {"n": 40, "cat": "ip", "q": "Un proces de \"descarcare\" (Charge-out) in cazul unui sistem de gestiune a configuratiilor realizeaza:", "opts": ["copierea unui modul de program din depozitul de baza in spatiul de lucru al programatorului", "copierea unui modul din depozitul de baza in spatiul de lucru al programatorului si blocarea accesului", "crearea unei noi revizii in depozit si eliminarea blocarii accesului astfel incat alti proiectanti sa poata face revizii"], "a": 2}, {"n": 41, "cat": "ip", "q": "Analiza orientata pe obiecte este:", "opts": ["procesul de identificare a claselor si obiectelor", "procesul de analiza a cerintelor", "procesul de descompunere functionala a sistemului", "procesul de testare orientata pe obiecte"], "a": 0}, {"n": 42, "cat": "ip", "q": "In acceptiunea UML, relatiile dintre clase sunt:", "opts": ["noduri, constrangeri, stereotipuri, asociatii, compozitii, generalizare, dependenta, multiplicitate", "asociatii, agregare, compozitii, generalizare, dependenta", "asociatii, agregare, cazuri de utilizare, actori, compozitie, generalizare, multiplicitate"], "a": 1}, {"n": 43, "cat": "ip", "q": "Ce reprezinta in UML o diagrama de tip \"use case\" (caz de utilizare)?", "opts": ["o interfata grafica intre utilizator si sistem", "o relatie de mostenire intre clase", "o abstractie a unei unitati de comunicare intre un sistem si actorii sai externi"], "a": 2}, {"n": 44, "cat": "ip", "q": "Ce este o stare in abordarea UML?", "opts": ["o diagrama reprezentand relatiile dintre diferitele componente ale unui sistem", "o conditie de existenta a unui obiect, care persista pentru o perioada nesemnificativa de timp si poate fi distinsa intr-un anumit mod de alta astfel de conditie de existenta", "o pozitie a sistemului in arhitectura"], "a": 1}, {"n": 45, "cat": "ip", "q": "Un mesaj (UML) este:", "opts": ["o realizare a unei comunicari intre un obiect sursa si un obiect destinatie", "un apel de functie", "o abstractie a unei unitati de comunicare intre un obiect sursa si un obiect destinatie"], "a": 2}, {"n": 46, "cat": "ip", "q": "Cand o clasa trebuie sa gestioneze un numar de obiecte de aceeasi clasa, o abordare potrivita ar fi sa se adauge:", "opts": ["un model (pattern) de proiectare", "o clasa observator intre clasa primara si setul de obiecte", "o clasa container intre clasa primara si setul de obiecte"], "a": 2}, {"n": 47, "cat": "ip", "q": "Strategia de identificare a obiectelor numita \"sublinierea substantivelor\" permite depistarea:", "opts": ["doar a claselor si atributelor", "doar a metodelor si functiilor", "unor asociatii, unor obiecte, clase, atribute, metode si generalizari"], "a": 2}, {"n": 48, "cat": "ip", "q": "Implementarea asociatiilor se poate realiza prin:", "opts": ["pentru asociatii \"1 la 1\" cu pointeri, referinte sau declaratii inline de clase, iar pentru \"1 la mai multi\" cu pattern container", "doar prin pointeri pentru toate tipurile de asociatii", "doar prin tabele de hash"], "a": 0}, {"n": 49, "cat": "ip", "q": "In modelul (pattern) Rendezvous participa urmatoarele obiecte:", "opts": ["Rendezvous, Lock, Thread", "Rendezvous, Lock, Client, Context, Thread", "Rendezvous, Wait, Semaphore, Client, Context, Thread"], "a": 0}, {"n": 50, "cat": "ip", "q": "Sablonul Smart Pointer elimina unele surse de erori din practica utilizarii pointerilor obisnuiti astfel:", "opts": ["folosesc constructorii pentru a initializa cu NULL sau a forta preconditii pentru ca pointerii sa indice spre obiecte valide; determina daca memoria trebuie eliberata cand nu mai e necesara; pot automat detecta conditia ca obiectul nu mai exista si sa refuze accesul", "sterg automat obiectele la iesirea din domeniu de valabilitate", "inlocuiesc complet pointerii obisnuiti cu referinte"], "a": 0}, {"n": 51, "cat": "ip", "q": "Sablonul Factory:", "opts": ["ofera o interfata unificata pentru un set de interfete dintr-un subsistem", "este un cadru compus din doua sabloane Observer", "defineste o interfata pentru crearea unui obiect, dar lasa subclasele sa decida ce clasa trebuie instantiata"], "a": 2}, {"n": 52, "cat": "ip", "q": "Sablonul Facade este:", "opts": ["un mecanism de creare de obiecte", "un cadru pentru sincronizarea thread-urilor", "o interfata unificata pentru un set de interfete dintr-un subsistem"], "a": 2}, {"n": 53, "cat": "ip", "q": "Solutia pentru sablonul Real-Time Observer consta in:", "opts": ["clientii solicita periodic date de la server prin polling", "serverul trimite date periodic fara ca clientii sa fi facut cerere", "un singur obiect (Server) furnizeaza automat date pentru clientii sai (Observers) care in prealabil s-au inregistrat la Server cu Subscribe()"], "a": 2}, {"n": 54, "cat": "ip", "q": "Model-View-Controller este:", "opts": ["un cadru compus din doua sabloane Observer", "un mecanism de creare de obiecte", "un cadru pentru sincronizarea thread-urilor"], "a": 0}, {"n": 55, "cat": "ip", "q": "Middleware este:", "opts": ["un software de conectivitate care consta dintr-un set de servicii care permit rularea proceselor multiple pe una sau mai multe echipamente in vederea interactiunii de-a lungul unei retele", "un sistem de operare", "un instrument de testare"], "a": 0}, {"n": 56, "cat": "ip", "q": "OSEK/VDX este:", "opts": ["un standard referitor la sistemul de operare in timp real folosit in industria automotive, dezvoltat de un consortiu de companii majore implicate in industria automotive", "un sistem de operare dedicat industriei aerospatiale", "un limbaj de programare pentru embedded"], "a": 0}, {"n": 57, "cat": "ip", "q": "AUTOSAR (AUTomotive Open System ARchitecture) este o initiativa pentru:", "opts": ["a crea si stabili standarde deschise pentru arhitectura software a vehiculelor", "a crea un sistem de operare dedicat exclusiv vehiculelor electrice", "a standardiza limbajele de programare folosite in industria auto"], "a": 0}, {"n": 58, "cat": "ip", "q": "Analiza orientata pe obiecte (OOA) este:", "opts": ["crearea unui model OO plecand de la cerintele externe (un model al domeniului problemei)", "implementarea claselor si obiectelor", "testarea aplicatiilor orientate pe obiecte"], "a": 0}, {"n": 59, "cat": "ip", "q": "Tipurile de cerinte sunt:", "opts": ["functionale, nefunctionale, de performanta", "tehnice, economice, sociale", "de business, utilizator, functionale"], "a": 2}, {"n": 60, "cat": "ip", "q": "Activitatile principale de proiectare sunt:", "opts": ["codificarea, testarea si livrarea", "analiza, proiectarea si mentenanta", "proiectarea arhitecturii, specificarea abstracta, proiectarea interfetelor, proiectarea componentelor, proiectarea structurilor de date, proiectarea algoritmilor"], "a": 2}, {"n": 61, "cat": "ip", "q": "Specificatiile urmaresc:", "opts": ["descrierea modului intern de functionare a aplicatiei", "descrierea limbajului de programare utilizat", "descrierea comunicarii dintre aplicatia software (vazuta ca o cutie neagra) si mediu"], "a": 2}, {"n": 62, "cat": "ip", "q": "Obiectivul primordial al proiectarii software este sa se ajunga la o descriere care sa permita:", "opts": ["delimitarea exacta a muncii in cadrul echipei si pe de alta parte continuarea cu actiunea de codificare", "estimarea costurilor finale", "selectarea limbajului de programare"], "a": 0}, {"n": 63, "cat": "ip", "q": "Documentatia software de testare:", "opts": ["este necesara pentru a putea repeta testele la o eventuala dezvoltare ulterioara", "este necesara doar pentru testele de acceptanta", "nu este necesara"], "a": 0}, {"n": 64, "cat": "ip", "q": "Service Oriented Architecture (SOA) se bazeaza pe:", "opts": ["protocoale proprietare ale fiecarui furnizor", "standarde de acces specifice Serviciilor WEB (SOAP, REST), interfetele Serviciilor WEB sunt descrise in WSDL pentru a putea fi inregistrate in directori publici", "comunicatii directe intre aplicatii fara standarde"], "a": 1}, {"n": 65, "cat": "ip", "q": "Cerintele de calitate pentru un sistem software se refera la:", "opts": ["fiabilitate, mentenabilitate, portabilitate, utilizabilitate, eficienta, securitate", "numai la performanta", "numai la usurinta in utilizare"], "a": 0}, {"n": 66, "cat": "ip", "q": "AUTOSAR (AUTomotive Open System ARchitecture) este o initiativa pentru:", "opts": ["a crea si stabili standarde deschise pentru arhitectura software a vehiculelor", "a crea un sistem de operare dedicat exclusiv vehiculelor", "a standardiza limbajele de programare folosite in industrie"], "a": 0}, {"n": 67, "cat": "ip", "q": "Testele de modul:", "opts": ["testeaza fiecare modul izolat, conform specificatiilor de modul", "testeaza intreaga aplicatie", "testeaza doar interfetele"], "a": 0}, {"n": 68, "cat": "ip", "q": "Testele de integrare verifica daca:", "opts": ["aplicatia functioneaza corect in mediul in care va fi folosita", "toate modulele de program, integrate in sistem, functioneaza corect impreuna", "clientul certifica corespondenta dintre specificatii si functionarea aplicatiei"], "a": 1}, {"n": 69, "cat": "ip", "q": "Testele de acceptanta:", "opts": ["sistemul este testat conform descrierii cerintelor clientului", "aplicatia este comparata cu lista cerintelor", "sistemul este testat dupa instalare"], "a": 0}, {"n": 70, "cat": "ip", "q": "Atingerea unui prag fixat pentru increderea in software este:", "opts": ["Un obiectiv de calitate", "O metrica de performanta", "Un criteriu de oprire a testarii"], "a": 2}, {"n": 71, "cat": "ip", "q": "In depanarea aplicatiilor in cadrul intretinerii, este bine daca:", "opts": ["repornim serverul la fiecare eroare", "ignoram erorile minore", "avem un log al utilizatorilor, al activitatilor, al erorilor"], "a": 2}, {"n": 72, "cat": "ip", "q": "O aplicatie de tip task este, de regula:", "opts": ["un program care ruleaza o singura data la pornire", "un calculator simplu de date", "un calcul care se efectueaza in bucla infinita, functionand asincron fata de alte taskuri"], "a": 2}, {"n": 73, "cat": "ip", "q": "Mecanismul de watchdog functioneaza astfel:", "opts": ["reseteaza procesorul la intervale fixe de timp", "monitorizeaza consumul de energie al sistemului", "periodic, o secventa software apelata printr-o intrerupere de tip timer verifica buna functionare a aplicatiei"], "a": 2}, {"n": 74, "cat": "ip", "q": "Pentru validarea masuratorilor unui senzor critic se foloseste:", "opts": ["se folosesc doi senzori identici si se face media", "o secventa software apelata dupa masurarea pozitiei verifica plauzibilitatea valorilor obtinute", "se ignora masuratorile aberante"], "a": 1}, {"n": 75, "cat": "ip", "q": "Sablonul Smart Pointer:", "opts": ["elimina unele surse de erori din practica utilizarii pointerilor obisnuiti", "este un sablon de creatie", "este un sablon comportamental"], "a": 0}, {"n": 76, "cat": "ip", "q": "Inspectia codului:", "opts": ["se face automat de catre un instrument", "este o tehnica de verificare statica a codului realizata de o echipa", "este o testare dinamica"], "a": 1}, {"n": 77, "cat": "ip", "q": "Refactorizarea codului inseamna:", "opts": ["restructurarea codului fara a-i modifica comportamentul extern", "modificarea comportamentului unei aplicatii", "corectarea erorilor"], "a": 0}, {"n": 78, "cat": "mpsam", "q": "Complexitatea Halstead a unui program estimeaza numarul de linii de cod dintr-un program pe baza:", "opts": ["numarului de variabile si operatori", "numarului de operatori si operanzi distincti precum si numarului total al acestora", "numarului de linii de comentarii", "numarului de functii"], "a": 1}, {"n": 79, "cat": "mpsam", "q": "Modelul COCOMO de estimare a efortului de proiectare da o estimare asupra efortului de proiectare prin:", "opts": ["o functie de tipul efort = a * (dimensiune)^b * factori_de_ajustare", "o functie liniara", "o functie logaritmica"], "a": 0}, {"n": 80, "cat": "mpsam", "q": "In cadrul proiectelor software, procesele primare sunt:", "opts": ["planificare, executie, control, finalizare", "achizitie, furnizare, dezvoltare, utilizare, intretinere", "analiza, proiectare, codificare, testare", "documentare, testare, validare, audit"], "a": 1}, {"n": 81, "cat": "mpsam", "q": "Structura de alocare a activitatilor (WBS) este:", "opts": ["o lista de activitati ordonate cronologic", "o descompunere ierarhica a livrabilelor proiectului in activitati mai mici", "o lista a resurselor umane", "un buget detaliat"], "a": 1}, {"n": 82, "cat": "mpsam", "q": "Marja de timp este:", "opts": ["durata totala a proiectului", "timpul pierdut din cauza intarzierilor", "timpul de care se dispune ca rezerva pentru efectuarea unei activitati", "timpul minim al unei activitati"], "a": 2}, {"n": 83, "cat": "mpsam", "q": "Analiza Pareto este:", "opts": ["o metoda statistica de identificare a celor mai importante cauze pentru o problema (regula 80/20)", "o metoda de planificare a proiectelor", "o metoda de testare a software-ului"], "a": 0}, {"n": 84, "cat": "mpsam", "q": "Conform Maslow, indivizii sunt motivati de:", "opts": ["doar de bani", "doar de recunoasterea profesionala", "de o ierarhie de nevoi: fiziologice, securitate, sociale, stima si auto-realizare", "doar de conditiile de munca"], "a": 2}, {"n": 85, "cat": "mpsam", "q": "In practica, succesul unei tactici de imbunatatire a motivarii personalului depinde de:", "opts": ["exclusiv de marimea salariului", "statutul relatiilor din firma, atitudinea sindicatelor, claritatea cu care sunt diagnosticate problemele si gradul de implicare a managementului", "exclusiv de stilul de management", "numarul de angajati din firma"], "a": 1}, {"n": 1, "q": "Modularitatea inseamna:", "opts": ["delimitarea unor secvente de program, cu intrari si iesiri bine precizate, intre care se stabilesc relatii ierarhice sau de colaborare", "stabilirea unor ierarhii in program", "delimitarea unor secvente de program", "stabilirea riguroasa a intrarilor si iesirilor"], "a": 0, "cat": "radu1"}, {"n": 2, "q": "Notiunea de timp real implica:", "opts": ["proprietatea de a reactiona in conditiile reale ale sistemului", "reactia sistemului in conditii precizate", "timp minim de reactie", "proprietatea sistemului de a reactiona la schimbari in proces, intr-un timp mai mic decat o limita prestabilita"], "a": 3, "cat": "radu1"}, {"n": 3, "q": "Metoda MASCOT presupune, printre altele, elaborarea unei diagrame (numite ACR) care reflecta:", "opts": ["structurile de date si de apel folosite in program", "relatiile dintre structurile de date si structurile de program", "tranzactiile din sistem", "fluxurile de date din program, care isi au obarsiile in Dispozitivele de intrare si se termina totdeauna la Dispozitive de iesire"], "a": 3, "cat": "radu1"}, {"n": 4, "q": "Obiectivele ingineriei programarii stabilesc:", "opts": ["modelele de proiectare", "dezideratele activitatii urmate la proiectare", "principiile care trebuie urmate la proiectare", "modelele si principiile de proiectare"], "a": 2, "cat": "radu1"}, {"n": 5, "q": "Intr-un sistem de conducere de proces interactioneaza urmatoarele componente:", "opts": ["software, hardware", "programe, calculatoare, interfete de proces, manual de utilizare", "echipamente, software, proceduri de operare, operator uman", "interfete, sisteme de reglare, sisteme de calcul, software"], "a": 2, "cat": "radu1"}, {"n": 6, "q": "Metodele de testare/punere la punct folosite in cadrul metodologiei MASCOT sunt:", "opts": ["testare in echipa mare, testare in echipa restransa", "testare generala, testare de detaliu", "programare, implementare", "testare pentru echipa mare, testare pentru echipa mica, testare pentru implementare"], "a": 0, "cat": "radu1"}, {"n": 7, "q": "Ingineria programarii se ocupa cu:", "opts": ["aplicarea unor principii de programare structurata, astfel incat sa creasca fiabilitatea produselor-program", "folosirea unor instrumente software adecvate, astfel incat sa creasca productivitatea activitatii de programare", "utilizarea intr-o maniera disciplinata, sistematica si cu pricepere a unor metode si instrumente asociate, adecvate, avand in vedere anumite obiective si principii de baza", "organizarea corecta a activitatii de programare intr-o firma de software"], "a": 2, "cat": "radu1"}, {"n": 8, "q": "Adaptabilitatea se refera la:", "opts": ["obiectivul de realizare a unor programe care sa poata fi usor adaptate pentru conditii diferite de functionare", "obiectivul de realizare a unor programe adaptate unor situatii concrete de functionare", "principiul de programare prin care programul trebuie sa fie usor de modificat", "principiul de proiectare prin care se cere proiectantului sa se adapteze usor la noi cerinte"], "a": 0, "cat": "radu1"}, {"n": 9, "q": "Prototipizarea este o paradigma a ingineriei programarii care se refera la:", "opts": ["construirea aplicatiilor prin metoda top-down", "construirea unui prototip al programului si modificarea acestuia", "dezvoltarea rapida a unui model simplificat al programului, interactiunea cu clientul si adaugarea ulterioara a functiilor omise"], "a": 2, "cat": "radu1"}, {"n": 10, "q": "Cate module de program pot fi subordonate unui modul, conform regulilor euristice de proiectare?", "opts": ["de obicei intre 3-4 si 7, iar daca fan-out este mai mare de 9 sau mai mic de 3-4, este necesara reproiectarea", "maxim 5 si minim 2", "intre 3 si 6", "mai mult de 4"], "a": 0, "cat": "radu1"}, {"n": 11, "q": "De ce sunt necesare taskurile de \"luare la cunostinta\" intr-un sistem de telemecanica?", "opts": ["deoarece evenimentele din proces trebuie aduse la cunostinta sistemului", "deoarece telecomenzile trebuie confirmate de catre operator", "deoarece operatorul trebuie sa confirme ca a luat la cunostinta de evenimentele din proces si sunt necesare alte taskuri decat cele de tratare a evenimentelor, din pricina asincronismului reactiilor operatorului cu evenimentele din proces", "deoarece sistemul trebuie sa reactioneze suficient de rapid la evenimentele din proces"], "a": 2, "cat": "radu1"}, {"n": 12, "q": "Proiectarea structurata se realizeaza prin:", "opts": ["folosirea proiectarii top-down si a unor structuri standard de control al programului: procesare secventiala, decizie, reuniune", "proiectarea ingrijita a programelor, astfel incat acestea sa aiba o structura clara", "folosirea unor structuri standard de control al programului: procesare secventiala, decizie, reuniune", "proiectarea top-down si modularizare structurala"], "a": 0, "cat": "radu1"}, {"n": 13, "q": "Ce sunt regulile euristice de proiectare?", "opts": ["reguli rezultate din aplicarea teoriilor euristice", "metodologii de proiectare ale organizatiilor software", "reguli rezultate din experienta practica", "metode sistematice de proiectare"], "a": 2, "cat": "radu1"}, {"n": 14, "q": "Principiile ingineriei programarii se refera la:", "opts": ["modele folosite in procesul de proiectare", "modalitatile de atingere a obiectivelor ingineriei programarii", "scopurile programarii", "destinatia activitatii de programare"], "a": 1, "cat": "radu1"}, {"n": 15, "q": "Redundanta dinamica se realizeaza prin:", "opts": ["efectuarea unor teste de acceptanta si eventual rulare a unei versiuni alternative", "dublarea unei functii", "efectuarea unor teste de acceptanta si rularea unei versiuni alternative", "testarea starii taskurilor"], "a": 0, "cat": "radu1"}, {"n": 16, "q": "Documentatia software de proiectare este necesara pentru:", "opts": ["elaborarea unui prototip", "prezentarea produsului", "prezentarea produsului si relatiile cu clientii", "activitatea de asistenta tehnica si refolosire software"], "a": 3, "cat": "radu1"}, {"n": 17, "q": "\"Ascunderea\" este utila pentru:", "opts": ["mai buna structurare a programului", "definirea unor restrictii de acces si \"ascunderea\" detaliilor nesemnificative ale unui modul de program", "definirea unor interfete complexe prin ascunderea temporara a detaliilor", "\"ascunderea\" detaliilor referitoare la tratarea erorilor"], "a": 1, "cat": "radu1"}, {"n": 18, "q": "Cand o clasa trebuie sa gestioneze un numar de obiecte de aceeasi clasa, o abordare potrivita in proiectare ar fi sa se adauge:", "opts": ["un model (pattern) de proiectare", "o clasa observator intre clasa primara si setul de obiecte", "o clasa container intre clasa primara si setul de obiecte"], "a": 2, "cat": "radu1"}, {"n": 19, "q": "Configuratia larg distribuita utilizeaza:", "opts": ["legatura multipunct", "retele WAN si protocoale de comunicatii potrivite", "field-bus", "protocoale de comunicatie Novell si retele LAN"], "a": 1, "cat": "radu1"}, {"n": 20, "q": "Familiile mai reprezentative de sisteme de operare dedicate sunt:", "opts": ["OS-9, QNX, VxWorks/Microworks", "OS-2 WARP, QNX, OS-9", "OS-9, QNX, Windows 95 CE", "OS-9000, QTRM, RTS"], "a": 0, "cat": "radu1"}, {"n": 21, "q": "Sistemele de operare dedicate folosesc pentru comunicare:", "opts": ["mesaje si variabile comune", "mesaje", "cutii postale si semafoare", "zone tampon si conducte"], "a": 1, "cat": "radu1"}, {"n": 22, "q": "Intr-un sistem de telemecanica, efectuarea unei telecomenzi parcurge urmatoarele etape:", "opts": ["selectie, executie", "trimiterea telecomenzii, raspunsul procesului", "selectie, executie, confirmare din proces", "selectie, confirmare"], "a": 2, "cat": "radu1"}, {"n": 23, "q": "Redundanta dinamica se realizeaza prin:", "opts": ["efectuarea unor teste de acceptanta si rularea unei versiuni alternative", "dublarea unei functii", "efectuarea unor teste de acceptanta si eventuala rulare a unei versiuni alternative", "testarea starii taskurilor"], "a": 2, "cat": "radu1"}, {"n": 24, "q": "Obiectivele ingineriei programarii sunt:", "opts": ["adaptabilitatea, eficienta, fiabilitatea, perceptibilitatea", "modularitatea, confirmabilitatea, adaptabilitatea, eficienta", "adaptabilitatea, eficienta, modularitatea, confirmabilitatea, eficienta", "modularitatea, abstractizarea, ascunderea, eficienta, fiabilitatea, perceptibilitatea, confirmabilitatea"], "a": 0, "cat": "radu1"}, {"n": 25, "q": "Un sistem Delta de stocare de versiuni:", "opts": ["reprezinta toate versiunile prin utilizarea unei singure copii a codului sursa si diferentele dintre versiuni sunt marcate prin compilare conditionata", "memoreaza o singura versiune completa si le reprezinta pe celelalte prin retinerea diferentelor de la una la alta", "cuprinde conventiile de nume care sunt folosite pentru a discerne intre situatiile in care fisiere diferite reprezinta versiuni diferite ale aceluiasi modul"], "a": 1, "cat": "radu1"}, {"n": 26, "q": "Ce este o revizie?", "opts": ["o noua versiune destinata a inlocui versiunea veche si care reflecta evolutia in depanarea si imbunatatirea modulului ca functionalitate si performante", "o noua versiune care realizeaza aceleasi functionalitati pentru situatii usor diferite si care este destinata a fi o alternativa interschimbabila cu alta similara", "un mecanism notational care arata organizarea unui set de variatii si relatiile dintre acestea"], "a": 0, "cat": "radu1"}, {"n": 27, "q": "Un mesaj (UML) este:", "opts": ["o realizare a unei comunicari intre un obiect sursa si un obiect destinatie", "un apel de functie care se realizeaza la aparitia unui eveniment", "o abstractie a unei unitati de comunicare intre un obiect sursa si un obiect destinatie"], "a": 2, "cat": "radu1"}, {"n": 28, "q": "Dezvoltarea iterativa furnizeaza clientului o versiune de program care:", "opts": ["contine de la inceput toate functiile si cu fiecare versiune noua acestea sunt perfectionate si performantele imbunatatite", "contine de la inceput un set restrans de functionalitati si cu fiecare versiune noua se adauga altele noi", "permite instruirea clientului si adaugarea de functii noi"], "a": 0, "cat": "radu1"}, {"n": 29, "q": "Strategia de identificare a obiectelor numita \"sublinierea substantivelor\" permite depistarea:", "opts": ["unor clase de interes, a unor subsisteme, clase neinteresante sau atribute de clase", "unor obiecte de interes, a unor actori, obiecte neinteresante sau atribute de obiecte", "unor asociatii, unor obiecte, clase, atribute, metode si generalizari"], "a": 1, "cat": "radu1"}, {"n": 30, "q": "Problema dublei intretineri rezulta daca:", "opts": ["se mentin copii multiple ale aceluiasi cod sursa", "mai multi proiectanti au drepturi pentru acces si modificare simultana a acelorasi date (eventual cod sursa)", "doi proiectanti actualizeaza simultan acelasi cod sursa si astfel este posibil sa se suprascrie unele modificari in copia distribuita"], "a": 0, "cat": "radu1"}, {"n": 31, "q": "Implementarea asociatiilor se poate realiza prin:", "opts": ["prin includerea unor obiecte de tipul claselor asociate", "prin mesaje pentru asociatiile de la \"1 la 1\" si prin liste inlantuite si iteratori pentru asociatiile de la \"1 la mai multi\"", "pentru asociatii \"1 la 1\" cu pointeri, referinte sau declaratii inline de clase, iar asociatiile \"1 la mai multi\" se implementeaza de multe ori cu pattern \"container\""], "a": 2, "cat": "radu1"}, {"n": 32, "q": "Un proces de descarcare (charge-out) in cadrul unui sistem de gestiune a configuratiilor realizeaza:", "opts": ["copierea unui modul din depozitul de baza in spatiul de lucru al programatorului si apoi blocarea accesului (lock) la acest modul astfel incat nimeni altcineva sa nu mai poata realiza un alt proces de descarcare", "copierea unui modul de program din depozitul de baza (baseline) in spatiul de lucru al programului si apoi stergerea acestuia din depozit", "crearea unei noi revizii in depozit si eliminarea blocarii accesului astfel incat alti programatori sa poata realiza mai departe revizii"], "a": 2, "cat": "radu1"}, {"n": 33, "q": "O aplicatie informatica de gestiune a configuratiilor permite stocarea:", "opts": ["tuturor fisierelor unui proiect, indiferent de destinatia informatiei (cod-sursa, documentatii, planificari etc), stocate intr-un depozit si sub forma tuturor versiunilor create de proiectantii din cadrul echipei", "tuturor fisierelor aferente unui proiect intr-o ierarhie de clase in care relatiile de mostenire sunt corespunzatoare reviziilor succesive", "tuturor fisierelor unui proiect, indiferent de destinatia informatiei, stocate distribuit, sub forma tuturor versiunilor create de proiectantii din cadrul echipei"], "a": 0, "cat": "radu1"}, {"n": 34, "q": "Ce fel de relatii sunt implementate in codul sursa cu ierarhia Animal -> caine, peste, mita?", "opts": ["specializare", "generalizare", "extensie"], "a": 0, "cat": "radu1"}, {"n": 35, "q": "In acceptiunea UML, relatiile dintre clase sunt:", "opts": ["noduri, constrangeri, stereotipuri, compozitii, generalizare, dependenta, multiplicitate", "asociatii, agregare, compozitii, generalizare, dependenta", "asociatii, agregare, cazuri de utilizare (use cases), actori, compozitie, generalizare, multiplicitate"], "a": 1, "cat": "radu1"}, {"n": 36, "q": "Caracteristica esentiala a modelului in V de dezvoltare software este:", "opts": ["testele de acceptanta valideaza cerintele prin asocierea testelor cu specificatiile, prin conlucrarea dintre client si dezvoltator, aripa stanga poate fi reexecutata pentru a imbunatati cerintele, proiectarea sau codificarea", "fiecare pas de proiectare este asociat cu pasul corespunzator din etapa de testare pentru verificarea corectei implementari a cerintelor si a aspectelor de proiectare, asociere realizata prin conlucrarea directa a echipelor implicate; aripa stanga poate fi reexecutata pentru a imbunatati cerintele, proiectarea sau codificarea", "realizarea unui produs dezvoltat partial, care sa permita clientilor si proiectantilor sa examineze anumite aspecte ale produsului (mai ales interfete) pentru a putea coda mai usor; codarea este in varful V-ului"], "a": 1, "cat": "radu1"}, {"n": 37, "q": "Ce reprezinta in UML diagrama cu actori si elipse de tip use case?", "opts": ["o diagrama structurata", "o agregare", "o diagrama de caz de utilizare (use case)"], "a": 2, "cat": "radu1"}, {"n": 38, "q": "Ce este o stare in abordarea UML?", "opts": ["o diagrama reprezentand relatiile dintre diferitele componente ale unui sistem", "o conditie de existenta a unui sistem care persista pentru o perioada semnificativa de timp si este reprezentata prin relatiile din cadrul arhitecturii sistemului", "o conditie de existenta a unui obiect, care persista pentru o perioada nesemnificativa de timp si poate fi distinsa intr-un anumit mod de alta astfel de conditie de existenta"], "a": 2, "cat": "radu1"}, {"n": 39, "q": "Testele de integrare verifica daca:", "opts": ["aplicatia functioneaza corect in mediul in care va fi folosita", "toate modulele de program, integrate in sistem, functioneaza corect impreuna, conform cerintelor functionale", "clientul certifica corespondenta dintre specificatiile initiale si functionarea aplicatiei"], "a": 0, "cat": "radu1"}, {"n": 40, "q": "In depanarea aplicatiilor in cadrul intretinerii, este bine daca:", "opts": ["introducem in meniul aplicatiei o comanda numita \"Lista erorilor inregistrate\"", "avem acces la un simulator de proces", "avem un log al utilizatorilor, al activitatilor, al erorilor, al utilizatorilor care au modificat inregistrari in baza de date"], "a": 0, "cat": "radu1"}, {"n": 41, "q": "In cadrul testelor de acceptanta:", "opts": ["sistemul este testat conform descrierii cerintelor clientului", "aplicatia este comparata cu lista cerintelor software si hardware", "sistemul este testat daca functiile sunt implementate dupa instalarea softului"], "a": 0, "cat": "radu1"}, {"n": 42, "q": "Un program este \"plantat\" cu 26 de erori. In timpul testarii, sunt detectate 15 erori din care 10 sunt \"plantate\" si 5 sunt alte erori. Cate erori estimam ca mai sunt in program (nedetectate)?", "opts": ["6", "8", "12"], "a": 2, "cat": "radu1"}, {"n": 43, "q": "Penetrabilitatea sistemelor de operare este:", "opts": ["Raspandirea si asimilarea de catre specialisti si utilizatori", "Raspandirea si asimilarea de catre dezvoltatorii de software", "Calitatea sistemelor de operare de a fi usor de utilizat si de inteles de catre utilizatori"], "a": 0, "cat": "radu1"}, {"n": 44, "q": "Inspectia codului:", "opts": ["este o metoda de testare utilizata la testele de acceptanta si presupune inspectia codului de catre client, realizata prin comparare cu specificatiile", "se foloseste la testele de modul si presupune pregatirea actiunii prin desemnarea unei echipe, prezentarea prealabila a codului, studiul acestuia, formularea unei liste de obiective si organizarea unei sedinte de analiza; se verifica inclusiv corectitudinea algoritmilor, performantele, interfetele etc.", "se foloseste la testele de modul si presupune analiza de colegii din echipa de testare, carora li se explica cele realizate (folosind inclusiv documentatia)"], "a": 1, "cat": "radu1"}, {"n": 45, "q": "Atingerea unui prag fixat pentru increderea in software este:", "opts": ["un criteriu de optimizare a proiectarii software", "o modalitate de implementare a imbunatatirii sigurantei in functionare", "un criteriu de oprire a testarii"], "a": 2, "cat": "radu1"}, {"n": 46, "q": "Sablonul Factory:", "opts": ["ofera un surogat local al unui obiect", "ofera o interfata unificata pentru un set de interfete dintr-un subsistem", "defineste o interfata pentru crearea unui obiect, dar lasa subclasele sa decida ce clasa trebuie instantiata"], "a": 2, "cat": "radu1"}, {"n": 47, "q": "Model-View-Controller este:", "opts": ["un sablon structurat care este de folos atunci cand o referinta sau un pointer spre un obiect nu poate fi obtinuta", "un cadru compus din doua sabloane Observer", "un model arhitectural pentru implementarea unor interactiuni in timp real intre doua fire de executie"], "a": 1, "cat": "radu1"}, {"n": 48, "q": "Sablonul Smart Pointer elimina unele surse de erori din practica utilizarii pointerilor obisnuiti astfel:", "opts": ["au constructor care initializeaza pointerii cu NULL; nu au destructor dar mentin adresa memoriei unde e obiectul utilizat", "indica in permanenta spre obiecte valide; determina daca memoria trebuie eliberata cand nu mai e necesara; daca eliberarea memoriei nu se face corect, smart pointers returneaza un pointer valid spre o alta zona de memorie si refuza accesul la zona initiala", "folosesc constructori pentru a initializa cu NULL sau a forta preconditii pentru ca pointerii sa indice spre obiecte valide; determina daca memoria trebuie eliberata cand nu mai e necesara; daca eliberarea memoriei nu se face corect, smart pointers pot automat detecta conditia ca obiectul nu mai exista si sa refuze accesul"], "a": 2, "cat": "radu1"}, {"n": 49, "q": "Solutia pentru sablonul Real-Time Observer consta in aceea ca:", "opts": ["au un singur obiect (server) decupleaza clientii sai (Observer) care in prealabil s-au inregistrat la Server cu Subscribe() de la accesul la un alt fir de executie sau proces prin crearea unui surogat al obiectului", "un singur obiect (Server) furnizeaza automat date pentru clientii sai (Observers) care in prealabil s-au inregistrat la Server cu Subscribe(); acestea sunt clase abstracte care au clase derivate (Concrete Server si Concrete Observer)", "obiectul Server furnizeaza la cerere asincrona sau episodica date pentru clientii sai (Observers) care in prealabil s-au inregistrat la Server cu Attach()"], "a": 1, "cat": "radu1"}, {"n": 50, "q": "Middleware este:", "opts": ["un software de conectivitate care consta dintr-un set de servicii care permit rularea proceselor multiple pe una sau mai multe echipamente/masini in vederea interactiunii de-a lungul unei retele", "un software de conectivitate care consta dintr-un set de servicii de tip proxy care permit rularea interfetelor utilizator", "un software care este conceput pentru a rula intr-un nivel ierarhic de mijloc (three-tier) intre utilizatori si bazele de date"], "a": 0, "cat": "radu1"}, {"n": 51, "q": "OSEK/VDX este un:", "opts": ["standard referitor la comunicare intre sisteme, sistemul de operare propriu-zis si managementul retelei (care este de regula o retea interna a automobilului, functionand conform standardului CAN), dezvoltat de un consortiu de companii majore implicate in industria automotive", "sistem de operare in timp real pentru industria automotive, pentru procesoare pe 16/32 biti, dezvoltat de un consortiu din companii majore implicate in aceasta industrie", "standard referitor la comunicare intre sisteme, sistemul de operare propriu-zis si realizarea aplicatiilor automotive pe reteaua interna a automobilului, dezvoltat de companiile Siemens si Continental"], "a": 0, "cat": "radu1"}, {"n": 52, "q": "Uzual, Service Oriented Architecture (SOA) se bazeaza pe:", "opts": ["standarde de acces specifice serviciilor WEB (SOAP, REST), interfetele Serviciilor WEB sunt descrise in termeni XML pentru a putea fi cautate in depozite UDDI iar mediul pentru dezvoltarea aplicatiilor este Microsoft Studio.NET sau JAVA", "standarde de acces specifice Serviciilor WEB (SOAP, REST) care sunt folosite pe scara larga de industria software. Interfetele Serviciilor WEB sunt descrise in termeni de WSDL (Web Services Description Language) pentru a putea fi inregistrate in directori publici si cautate in depozite UDDI. Suportul pentru transportul informatiei este formatul XML", "standarde de acces specifice Serviciilor WEB XML, interfetele Serviciilor WEB sunt descrise in termeni WSDL pentru a putea fi inregistrate in directori publici si cautate in depozite UDDI iar suportul pentru transportul informatiei este formatul SOAP"], "a": 1, "cat": "radu1"}, {"n": 53, "q": "Analiza orientata pe obiecte (OOA-Object Oriented Analysis) este:", "opts": ["crearea unui set de aplicatii OO plecand de la cerintele externe (un model al domeniului solutiei problemei)", "analiza problemei plecand de la cerintele externe, prin discutii cu clientul, urmand sa se obtina astfel diagrame de clase si diagrame de cazuri de utilizare", "crearea unui model OO plecand de la cerintele externe (un model al domeniului problemei)"], "a": 0, "cat": "radu1"}, {"n": 54, "q": "Arhitectul unui sistem software este:", "opts": ["acea autoritate ce determina structura initiala a sistemului, accepta influente ulterioare de la o serie de parteneri ai proiectului in ansamblu si elaboreaza o structura de baza a sistemului", "acea autoritate ce determina structura initiala a sistemului, elaboreaza cea mai mare parte a specificatiilor, a proiectului software si a manualului de utilizare si este responsabil de testarea sistemului", "acel inginer, care conduce echipa de analiza si apoi echipele de proiectare si implementare si elaboreaza partile cele mai complicate ale softului sistemului"], "a": 0, "cat": "radu1"}, {"n": 55, "q": "Specificatiile urmaresc:", "opts": ["descrierea structurii aplicatiei software si a comunicarii acesteia cu mediul", "descrierea elementelor de arhitectura si de detaliu in aplicatia software, a structurii bazelor de date precum si a interfetelor utilizator", "descrierea comunicarii dintre aplicatia software (vazuta ca o cutie neagra) si mediu (aici, multimea tuturor actorilor - a entitatilor exterioare cu care aplicatia interactioneaza in mod semnificativ)"], "a": 2, "cat": "radu1"}, {"n": 56, "q": "Obiectivul primordial al proiectarii software este sa se ajunga la o descriere care sa permita:", "opts": ["delimitarea exacta a muncii in cadrul echipei si pe de alta parte continuarea cu actiunea de codificare (scriere de cod-sursa) in cadrul careia fiecare proiectant sa stie exact ce sa faca pentru a scrie codul ca activitate de rutina", "descrierea exacta a claselor, a relatiilor dintre acestea, stabilirea metodelor, descrierea structurii bazelor de date astfel ca mai departe fiecare proiectant sa stie exact ce sa faca", "delimitarea exacta a muncii in cadrul echipei prin intocmirea corecta a diagramei Gantt si obtinerea diagramei DFD pentru ca mai departe fiecare proiectant sa stie exact ce sa faca"], "a": 0, "cat": "radu1"}, {"n": 57, "q": "Sistemele pentru conducere de proces ridica probleme speciale, care maresc gradul de dificultate al proiectarii si implementarii deoarece:", "opts": ["impun cerinte speciale privind siguranta in functionare (sisteme safety-critical), respectiv, cele mai multe au cerinte exprese privind implementarea redundantei dinamice", "impun cerinte speciale privind siguranta in functionare (sisteme safety-critical), respectiv, cele mai multe au cerinte exprese privind raspunsul in timp real", "impun cerinte speciale privind raspunsul in timp real, respectiv, cele mai multe au cerinte exprese privind utilizarea unor sisteme de operare speciale"], "a": 1, "cat": "radu1"}, {"n": 58, "q": "Cand programele trebuie transferate dintr-un calculator-gazda (de exemplu un PC) intr-un calculator tinta prin legatura dintre acestea (seriala/USB) se transfera cod executabil, in cele mai multe cazuri, in format HEX-INTEL. Caracteristicile acestui format sunt:", "opts": ["organizarea informatiei pe blocuri; fiecare bloc de informatie are un delimitator de inceput, lungime, adresa de depunere, tip informatie, informatie utila (codul programului), suma de control; informatia utila este convertita intr-un sir de caractere ASCII Unicode", "organizarea informatiei pe blocuri; fiecare bloc de informatie este convertit in doi octeti ASCII corespunzatori codului ASCII al fiecarei tetrade a reprezentarii hexazecimale a blocului", "organizarea informatiei pe blocuri; fiecare bloc de informatie are un delimitator de inceput, lungime, adresa de depunere, tip informatie, informatie utila, suma de control; fiecare octet de informatie este convertit in doi octeti ASCII corespunzatori codului ASCII al fiecarei tetrade a reprezentarii hexazecimale a octetului"], "a": 2, "cat": "radu1"}, {"n": 59, "q": "Mediul LabView contine:", "opts": ["un editor de scheme (Simulink/Matlab) si un mediu de executie (run-time) care permite rularea schemelor grafice obtinute", "un editor de scheme-bloc de instrumente de masura si prelucrari de semnale, si un mediu de executie (run-time) care permite rularea schemelor grafice obtinute", "un editor de scheme-bloc de instrumente de masura si prelucrari de semnale, si un generator care genereaza cod in C, care ulterior poate fi utilizat"], "a": 2, "cat": "radu1"}, {"n": 60, "q": "Gama de aplicatii Lotus este caracterizata de urmatoarele:", "opts": ["fiecare utilizator are acces la o aplicatie care vehiculeaza tabele (colectii de campuri) de baza de date in format DB2; aceste informatii sunt vehiculate in retea printr-un sistem de corespondenta intre utilizatorii de-a lungul unui flux de date (Dataflow)", "fiecare utilizator are acces la o aplicatie Server Lotus Domino care vehiculeaza documente (care la randul lor sunt colectii de campuri) ca si entitati de informatii; documentele sunt vehiculate secvential intre toti utilizatorii de-a lungul unui flux de date (Dataflow) asemanator modalitatii birocratice de circulatie a documentelor scrise in cadrul unei organizatii", "fiecare utilizator are acces la o aplicatie care vehiculeaza documente (care la randul lor sunt colectii de campuri) ca si entitati de informatii; documentele sunt vehiculate intre utilizatori de-a lungul unui flux de lucru (Workflow) asemanator modalitatii birocratice de circulatie a documentelor"], "a": 1, "cat": "radu1"}, {"n": 1, "cat": "radu2", "q": "La angajarea unui programator pentru un proiect estimat la 3 luni cel mai important factor de luat in calcul este:", "opts": ["Educatia", "Abilitatile comunicationale", "Experienta in limbajul de programare"], "a": 2}, {"n": 2, "cat": "radu2", "q": "Care factor influenteaza decizia de crestere a pretului unui sistem la incheierea unui contract?", "opts": ["Oportunitati de piata", "Imprecizia estimarii costurilor", "Situatia financiara dificila"], "a": 0}, {"n": 3, "cat": "radu2", "q": "Care este cea mai probabila cauza de degradare a performantei unui sistem organizat dupa un model pe nivele (masina abstracta)?", "opts": ["Nivelele superioare pot depinde direct de servicii oferite de nivelele de mai jos", "Nivelele inferioare nu pot accesa nivelele superioare", "Comunicarea intre nivele este intotdeauna rapida"], "a": 0}, {"n": 4, "cat": "radu2", "q": "Subsistemele unui sistem distribuit, organizat dupa un model cu zona de date partajata, pot schimba date prin:", "opts": ["O baza de date centrala accesibila tuturor subsistemelor", "Mesaje directe intre subsisteme", "Apeluri de proceduri la distanta"], "a": 0}, {"n": 5, "cat": "radu2", "q": "In cazul Extreme Programming, testarea de la inceput presupune:", "opts": ["Selectarea prioritara a setului minimal de functionalitati esentiale", "Scrierea testelor pentru functionalitati inainte de implementarea respectivelor functionalitati", "Limitarea proiectarii la suportul cerintelor curente"], "a": 1}, {"n": 6, "cat": "radu2", "q": "Lista de inspectie reprezinta:", "opts": ["Lista cu erori frecvente in limbajul de implementare ales", "Lista de materiale necesare procesului de inspectie", "Lista programatorilor implicati in procesul de inspectie"], "a": 0}, {"n": 7, "cat": "radu2", "q": "Constrangerile unui sistem reprezinta cerinte:", "opts": ["Non-functionale", "Functionale", "De domeniu"], "a": 0}, {"n": 8, "cat": "radu2", "q": "Cui NU ii sunt folositoare cerintele sistem rezultate in urma analizei cerintelor?", "opts": ["Managerilor de contracte", "Proiectantilor de sistem", "Programatorilor"], "a": 2}, {"n": 9, "cat": "radu2", "q": "Care sunt elementele de modelare dintr-o diagrama entitate-relatie?", "opts": ["Entitati, relatii si atribute", "Clase, obiecte si metode", "Procese, fluxuri si depozite"], "a": 0}, {"n": 10, "cat": "radu2", "q": "Procesul de analiza NU poate depista:", "opts": ["Timpul de executie a unei functii statice", "Erorile de sintaxa", "Variabilele nefolosite"], "a": 0}, {"n": 11, "cat": "radu2", "q": "Care din urmatoarele caracteristici NU reprezinta un avantaj al modelelor in cascada?", "opts": ["Modificarea cerintelor este usor de gestionat", "Fazele si procesele sunt terminate una dupa alta", "Modelul este simplu de utilizat"], "a": 0}, {"n": 12, "cat": "radu2", "q": "Care din urmatoarele afirmatii privind fazele de dezvoltare a unui produs software este adevarata?", "opts": ["Testarea si validarea se aplica la toate fazele de dezvoltare a unui sistem software", "Testarea se face doar la sfarsit", "Validarea este optionala"], "a": 0}, {"n": 13, "cat": "radu2", "q": "La modelul in V, planificarea integrarii sistemului se face in faza de:", "opts": ["Integrare componente si testare", "Analiza cerinte sistem", "Proiectare la nivel inalt"], "a": 2}, {"n": 14, "cat": "radu2", "q": "La diagramele Use-Case legatura dintre un actor si un use-case poate fi de tip:", "opts": ["Comunicare", "Mostenire", "Compozitie"], "a": 0}, {"n": 15, "cat": "radu2", "q": "La un ciclu de viata iterativ, prin cresteri succesive (increments) se intelege:", "opts": ["Versiuni noi ale produsului la sfarsitul fiecarei iteratii", "Adaugarea de programatori la fiecare iteratie", "Marirea bugetului pe parcurs"], "a": 0}, {"n": 16, "cat": "radu2", "q": "Care este diferenta principala intre ingineria software si ramurile ingineresti traditionale?", "opts": ["Permite modificarea drastica a cerintelor in timpul dezvoltarii", "Are mai multe standarde", "Are costuri mai mici"], "a": 0}, {"n": 17, "cat": "radu2", "q": "Diagrama de context este o reprezentare din cadrul unei diagrame:", "opts": ["Entitate-relatie (ER)", "De flux de date", "De utilizare (use case)"], "a": 1}, {"n": 18, "cat": "radu2", "q": "La estimarea costului unui sistem software cel mai important factor in majoritatea cazurilor este:", "opts": ["Costul efortului personalului", "Costul hardware-ului", "Costul licentelor"], "a": 0}, {"n": 19, "cat": "radu2", "q": "Care din urmatoarele caracteristici reprezinta un dezavantaj pentru modelul de organizare cu zona de date partajata?", "opts": ["Ingreuneaza implementarea unor politici de gestiune specifice fiecarui subsistem", "Permite acces facil la date", "Asigura consistenta datelor"], "a": 0}, {"n": 20, "cat": "radu2", "q": "Care din urmatorii pasi ai analizei statice NU detecteaza direct anomaliile in cod?", "opts": ["Analiza fluxului de control", "Analiza utilizarii datelor", "Analiza cailor de rulare"], "a": 0}, {"n": 21, "cat": "radu2", "q": "Procesul de validare la dezvoltarea unui produs software trebuie sa raspunda la urmatoarea intrebare:", "opts": ["Construim produsul care trebuie", "Construim corect produsul", "Costul este corect"], "a": 0}, {"n": 22, "cat": "radu2", "q": "Lista de inspectie reprezinta:", "opts": ["Lista cu erori frecvente in limbajul de implementare ales", "Lista cerintelor functionale", "Lista membrilor echipei"], "a": 0}, {"n": 23, "cat": "radu2", "q": "Localizarea si inlaturarea unei erori se face in procesul de:", "opts": ["Depanare", "Testare", "Validare"], "a": 0}, {"n": 24, "cat": "radu2", "q": "Verificarea statica inseamna:", "opts": ["Inspectarea codului", "Rularea programului", "Profilarea performantei"], "a": 0}, {"n": 25, "cat": "radu2", "q": "Care dintre urmatoarele afirmatii reprezinta un dezavantaj pentru Modelul Obiectual de descompunere a unui sistem?", "opts": ["Necesitatea de a schimba interfata unui obiect poate duce usor la necesitatea de a modifica alte obiecte cu care acesta este cuplat", "Obiectele sunt usor de identificat", "Permite reutilizarea codului"], "a": 0}, {"n": 26, "cat": "radu2", "q": "Datorita coruperii frecvente a structurii sistemului, dezvoltarea incrementala poate genera probleme de:", "opts": ["Mentenanta", "Performanta", "Documentare"], "a": 0}, {"n": 27, "cat": "radu2", "q": "Prototipurile sistemelor software se pot utiliza pentru implementarea testelor:", "opts": ["Back to back", "De acceptanta", "De integrare"], "a": 0}, {"n": 28, "cat": "radu2", "q": "Care din urmatoarele caracteristici ale unui sistem organizat dupa un model client-server reprezinta un avantaj important?", "opts": ["Este usor de adaugat noi servere", "Comunicarea este sincrona", "Nu necesita retea"], "a": 0}, {"n": 29, "cat": "radu2", "q": "Care tip de model arhitectural evidentiaza componentele majore ale unui sistem?", "opts": ["Model structural", "Model functional", "Model dinamic"], "a": 0}, {"n": 30, "cat": "radu2", "q": "Cumulative Class Dependency (CCD) se foloseste pentru:", "opts": ["Complexitatea unui sistem format din componente", "Numararea claselor", "Documentatia codului"], "a": 0}, {"n": 31, "cat": "radu2", "q": "La testarea top-down se folosesc componente de tip:", "opts": ["Stub", "Driver", "Mock"], "a": 0}, {"n": 32, "cat": "radu2", "q": "Abstractizarea prin modelare se aplica:", "opts": ["Si produselor si proceselor software", "Doar produselor software", "Doar proceselor"], "a": 0}, {"n": 33, "cat": "radu2", "q": "Care din urmatoarele intrebari sunt utile la proiectarea unui sistem?", "opts": ["Care este strategia de control cea mai potrivita?", "Cati programatori sunt disponibili?", "Care este bugetul total?"], "a": 0}, {"n": 34, "cat": "radu2", "q": "La un ciclu de viata in cascada cu reactie, faza de integrare urmeaza dupa faza de:", "opts": ["Proiectare", "Analiza a cerintelor", "Operare", "Implementare"], "a": 3}, {"n": 35, "cat": "radu2", "q": "Care dintre urmatoarele afirmatii NU constituie un avantaj al programarii in perechi practicata in Extreme Programming?", "opts": ["Programarea in perechi evita dezvoltarea prea rapida a codului, permitand sincronizarea", "Imbunatateste calitatea codului", "Faciliteaza transferul de cunostinte"], "a": 0}, {"n": 36, "cat": "radu2", "q": "Care din urmatoarele denumiri NU se refera la un stil de organizare a unui sistem?", "opts": ["Stil automat finit cu legaturi ciclice", "Stil client-server", "Stil pipeline"], "a": 0}, {"n": 37, "cat": "radu2", "q": "Care din urmatoarele afirmatii releva o problema in reutilizarea unor componente software?", "opts": ["Prin reutilizare creste costul de mentenanta", "Reutilizarea reduce timpul de dezvoltare", "Reutilizarea creste calitatea codului"], "a": 0}, {"n": 38, "cat": "radu2", "q": "Ce rezolva mentenanta perfectiva a unui sistem software?", "opts": ["Implementeaza noi cerinte functionale sau non-functionale dupa inceperea operarii sistemului", "Adapteaza functionarea sistemului pentru platforma clientului dupa instalarea acestuia", "Inlatura defecte de proiectare a sistemului dupa inceperea operarii acestuia de catre client"], "a": 0}, {"n": 39, "cat": "radu2", "q": "Care sunt tipurile de diagrame UML de interactiune (Interaction)?", "opts": ["Secventa si Colaborare (Sequence and Collaboration)", "Activitate si Stare", "Clase si Obiecte"], "a": 0}, {"n": 40, "cat": "radu2", "q": "O diagrama UML de clase modeleaza:", "opts": ["Clasificarea unui sistem", "Structura unui sistem", "Comportamentul unui sistem"], "a": 1}, {"n": 41, "cat": "radu2", "q": "O componenta tip driver este utilizata la testare pentru:", "opts": ["A trimite datele si contextul in locul unei componente neimplementate inca", "A monitoriza performanta", "A genera rapoarte"], "a": 0}, {"n": 42, "cat": "radu2", "q": "Cerintele utilizator sunt complete daca:", "opts": ["Includ descrieri pentru toate facilitatile cerute de client", "Sunt scrise in limbaj formal", "Au fost validate de un programator"], "a": 0}, {"n": 43, "cat": "radu2", "q": "Daca la o diagrama Use-Case un caz de utilizare depinde neconditionat de realizarea unui alt caz, relatia dintre ele este de:", "opts": ["Extindere", "Incluziune", "Generalizare"], "a": 1}, {"n": 44, "cat": "radu2", "q": "Care din urmatorii pasi NU reprezinta o faza de dezvoltare a unui sistem software?", "opts": ["Ajustarea si adaptarea", "Analiza cerintelor", "Testarea"], "a": 0}, {"n": 45, "cat": "radu2", "q": "Controlul calitatii cerintelor rezultate din faza de analiza a cerintelor va verifica ca acestea sa fie:", "opts": ["Consistente", "Evazive", "Imposibil de modificat", "Robuste la intrari perturbate"], "a": 0}, {"n": 46, "cat": "radu2", "q": "Prin ce tip de diagrama UML se poate reprezenta un algoritm de calcul?", "opts": ["Diagrama de clase (Class)", "Diagrama de cazuri de utilizare (Use-case)", "Diagrama de activitate (Activity)", "Diagrama de secventa (Sequence)"], "a": 2}, {"n": 47, "cat": "radu2", "q": "La sistemele software formate din componente (distribuite) complexitatea este data in principal de:", "opts": ["Numarul de legaturi directe si de comunicatii intre componente", "Numarul de variabile utilizate", "Numarul de instructiuni ciclice folosite", "Numarul de linii de cod"], "a": 0}, {"n": 48, "cat": "radu2", "q": "Care din urmatoarele cerinte NU reprezinta o cerinta non-functionala?", "opts": ["Sistemul trebuie implementat in limbajul Java", "Sistemul trebuie sa ignore valorile negative introduse de utilizator", "Sistemul trebuie sa proceseze cel putin 10 intrari pe secunda", "Intervalul minim intre 2 erori ale sistemului trebuie sa fie de 5 luni"], "a": 1}, {"n": 49, "cat": "radu2", "q": "Sistemele OLTP se folosesc intr-o companie la:", "opts": ["Managementul tactic", "Managementul operational", "Managementul teoretic", "Managementul strategic"], "a": 1}, {"n": 50, "cat": "radu2", "q": "Prin testare software se poate:", "opts": ["Evidentia implinirea cerintelor non-functionale", "Evidentia lipsa erorilor", "Evidentia prezenta erorilor"], "a": 2}, {"n": 51, "cat": "radu2", "q": "Retelele CPM se folosesc la:", "opts": ["Generarea automata a codului", "Proiectarea de nivel inalt", "Planificarea proiectului"], "a": 2}, {"n": 52, "cat": "radu2", "q": "Care dintre urmatoarele NU este o caracteristica a unui sistem de luat in calcul la proiectare?", "opts": ["Empatia", "Performanta", "Securitatea"], "a": 0}, {"n": 53, "cat": "radu2", "q": "Utilizarea la proiectarea unui sistem a unor componente de mici dimensiuni (fine) sprijina:", "opts": ["Mentenabilitatea", "Securitatea", "Disponibilitatea"], "a": 0}, {"n": 54, "cat": "radu2", "q": "In cazul unui stil de control centralizat, care model este aplicabil sistemelor concurente?", "opts": ["Modelul \"gestionar\"", "Modelul \"client-server\"", "Modelul \"broadcast\""], "a": 0}, {"n": 55, "cat": "radu2", "q": "Modelele arhitecturale de referinta sunt de obicei de tip:", "opts": ["Top-down", "Bottom-up", "Hibrid"], "a": 0}, {"n": 56, "cat": "radu2", "q": "Cerintele legate de portabilitatea unui sistem se pot cuantifica prin:", "opts": ["Specificarea timpului de raspuns al sistemului in milisecunde", "Specificarea incarcarii maxime a procesorului pe un anumit interval, in procente", "Specificarea unui procent de linii de cod dependente de un anumit limbaj"], "a": 2}, {"n": 57, "cat": "radu2", "q": "Care dintre urmatoarele afirmatii reprezinta beneficii ale reutilizarii in dezvoltarea software?", "opts": ["Prin refolosirea unei componente se micsoreaza timpul de implementare si testare a sistemului", "Reutilizarea creste complexitatea sistemului", "Reutilizarea complica documentatia"], "a": 0}, {"n": 58, "cat": "radu2", "q": "Reutilizarea software prin reconfigurarea unui sistem generic este cunoscuta ca si:", "opts": ["Configurable vertical applications", "Generic horizontal applications", "Adaptive software"], "a": 0}, {"n": 59, "cat": "radu2", "q": "Care din urmatoarele afirmatii reprezinta un dezavantaj major al modelului broadcast?", "opts": ["Subsistemele nu stiu daca si cand un eveniment este tratat de alte subsisteme", "Modelul este prea complex", "Modelul este prea lent"], "a": 0}, {"n": 60, "cat": "radu2", "q": "Modelul pipeline de descompunere a unui sistem ingreuneaza:", "opts": ["Implementarea interactiunii bazate pe evenimente", "Citirea codului", "Testarea unitara"], "a": 0}, {"n": 61, "cat": "radu2", "q": "Care din urmatoarele afirmatii reprezinta beneficii ale reutilizarii in dezvoltarea software?", "opts": ["Prin refolosirea unei componente se micsoreaza timpul de implementare si testare a sistemului", "Reutilizarea creste numarul de bug-uri", "Reutilizarea ingreuneaza testarea"], "a": 0}, {"n": 62, "cat": "radu2", "q": "Care din urmatoarele afirmatii NU reprezinta o problema a tehnicii RAD de programare vizuala?", "opts": ["Lipsa suportului pentru dezvoltarea orientate pe sine", "Dificultatea integrarii cu sisteme legacy", "Limitari in personalizare"], "a": 0}, {"n": 63, "cat": "radu2", "q": "Care din urmatoarele afirmatii NU reprezinta un principiu al metodelor Agile?", "opts": ["Accentul pus pe cod, nu pe programatori", "Colaborarea cu clientul", "Adaptarea la schimbari"], "a": 0}, {"n": 64, "cat": "radu2", "q": "Care din urmatoarele componente NU este specifica unui mediu RAD?", "opts": ["Generator de probleme", "Editor vizual", "Generator de cod"], "a": 0}, {"n": 65, "cat": "radu2", "q": "Pentru a creste disponibilitatea unui sistem este importanta:", "opts": ["Includerea de componente redundante", "Reducerea numarului de componente", "Simplificarea arhitecturii"], "a": 0}, {"n": 66, "cat": "radu2", "q": "Ce rezolva mentenanta perfectiva a unui sistem software?", "opts": ["Implementeaza noi cerinte functionale sau non-functionale dupa inceperea operarii sistemului", "Inlatura defecte de implementare a sistemului, observate dupa instalarea sistemului", "Inlatura defecte de proiectare a sistemului dupa inceperea operarii acestuia de catre clienti", "Adapteaza functionarea sistemului pentru platforma clientului dupa instalarea acestuia"], "a": 0}, {"n": 67, "cat": "radu2", "q": "La un ciclu de viata in cascada cu suprapuneri, faza de analiza a cerintelor se suprapune cu faza de:", "opts": ["Integrare", "Proiectare", "Implementare", "Operare"], "a": 1}, {"n": 68, "cat": "radu2", "q": "Avantajul principal al modelului de control bazat pe intreruperi:", "opts": ["Sistemul este dificil de validat", "Se bazeaza pe definirea unei rutine de tratare pentru fiecare intrerupere", "Permite un raspuns rapid la evenimente", "Sistemul este complex de programat"], "a": 2}, {"n": 69, "cat": "radu2", "q": "Grupul de practici reunite sub denumirea \"Practici comune echipei\" la Extreme Programming NU include:", "opts": ["Programarea in perechi", "Proiectarea simpla", "Codarea standard", "Folosirea unor denumiri explicite"], "a": 0}, {"n": 70, "cat": "radu2", "q": "Care din urmatoarele caracteristici ale unui sistem organizat dupa un model client-server reprezinta un avantaj important al acestui model?", "opts": ["Este usor de adaugat noi servere", "Comunicarea este intotdeauna sincrona", "Nu necesita retea"], "a": 0}, {"n": 71, "cat": "radu2", "q": "Retelele CPM se folosesc la:", "opts": ["Proiectarea de nivel inalt", "Proiectarea detaliata", "Planificarea proiectului", "Generarea automata a codului"], "a": 2}, {"n": 72, "cat": "radu2", "q": "Ce model al ciclului de viata sprijina cel mai bine dezvoltarea orientata pe obiecte?", "opts": ["Modelul iterativ cu variante succesive", "Modelul in cascada cu reactie", "Modelul in V"], "a": 0}, {"n": 73, "cat": "radu2", "q": "Procesul de analiza statica NU poate depista:", "opts": ["Timpul de executie a unei functii statice", "Variabilele nefolosite", "Codul mort"], "a": 0}, {"n": 74, "cat": "radu2", "q": "Specificarea de catre client a unei dimensiuni maxime de stocare pe disc pentru sistem constituie o:", "opts": ["Cerinta de colaborare", "Cerinta functionala", "Cerinta non-functionala", "Cerinta de domeniu"], "a": 2}, {"n": 75, "cat": "radu2", "q": "La Extreme Programming, refactorizarea este inclusa in grupul de practici:", "opts": ["Cadru adecvat pentru programator", "Practici comune echipei", "Reactie fina", "Proces continuu"], "a": 2}]};
 </script>
 <script>
-const STORAGE_KEY='grile_ip_mpsam_v2';
-const NEW_FROM=86;
-const state={mode:null,questions:[],optionOrder:[],currentIdx:0,selected:{},answered:{},isExam:false,showFeedback:true,titleLabel:''};
-let stats={perQuestion:{},catBest:{},totalAnswered:0,totalCorrect:0,streak:0,bestStreak:0};
-const CAT_ICONS={ip:'IP',mpsam:'MP'};
-function loadStats(){try{const r=localStorage.getItem(STORAGE_KEY);if(r)stats={...stats,...JSON.parse(r)}}catch(e){}}
-function saveStats(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(stats))}catch(e){}}
-function resetStats(){if(!confirm('Resetezi toate statisticile?'))return;stats={perQuestion:{},catBest:{},totalAnswered:0,totalCorrect:0,streak:0,bestStreak:0};saveStats();renderHome()}
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function getAccuracy(){if(stats.totalAnswered===0)return null;return Math.round(stats.totalCorrect/stats.totalAnswered*100)}
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('home-btn-float').classList.toggle('show',id!=='screen-home');window.scrollTo({top:0,behavior:'smooth'})}
-function escapeHtml(s){if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-const ALL_QUESTIONS=QUIZ_DATA.questions.map(q=>({...q,id:'q'+q.n}));
-function renderHome(){
-  const banner=document.getElementById('stats-banner');
-  if(stats.totalAnswered>0){banner.style.display='flex';document.getElementById('stat-answered').textContent=stats.totalAnswered;document.getElementById('stat-correct').textContent=stats.totalCorrect;const acc=getAccuracy();document.getElementById('stat-accuracy').textContent=acc!==null?acc+'%':'—';document.getElementById('stat-streak').textContent=stats.bestStreak}else{banner.style.display='none'}
-  const grid=document.getElementById('cat-grid');grid.innerHTML='';
-  for(const[key,name]of Object.entries(QUIZ_DATA.categories)){
-    const qs=ALL_QUESTIONS.filter(q=>q.cat===key);
-    const count=qs.length;
-    const newCount=qs.filter(q=>q.n>=NEW_FROM).length;
-    const best=stats.catBest[key];
-    const bestHtml=best!==undefined?`<div class="cat-best">Best<br>${best}%</div>`:'<div class="cat-arrow">›</div>';
-    const newBadge=newCount>0?`<span class="new-badge">+${newCount} nou</span>`:'';
-    const btn=document.createElement('button');btn.className='cat-card';
-    btn.innerHTML=`<div class="cat-icon">${CAT_ICONS[key]||'??'}</div><div class="cat-info"><div class="cat-name">${escapeHtml(name)}${newBadge}</div><div class="cat-count">${count} intrebari</div></div>${bestHtml}`;
-    btn.addEventListener('click',()=>startMode('cat',key));grid.appendChild(btn)
+
+const STORAGE_KEY = 'grile_ip_fis_radu_v1';
+const state = {
+  mode: null, questions: [], optionOrder: [], currentIdx: 0,
+  selected: {}, answered: {}, isExam: false, showFeedback: true, titleLabel: '',
+};
+let stats = {
+  perQuestion: {}, catBest: {},
+  totalAnswered: 0, totalCorrect: 0, streak: 0, bestStreak: 0,
+};
+const CAT_ICONS = { ip: 'IP', mpsam: 'MP', radu1: 'R1', radu2: 'R2' };
+
+function loadStats() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) stats = { ...stats, ...JSON.parse(raw) }; } catch (e) {}
+}
+function saveStats() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stats)); } catch (e) {} }
+function resetStats() {
+  if (!confirm('Resetezi toate statisticile?')) return;
+  stats = { perQuestion: {}, catBest: {}, totalAnswered: 0, totalCorrect: 0, streak: 0, bestStreak: 0 };
+  saveStats(); renderHome();
+}
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function getAccuracy() {
+  if (stats.totalAnswered === 0) return null;
+  return Math.round((stats.totalCorrect / stats.totalAnswered) * 100);
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('home-btn-float').classList.toggle('show', id !== 'screen-home');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function escapeHtml(s) {
+  if (typeof s !== 'string') s = String(s);
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Build all questions with unique stable ids (combining cat + n to avoid collisions
+// between different sections that may share numbers)
+const ALL_QUESTIONS = QUIZ_DATA.questions.map(q => ({ ...q, id: q.cat + '-' + q.n }));
+
+function renderHome() {
+  const banner = document.getElementById('stats-banner');
+  if (stats.totalAnswered > 0) {
+    banner.style.display = 'flex';
+    document.getElementById('stat-answered').textContent = stats.totalAnswered;
+    document.getElementById('stat-correct').textContent = stats.totalCorrect;
+    const acc = getAccuracy();
+    document.getElementById('stat-accuracy').textContent = acc !== null ? acc + '%' : '—';
+    document.getElementById('stat-streak').textContent = stats.bestStreak;
+  } else { banner.style.display = 'none'; }
+
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = '';
+  for (const [key, name] of Object.entries(QUIZ_DATA.categories)) {
+    const count = ALL_QUESTIONS.filter(q => q.cat === key).length;
+    const best = stats.catBest[key];
+    const bestHtml = best !== undefined ? '<div class="cat-best">Best<br>' + best + '%</div>' : '<div class="cat-arrow">›</div>';
+    const isRadu = key === 'radu1' || key === 'radu2';
+    const btn = document.createElement('button');
+    btn.className = 'cat-card' + (isRadu ? ' featured' : '');
+    btn.innerHTML =
+      '<div class="cat-icon">' + (CAT_ICONS[key] || '??') + '</div>' +
+      '<div class="cat-info">' +
+        '<div class="cat-name">' + escapeHtml(name) + '</div>' +
+        '<div class="cat-count">' + count + ' intrebari</div>' +
+      '</div>' + bestHtml;
+    btn.addEventListener('click', () => startMode('cat', key));
+    grid.appendChild(btn);
   }
 }
-function startMode(mode,param){
-  state.showFeedback=true;state.isExam=false;state.selected={};state.answered={};state.currentIdx=0;
-  if(mode==='shuffle'){state.mode='shuffle';state.titleLabel='Quiz Aleator';state.questions=shuffle(ALL_QUESTIONS)}
-  else if(mode==='all'){state.mode='all';state.titleLabel='Toate la rand';state.questions=[...ALL_QUESTIONS].sort((a,b)=>a.n-b.n)}
-  else if(mode==='exam'){state.mode='exam';state.isExam=true;state.showFeedback=false;state.titleLabel='Simulare 25';state.questions=shuffle(ALL_QUESTIONS).slice(0,25)}
-  else if(mode==='exam40'){state.mode='exam40';state.isExam=true;state.showFeedback=false;state.titleLabel='Test 40';state.questions=shuffle(ALL_QUESTIONS).slice(0,40)}
-  else if(mode==='review'){
-    state.mode='review';state.titleLabel='Doar gresite';
-    const wrongIds=Object.entries(stats.perQuestion).filter(([id,s])=>s.lastResult==='wrong'||(s.attempts>0&&s.correct<s.attempts)).map(([id])=>id);
-    if(wrongIds.length===0){alert('Nu ai gresit inca nicio intrebare. Joaca putin si revino!');return}
-    state.questions=shuffle(ALL_QUESTIONS.filter(q=>wrongIds.includes(q.id)))
+
+function startMode(mode, param) {
+  state.showFeedback = true; state.isExam = false;
+  state.selected = {}; state.answered = {}; state.currentIdx = 0;
+
+  if (mode === 'shuffle') {
+    state.mode = 'shuffle'; state.titleLabel = 'Quiz Aleator';
+    state.questions = shuffle(ALL_QUESTIONS);
+  } else if (mode === 'radu') {
+    state.mode = 'radu'; state.titleLabel = 'Grile Radu FIS';
+    state.questions = shuffle(ALL_QUESTIONS.filter(q => q.cat === 'radu1' || q.cat === 'radu2'));
+  } else if (mode === 'all') {
+    state.mode = 'all'; state.titleLabel = 'Toate la rand';
+    state.questions = [...ALL_QUESTIONS];
+  } else if (mode === 'exam') {
+    state.mode = 'exam'; state.isExam = true; state.showFeedback = false;
+    state.titleLabel = 'Simulare 25';
+    state.questions = shuffle(ALL_QUESTIONS).slice(0, 25);
+  } else if (mode === 'exam50') {
+    state.mode = 'exam50'; state.isExam = true; state.showFeedback = false;
+    state.titleLabel = 'Test 50';
+    state.questions = shuffle(ALL_QUESTIONS).slice(0, 50);
+  } else if (mode === 'review') {
+    state.mode = 'review'; state.titleLabel = 'Doar gresite';
+    const wrongIds = Object.entries(stats.perQuestion)
+      .filter(([id, s]) => s.lastResult === 'wrong' || (s.attempts > 0 && s.correct < s.attempts))
+      .map(([id]) => id);
+    if (wrongIds.length === 0) { alert('Nu ai gresit inca nicio intrebare. Joaca putin si revino!'); return; }
+    state.questions = shuffle(ALL_QUESTIONS.filter(q => wrongIds.includes(q.id)));
+  } else if (mode === 'cat') {
+    state.mode = 'cat:' + param;
+    state.titleLabel = QUIZ_DATA.categories[param];
+    state.questions = shuffle(ALL_QUESTIONS.filter(q => q.cat === param));
   }
-  else if(mode==='cat'){state.mode='cat:'+param;state.titleLabel=QUIZ_DATA.categories[param];state.questions=shuffle(ALL_QUESTIONS.filter(q=>q.cat===param))}
-  state.optionOrder=state.questions.map(q=>mode==='all'?q.opts.map((_,i)=>i):shuffle(q.opts.map((_,i)=>i)));
-  document.getElementById('q-total').textContent=state.questions.length;
-  document.getElementById('score-live').style.display=state.isExam?'none':'block';
-  document.getElementById('quiz-title-mini').textContent=state.titleLabel;
-  showScreen('screen-quiz');renderQuestion()
-}
-function renderQuestion(){
-  const idx=state.currentIdx;const q=state.questions[idx];const order=state.optionOrder[idx];const card=document.getElementById('question-card');
-  const letters=['A','B','C','D'];const isLocked=!!state.answered[idx];const selectedOptIdx=state.selected[idx];const catName=QUIZ_DATA.categories[q.cat]||'';
-  const isNew=q.n>=NEW_FROM;
-  let optionsHTML='';
-  order.forEach((origIdx,displayIdx)=>{
-    let cls='option';
-    if(isLocked&&state.showFeedback){if(origIdx===q.a)cls+=' correct locked';else if(origIdx===selectedOptIdx)cls+=' incorrect locked';else cls+=' locked'}
-    else if(selectedOptIdx===origIdx)cls+=' selected';
-    const indicator = isLocked && state.showFeedback ? (origIdx === q.a ? '<span class="indicator">✓</span>' : (origIdx === selectedOptIdx ? '<span class="indicator">✗</span>' : '')) : '';
-    optionsHTML+=`<button class="${cls}" data-orig="${origIdx}"><span class="letter">${letters[displayIdx]}</span><span class="opt-text">${escapeHtml(q.opts[origIdx])}</span>${indicator}</button>`
+
+  state.optionOrder = state.questions.map(q => {
+    if (state.mode === 'all') return q.opts.map((_, i) => i);
+    return shuffle(q.opts.map((_, i) => i));
   });
-  let feedbackHTML='';
-  if(isLocked&&state.showFeedback){
-    const correctLetter=letters[order.indexOf(q.a)];const wasCorrect=selectedOptIdx===q.a;
-    feedbackHTML=`<div class="feedback show ${wasCorrect?'correct':'wrong'}"><div class="label">${wasCorrect?'✓ Corect':'✗ Gresit'}</div><div class="text">${wasCorrect?'Asa e.':'Raspunsul corect: '+correctLetter+') '+escapeHtml(q.opts[q.a])}</div></div>`
-  }
-  const newTag=isNew?'<span class="new-badge">NOU</span>':'';
-  card.innerHTML=`<div class="q-meta"><span class="q-number">Q${q.n}</span><span class="q-category">[${CAT_ICONS[q.cat]||''}] ${escapeHtml(catName)}</span>${newTag}</div><div class="q-text">${escapeHtml(q.q)}</div><div class="options">${optionsHTML}</div>${feedbackHTML}`;
-  card.querySelectorAll('.option').forEach(btn=>{btn.addEventListener('click',()=>selectOption(parseInt(btn.dataset.orig)))});
-  document.getElementById('q-current').textContent=idx+1;
-  document.getElementById('progress-fill').style.width=((idx+1)/state.questions.length*100)+'%';
-  const correctSoFar=Object.entries(state.answered).filter(([qIdx])=>state.selected[qIdx]===state.questions[qIdx].a).length;
-  document.getElementById('score-live').querySelector('strong').textContent=correctSoFar;
-  document.getElementById('prev-btn').disabled=idx===0;
-  const nextBtn=document.getElementById('next-btn');const skipBtn=document.getElementById('skip-btn');
-  nextBtn.textContent=(idx===state.questions.length-1)?'Finalizeaza →':'Urmatoarea →';
-  skipBtn.style.display=(state.isExam||isLocked)?'none':'block'
+
+  document.getElementById('q-total').textContent = state.questions.length;
+  document.getElementById('score-live').style.display = state.isExam ? 'none' : 'block';
+  document.getElementById('quiz-title-mini').textContent = state.titleLabel;
+  showScreen('screen-quiz');
+  renderQuestion();
 }
-function selectOption(origIdx){
-  const qIdx=state.currentIdx;
-  if(state.isExam){state.selected[qIdx]=origIdx;renderQuestion();return}
-  if(state.answered[qIdx])return;
-  const q=state.questions[qIdx];state.selected[qIdx]=origIdx;state.answered[qIdx]=true;
-  const wasCorrect=origIdx===q.a;recordAnswer(q,wasCorrect);saveStats();renderQuestion()
-}
-function recordAnswer(q,wasCorrect){
-  const pq=stats.perQuestion[q.id]||{attempts:0,correct:0,lastResult:null};
-  pq.attempts+=1;if(wasCorrect)pq.correct+=1;pq.lastResult=wasCorrect?'right':'wrong';
-  stats.perQuestion[q.id]=pq;stats.totalAnswered+=1;
-  if(wasCorrect){stats.totalCorrect+=1;stats.streak+=1;if(stats.streak>stats.bestStreak)stats.bestStreak=stats.streak}else{stats.streak=0}
-}
-function goNext(){if(state.currentIdx>=state.questions.length-1){finishQuiz();return}state.currentIdx+=1;renderQuestion()}
-function goPrev(){if(state.currentIdx===0)return;state.currentIdx-=1;renderQuestion()}
-function skipQuestion(){if(state.currentIdx>=state.questions.length-1){finishQuiz();return}state.currentIdx+=1;renderQuestion()}
-function finishQuiz(){
-  if(state.isExam){state.questions.forEach((q,idx)=>{if(state.selected[idx]!==undefined){state.answered[idx]=true;recordAnswer(q,state.selected[idx]===q.a)}});saveStats()}
-  let correct=0,wrong=0,skipped=0;
-  state.questions.forEach((q,idx)=>{if(state.selected[idx]===undefined)skipped++;else if(state.selected[idx]===q.a)correct++;else wrong++});
-  const total=state.questions.length;const pct=total>0?Math.round(correct/total*100):0;
-  if(state.mode.startsWith('cat:')&&skipped===0){const key=state.mode.slice(4);if(stats.catBest[key]===undefined||pct>stats.catBest[key]){stats.catBest[key]=pct;saveStats()}}
-  document.getElementById('results-label').textContent=state.titleLabel||'Rezultat final';
-  document.getElementById('final-score').textContent=correct;document.getElementById('final-total').textContent=total;
-  document.getElementById('final-percent').textContent=pct+'%';document.getElementById('final-correct').textContent=correct;
-  document.getElementById('final-wrong').textContent=wrong;document.getElementById('final-skipped').textContent=skipped;
-  const medal=document.getElementById('results-medal');const msg=document.getElementById('results-message');
-  if(pct===100){medal.textContent='🏆';msg.textContent='Punctaj maxim. Esti pregatit pentru examen.'}
-  else if(pct>=85){medal.textContent='🥇';msg.textContent='Excelent. Mai cizelezi cateva detalii.'}
-  else if(pct>=70){medal.textContent='🥈';msg.textContent='Bine. Reia capitolele unde ai gresit.'}
-  else if(pct>=50){medal.textContent='🥉';msg.textContent='Pe drumul bun. Mai exerseaza definitiile.'}
-  else{medal.textContent='📚';msg.textContent='Mai e de lucru. Ia-o sistematic pe categorii.'}
-  renderReviewList('all');showScreen('screen-results')
-}
-function renderReviewList(filter){
-  const list=document.getElementById('review-list');let html='';
-  state.questions.forEach((q,idx)=>{
-    const sel=state.selected[idx];const isCorrect=sel===q.a;const wasAnswered=sel!==undefined;
-    if(filter==='wrong'&&(isCorrect||!wasAnswered))return;if(filter==='right'&&!isCorrect)return;
-    const correctAnsText=escapeHtml(q.opts[q.a]);let statusIcon,answerHtml;
-    if(!wasAnswered){statusIcon='⊘';answerHtml=`<span style="color:var(--green)">Corect: ${correctAnsText}</span>`}
-    else if(isCorrect){statusIcon='✓';answerHtml=`Raspuns: ${escapeHtml(q.opts[sel])}`}
-    else{statusIcon='✗';answerHtml=`Tu: ${escapeHtml(q.opts[sel])} · <span style="color:var(--green)">Corect: ${correctAnsText}</span>`}
-    html+=`<div class="review-item"><div class="num">Q${q.n}</div><div class="body"><div class="q">${escapeHtml(q.q)}</div><div class="a">${answerHtml}</div></div><div class="status">${statusIcon}</div></div>`
+
+function renderQuestion() {
+  const idx = state.currentIdx;
+  const q = state.questions[idx];
+  const order = state.optionOrder[idx];
+  const card = document.getElementById('question-card');
+  const letters = ['A', 'B', 'C', 'D'];
+  const isLocked = !!state.answered[idx];
+  const selectedOptIdx = state.selected[idx];
+  const catName = QUIZ_DATA.categories[q.cat] || '';
+
+  let optionsHTML = '';
+  order.forEach((origIdx, displayIdx) => {
+    let cls = 'option';
+    if (isLocked && state.showFeedback) {
+      if (origIdx === q.a) cls += ' correct locked';
+      else if (origIdx === selectedOptIdx) cls += ' incorrect locked';
+      else cls += ' locked';
+    } else if (selectedOptIdx === origIdx) cls += ' selected';
+    const indicator = isLocked && state.showFeedback
+      ? (origIdx === q.a ? '<span class="indicator">✓</span>'
+         : (origIdx === selectedOptIdx ? '<span class="indicator">✗</span>' : ''))
+      : '';
+    optionsHTML += '<button class="' + cls + '" data-orig="' + origIdx + '">' +
+      '<span class="letter">' + letters[displayIdx] + '</span>' +
+      '<span class="opt-text">' + escapeHtml(q.opts[origIdx]) + '</span>' +
+      indicator + '</button>';
   });
-  if(!html)html='<div style="text-align:center;color:var(--text-muted);padding:20px;">Niciun element aici.</div>';
-  list.innerHTML=html
+
+  let feedbackHTML = '';
+  if (isLocked && state.showFeedback) {
+    const correctLetter = letters[order.indexOf(q.a)];
+    const wasCorrect = selectedOptIdx === q.a;
+    feedbackHTML = '<div class="feedback show ' + (wasCorrect ? 'correct' : 'wrong') + '">' +
+      '<div class="label">' + (wasCorrect ? '✓ Corect' : '✗ Gresit') + '</div>' +
+      '<div class="text">' + (wasCorrect ? 'Asa e.' : 'Raspunsul corect: ' + correctLetter + ') ' + escapeHtml(q.opts[q.a])) + '</div>' +
+      '</div>';
+  }
+
+  card.innerHTML =
+    '<div class="q-meta">' +
+      '<span class="q-number">Q' + q.n + '</span>' +
+      '<span class="q-category">[' + (CAT_ICONS[q.cat] || '') + '] ' + escapeHtml(catName) + '</span>' +
+    '</div>' +
+    '<div class="q-text">' + escapeHtml(q.q) + '</div>' +
+    '<div class="options">' + optionsHTML + '</div>' +
+    feedbackHTML;
+
+  card.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => selectOption(parseInt(btn.dataset.orig)));
+  });
+
+  document.getElementById('q-current').textContent = idx + 1;
+  document.getElementById('progress-fill').style.width = ((idx + 1) / state.questions.length * 100) + '%';
+  const correctSoFar = Object.entries(state.answered).filter(
+    ([qIdx]) => state.selected[qIdx] === state.questions[qIdx].a
+  ).length;
+  document.getElementById('score-live').querySelector('strong').textContent = correctSoFar;
+  document.getElementById('prev-btn').disabled = idx === 0;
+  const nextBtn = document.getElementById('next-btn');
+  const skipBtn = document.getElementById('skip-btn');
+  nextBtn.textContent = (idx === state.questions.length - 1) ? 'Finalizeaza →' : 'Urmatoarea →';
+  skipBtn.style.display = (state.isExam || isLocked) ? 'none' : 'block';
 }
-document.querySelectorAll('[data-mode]').forEach(el=>{el.addEventListener('click',()=>startMode(el.dataset.mode))});
-document.getElementById('back-home').addEventListener('click',()=>{renderHome();showScreen('screen-home')});
-document.getElementById('home-btn-float').addEventListener('click',()=>{renderHome();showScreen('screen-home')});
-document.getElementById('results-home-btn').addEventListener('click',()=>{renderHome();showScreen('screen-home')});
-document.getElementById('next-btn').addEventListener('click',goNext);
-document.getElementById('prev-btn').addEventListener('click',goPrev);
-document.getElementById('skip-btn').addEventListener('click',skipQuestion);
-document.getElementById('restart-btn').addEventListener('click',()=>{if(!state.mode)return;if(state.mode.startsWith('cat:'))startMode('cat',state.mode.slice(4));else startMode(state.mode)});
-document.getElementById('reset-stats').addEventListener('click',resetStats);
-document.querySelectorAll('.filter-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');renderReviewList(chip.dataset.filter)})});
-loadStats();renderHome();
+
+function selectOption(origIdx) {
+  const qIdx = state.currentIdx;
+  if (state.isExam) { state.selected[qIdx] = origIdx; renderQuestion(); return; }
+  if (state.answered[qIdx]) return;
+  const q = state.questions[qIdx];
+  state.selected[qIdx] = origIdx;
+  state.answered[qIdx] = true;
+  const wasCorrect = origIdx === q.a;
+  recordAnswer(q, wasCorrect);
+  saveStats();
+  renderQuestion();
+}
+
+function recordAnswer(q, wasCorrect) {
+  const pq = stats.perQuestion[q.id] || { attempts: 0, correct: 0, lastResult: null };
+  pq.attempts += 1;
+  if (wasCorrect) pq.correct += 1;
+  pq.lastResult = wasCorrect ? 'right' : 'wrong';
+  stats.perQuestion[q.id] = pq;
+  stats.totalAnswered += 1;
+  if (wasCorrect) {
+    stats.totalCorrect += 1;
+    stats.streak += 1;
+    if (stats.streak > stats.bestStreak) stats.bestStreak = stats.streak;
+  } else stats.streak = 0;
+}
+
+function goNext() {
+  if (state.currentIdx >= state.questions.length - 1) { finishQuiz(); return; }
+  state.currentIdx += 1; renderQuestion();
+}
+function goPrev() { if (state.currentIdx === 0) return; state.currentIdx -= 1; renderQuestion(); }
+function skipQuestion() {
+  if (state.currentIdx >= state.questions.length - 1) { finishQuiz(); return; }
+  state.currentIdx += 1; renderQuestion();
+}
+
+function finishQuiz() {
+  if (state.isExam) {
+    state.questions.forEach((q, idx) => {
+      if (state.selected[idx] !== undefined) {
+        state.answered[idx] = true;
+        recordAnswer(q, state.selected[idx] === q.a);
+      }
+    });
+    saveStats();
+  }
+  let correct = 0, wrong = 0, skipped = 0;
+  state.questions.forEach((q, idx) => {
+    if (state.selected[idx] === undefined) skipped++;
+    else if (state.selected[idx] === q.a) correct++;
+    else wrong++;
+  });
+  const total = state.questions.length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  if (state.mode.startsWith('cat:') && skipped === 0) {
+    const key = state.mode.slice(4);
+    if (stats.catBest[key] === undefined || pct > stats.catBest[key]) {
+      stats.catBest[key] = pct;
+      saveStats();
+    }
+  }
+  document.getElementById('results-label').textContent = state.titleLabel || 'Rezultat final';
+  document.getElementById('final-score').textContent = correct;
+  document.getElementById('final-total').textContent = total;
+  document.getElementById('final-percent').textContent = pct + '%';
+  document.getElementById('final-correct').textContent = correct;
+  document.getElementById('final-wrong').textContent = wrong;
+  document.getElementById('final-skipped').textContent = skipped;
+  const medal = document.getElementById('results-medal');
+  const msg = document.getElementById('results-message');
+  if (pct === 100) { medal.textContent = '🏆'; msg.textContent = 'Punctaj maxim. Esti pregatit pentru examen.'; }
+  else if (pct >= 85) { medal.textContent = '🥇'; msg.textContent = 'Excelent. Mai cizelezi cateva detalii.'; }
+  else if (pct >= 70) { medal.textContent = '🥈'; msg.textContent = 'Bine. Reia capitolele unde ai gresit.'; }
+  else if (pct >= 50) { medal.textContent = '🥉'; msg.textContent = 'Pe drumul bun. Mai exerseaza definitiile.'; }
+  else { medal.textContent = '📚'; msg.textContent = 'Mai e de lucru. Ia-o sistematic pe categorii.'; }
+  renderReviewList('all');
+  showScreen('screen-results');
+}
+
+function renderReviewList(filter) {
+  const list = document.getElementById('review-list');
+  let html = '';
+  state.questions.forEach((q, idx) => {
+    const sel = state.selected[idx];
+    const isCorrect = sel === q.a;
+    const wasAnswered = sel !== undefined;
+    if (filter === 'wrong' && (isCorrect || !wasAnswered)) return;
+    if (filter === 'right' && !isCorrect) return;
+    const correctAnsText = escapeHtml(q.opts[q.a]);
+    let statusIcon, answerHtml;
+    if (!wasAnswered) { statusIcon = '⊘'; answerHtml = '<span style="color:var(--green)">Corect: ' + correctAnsText + '</span>'; }
+    else if (isCorrect) { statusIcon = '✓'; answerHtml = 'Raspuns: ' + escapeHtml(q.opts[sel]); }
+    else { statusIcon = '✗'; answerHtml = 'Tu: ' + escapeHtml(q.opts[sel]) + ' · <span style="color:var(--green)">Corect: ' + correctAnsText + '</span>'; }
+    html += '<div class="review-item">' +
+      '<div class="num">Q' + q.n + '</div>' +
+      '<div class="body">' +
+        '<div class="q">' + escapeHtml(q.q) + '</div>' +
+        '<div class="a">' + answerHtml + '</div>' +
+      '</div>' +
+      '<div class="status">' + statusIcon + '</div>' +
+    '</div>';
+  });
+  if (!html) html = '<div style="text-align:center;color:var(--text-muted);padding:20px;">Niciun element aici.</div>';
+  list.innerHTML = html;
+}
+
+document.querySelectorAll('[data-mode]').forEach(el => {
+  el.addEventListener('click', () => startMode(el.dataset.mode));
+});
+document.getElementById('back-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('home-btn-float').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('results-home-btn').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.getElementById('next-btn').addEventListener('click', goNext);
+document.getElementById('prev-btn').addEventListener('click', goPrev);
+document.getElementById('skip-btn').addEventListener('click', skipQuestion);
+document.getElementById('restart-btn').addEventListener('click', () => {
+  if (!state.mode) return;
+  if (state.mode.startsWith('cat:')) startMode('cat', state.mode.slice(4));
+  else startMode(state.mode);
+});
+document.getElementById('reset-stats').addEventListener('click', resetStats);
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderReviewList(chip.dataset.filter);
+  });
+});
+
+loadStats();
+renderHome();
+
 </script>
+
 </body>
 </html>
