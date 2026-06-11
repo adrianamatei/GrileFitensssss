@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grile MPSAM – Quiz Interactiv</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      min-height: 100vh;
+      padding: 16px;
+      color: #1e293b;
+    }
+
+    .container { max-width: 680px; margin: 0 auto; }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    /* Header */
+    .header h1 { font-size: 1.2rem; font-weight: 800; color: #1e293b; margin-bottom: 2px; }
+    .header p  { font-size: 0.8rem; color: #64748b; margin-bottom: 12px; }
+
+    /* Category pills */
+    .cats { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cat-btn {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1.5px solid #cbd5e1;
+      background: #fff; color: #475569;
+      cursor: pointer; transition: all .15s;
+    }
+    .cat-btn:hover { border-color: #6366f1; color: #4f46e5; }
+    .cat-btn.active { background: #1e293b; color: #fff; border-color: #1e293b; }
+
+    /* Progress */
+    .progress-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;
+    }
+    .progress-row .score { color: #16a34a; }
+    .progress-bar-bg {
+      background: #e2e8f0; border-radius: 999px; height: 7px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: #6366f1; transition: width .3s;
+    }
+
+    /* Category badge */
+    .cat-badge {
+      display: inline-block; font-size: 0.68rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px; margin-bottom: 14px;
+    }
+
+    /* Question text */
+    .question-text {
+      font-size: 1rem; font-weight: 700; color: #1e293b;
+      line-height: 1.5; margin-bottom: 20px;
+    }
+
+    /* Options */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option-btn {
+      width: 100%; text-align: left;
+      padding: 12px 16px; border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      background: #fff; color: #334155;
+      font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; transition: all .15s;
+      line-height: 1.4;
+    }
+    .option-btn .letter {
+      font-weight: 700; color: #94a3b8; margin-right: 8px;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: #818cf8; background: #eef2ff;
+    }
+    .option-btn.correct {
+      border-color: #16a34a; background: #f0fdf4; color: #15803d;
+    }
+    .option-btn.correct .letter { color: #16a34a; }
+    .option-btn.wrong {
+      border-color: #ef4444; background: #fef2f2; color: #b91c1c;
+    }
+    .option-btn.wrong .letter { color: #ef4444; }
+    .option-btn.dimmed { opacity: 0.5; }
+    .option-btn:disabled { cursor: default; }
+
+    /* Explanation box */
+    .explanation {
+      margin-top: 16px; padding: 14px; border-radius: 12px;
+      font-size: 0.83rem; line-height: 1.55;
+      border: 1.5px solid;
+    }
+    .explanation.ok  { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+    .explanation.bad { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .explanation strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
+
+    /* Next button */
+    .next-btn {
+      width: 100%; padding: 15px;
+      background: #4f46e5; color: #fff;
+      border: none; border-radius: 14px;
+      font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background .15s;
+      box-shadow: 0 4px 16px rgba(79,70,229,.35);
+    }
+    .next-btn:hover { background: #4338ca; }
+
+    /* Results screen */
+    .results-center {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 16px;
+    }
+    .results-card {
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 12px 50px rgba(0,0,0,.2);
+      padding: 36px 28px; max-width: 440px; width: 100%;
+      text-align: center;
+    }
+    .results-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+    .results-card h2 { font-size: 1.4rem; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+    .results-card .sub { font-size: 0.82rem; color: #64748b; margin-bottom: 20px; }
+    .score-big { font-size: 3rem; font-weight: 900; margin-bottom: 4px; }
+    .score-pct { font-size: 1.1rem; color: #475569; margin-bottom: 20px; }
+    .results-bar-bg {
+      background: #e2e8f0; border-radius: 999px;
+      height: 12px; overflow: hidden; margin-bottom: 28px;
+    }
+    .results-bar-fill { height: 100%; border-radius: 999px; transition: width .6s; }
+    .btn-group { display: flex; flex-direction: column; gap: 10px; }
+    .btn-primary {
+      padding: 13px; border: none; border-radius: 12px;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: .15s;
+    }
+    .btn-dark { background: #1e293b; color: #fff; }
+    .btn-dark:hover { background: #334155; }
+    .btn-indigo { background: #4f46e5; color: #fff; }
+    .btn-indigo:hover { background: #4338ca; }
+
+    /* Review screen */
+    .review-header { margin-bottom: 6px; }
+    .review-header h2 { font-size: 1.1rem; font-weight: 800; color: #1e293b; }
+    .review-header p { font-size: 0.8rem; color: #64748b; margin: 4px 0 12px; }
+    .btn-back {
+      padding: 7px 14px; background: #1e293b; color: #fff;
+      border: none; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer;
+    }
+    .btn-back:hover { background: #334155; }
+
+    .review-item {
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      padding: 16px; margin-bottom: 10px;
+      border-left: 5px solid;
+    }
+    .review-item.correct-item { border-color: #16a34a; }
+    .review-item.wrong-item   { border-color: #ef4444; }
+    .review-item .q-text { font-weight: 700; font-size: 0.88rem; color: #1e293b; margin: 10px 0 8px; }
+    .review-opt {
+      font-size: 0.8rem; padding: 6px 10px;
+      border-radius: 8px; margin-bottom: 4px; color: #475569;
+    }
+    .review-opt.r-correct { background: #dcfce7; color: #15803d; font-weight: 700; }
+    .review-opt.r-wrong   { background: #fee2e2; color: #b91c1c; }
+    .review-expl {
+      margin-top: 10px; font-size: 0.76rem; color: #64748b;
+      background: #f8fafc; padding: 10px 12px; border-radius: 8px; line-height: 1.5;
+    }
+
+    /* Category color map */
+    .badge-0  { background: #dbeafe; color: #1d4ed8; }
+    .badge-1  { background: #ede9fe; color: #6d28d9; }
+    .badge-2  { background: #dcfce7; color: #166534; }
+    .badge-3  { background: #fef9c3; color: #854d0e; }
+    .badge-4  { background: #fee2e2; color: #b91c1c; }
+    .badge-5  { background: #e0e7ff; color: #3730a3; }
+    .badge-6  { background: #fce7f3; color: #9d174d; }
+    .badge-7  { background: #ccfbf1; color: #0f766e; }
+    .badge-8  { background: #ffedd5; color: #9a3412; }
+    .badge-9  { background: #cffafe; color: #0e7490; }
+    .badge-10 { background: #ecfccb; color: #3f6212; }
+
+    @media (max-width: 480px) {
+      .card { padding: 14px; }
+      .question-text { font-size: 0.93rem; }
+      .option-btn { font-size: 0.82rem; padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+const questions = [
+  { category:"Ingineria Programării", question:"Când a luat naștere oficial ingineria software (la conferința NATO)?", options:["1955","1968","1975","1982"], answer:1, explanation:"Ingineria software s-a născut în 1968, la conferința NATO, ca răspuns la complexitatea tot mai mare a sistemelor software." },
+  { category:"Ingineria Programării", question:"Care sunt cele trei obiective principale ale ingineriei software?", options:["Viteză, cost, securitate","Flexibilitate, eficiență, fiabilitate (reliability)","Portabilitate, reutilizare, testabilitate","Modularitate, abstractizare, uniformitate"], answer:1, explanation:"Obiectivele principale sunt: Flexibilitatea (adaptare la cerințe noi), Eficiența (performanță și productivitate) și Fiabilitatea (evitarea și repararea greșelilor)." },
+  { category:"Ingineria Programării", question:"Ce procent din efortul total al unui proiect software reprezintă, în medie, întreținerea (maintenance)?", options:["20%","40%","Până la 60%","80%"], answer:2, explanation:"Întreținerea poate reprezenta până la 60% din costul total al unui proiect software, motiv pentru care trebuie minimizat numărul de erori." },
+  { category:"Ingineria Programării", question:"Conform statisticilor, ce procent din erori aparțin etapei de analiză (nu înțelegerea cerințelor)?", options:["20%","40%","60%","80%"], answer:2, explanation:"Statisticile arată că 60% din erori aparțin etapei de analiză (nu s-a înțeles bine ce trebuie făcut), iar doar 40% apar în conceperea propriu-zisă." },
+  { category:"Ingineria Programării", question:"Care este proprietatea programelor de a fi înțelese de alți programatori (alții decât autorii)?", options:["Flexibilitate","Fiabilitate","Perceptibilitate (readability)","Completitudine"], answer:2, explanation:"Perceptibilitatea (readability) este proprietatea programelor de a fi înțelese de alți programatori. Crește fiabilitatea și adaptabilitatea." },
+  { category:"Ingineria Programării", question:"Ce principiu al ingineriei software presupune 'punerea în vecinătatea fizică a elementelor cu legături între ele'?", options:["Modularitatea","Abstractizarea","Localizarea","Ascunderea"], answer:2, explanation:"Localizarea – punerea în vecinătatea fizică a elementelor cu unele legături între ele (ex: funcțiile unei biblioteci, funcții lângă structurile de date folosite)." },
+  { category:"Ingineria Programării", question:"Care este diferența esențială dintre abstractizare și ascundere?", options:["Abstractizarea se aplică doar la date, ascunderea la funcții","Ambele accentuează aspecte esențiale, dar ascunderea definește restricții de acces","Abstractizarea elimină detalii, ascunderea le adaugă","Nu există diferență, sunt sinonime"], answer:1, explanation:"Ambele accentuează aspecte esențiale, dar ascunderea definește în plus restricțiile de acces (ex: încapsularea în OOP)." },
+
+  { category:"Modele de Proces Software", question:"Care este principala caracteristică a Modelului Cascadă (Waterfall)?", options:["Permite modificări frecvente ale cerințelor","Un stadiu de dezvoltare trebuie terminat înainte de a începe următorul","Livrarea se face în incremente mici","Se bazează pe prototipuri iterative"], answer:1, explanation:"În modelul Cascadă, un stagiu de dezvoltare trebuie terminat înainte de a începe următorul. Prezintă vizualizare clară a etapelor, dar nu reflectă întotdeauna realitatea." },
+  { category:"Modele de Proces Software", question:"Care este distribuția efortului în modelul Cascadă (analiză+specificare+proiectare / implementare / testare)?", options:["20% / 40% / 40%","40% / 20% / 40%","33% / 33% / 33%","50% / 30% / 20%"], answer:1, explanation:"În modelul Cascadă: 40% reprezintă analiza, elaborarea specificațiilor și proiectarea; 20% implementarea; 40% testarea. Codificarea reprezintă 16-20%." },
+  { category:"Modele de Proces Software", question:"Modelul V (V Model) a fost introdus de:", options:["NASA (1985)","Ministerul de Apărare German (1992)","IEEE (1988)","NATO (1968)"], answer:1, explanation:"Modelul V a fost introdus de Ministerul de Apărare German în 1992. Este o variație a modelului Cascadă care leagă activitățile de testare de analiză și proiectare." },
+  { category:"Modele de Proces Software", question:"Care este scopul principal al unui PROTOTIP în dezvoltarea software?", options:["Înlocuiește produsul final","Este un produs parțial finalizat care permite examinarea unor aspecte ale sistemului propus","Servește exclusiv pentru testarea performanței","Este utilizat doar pentru interfața grafică"], answer:1, explanation:"Un prototip este un produs parțial finalizat care face posibilă o examinare a unor aspecte ale sistemului propus de către client și producător, pentru verificare și validare." },
+  { category:"Modele de Proces Software", question:"Modelul Spirală (Boehm, 1988) combină:", options:["Modelul Cascadă cu Modelul V","Activitatea de dezvoltare cu managementul de risc","Prototipizarea cu analiza cerințelor","Metode agile cu metode tradiționale"], answer:1, explanation:"Modelul Spirală combină activitatea de dezvoltare cu managementul de risc pentru a minimiza și controla riscul (Boehm, 1988)." },
+  { category:"Modele de Proces Software", question:"Care este diferența dintre Dezvoltarea Incrementală și Dezvoltarea Iterativă?", options:["Nu există diferență, sunt același lucru","Incrementală adaugă funcționalități noi cu fiecare versiune; iterativă livrează sistemul complet și îmbunătățește funcțiile","Incrementală este mai lentă, iterativă este mai rapidă","Iterativă adaugă funcționalități, incrementală îmbunătățește calitatea"], answer:1, explanation:"Dezvoltarea incrementală adaugă funcționalități noi cu fiecare versiune (pornind de la un subsistem mic). Dezvoltarea iterativă livrează sistemul complet la început și îmbunătățește fiecare funcție cu fiecare versiune nouă." },
+  { category:"Modele de Proces Software", question:"Care sunt cele 4 valori din Manifestul AGILE?", options:["Viteză, calitate, flexibilitate, documentație","Indivizi și interacțiuni; software funcțional; colaborare cu clientul; răspuns la schimbări","Planificare, execuție, testare, livrare","Cerințe, proiectare, implementare, mentenanță"], answer:1, explanation:"Manifestul Agile: (1) Indivizi și interacțiuni > procese și unelte; (2) Software funcțional > documentație bună; (3) Colaborare cu clientul > negociere contractuală; (4) Răspuns la schimbări > urmărirea unui plan." },
+  { category:"Modele de Proces Software", question:"Cei trei piloni ai SCRUM sunt:", options:["Planificare, execuție, retrospectivă","Transparență, inspecție și adaptare","Sprint, backlog, daily standup","Cerințe, testare, livrare"], answer:1, explanation:"Cei trei piloni ai SCRUM sunt: Transparența (aspecte vizibile celor responsabili), Inspecția (monitorizarea progresului) și Adaptarea (ajustarea procesului la deviații)." },
+  { category:"Modele de Proces Software", question:"Un Sprint în SCRUM are o durată maximă de:", options:["2 săptămâni","O lună","3 luni","6 luni"], answer:1, explanation:"Inima Scrum-ului este Sprint-ul, cu o durată de maxim o lună, în timpul căruia este creat un Increment al produsului cu statusul 'Finalizat'." },
+
+  { category:"Noțiuni de Bază – Proiect", question:"Care dintre următoarele NU este o caracteristică a unui proiect?", options:["Să fie un demers unic","Să aibă obiective specifice de îndeplinit","Să se desfășoare în mod continuu, fără punct final","Să aibă un buget și un calendar de activități"], answer:2, explanation:"Proiectul NU se desfășoară continuu – el are o dată de începere și de finalizare. Activitățile continue (operațiuni repetitive) nu sunt proiecte." },
+  { category:"Noțiuni de Bază – Proiect", question:"Succesul unui proiect se apreciază prin:", options:["Numai prin livrarea la termen","Livrarea livrabilelor, obținerea beneficiilor și satisfacția clientului","Respectarea bugetului inițial indiferent de calitate","Numărul de cerințe implementate"], answer:1, explanation:"Succesul unui proiect are trei categorii: (1) Livrarea livrabilelor propuse; (2) Obținerea beneficiilor asociate proiectului; (3) Satisfacția clientului." },
+  { category:"Noțiuni de Bază – Proiect", question:"Cine este SPONSORUL unui proiect?", options:["Persoana care plătește proiectul","Persoana care folosește produsul final","Persoana care diriguiește lucrarea, reprezentând punctul de interfață cu maximă autoritate pentru managerul de proiect","Managerul de proiect principal"], answer:2, explanation:"Sponsorul este persoana care diriguiește lucrarea, reprezentând pentru managerul de proiect punctul de interfață cu maximă autoritate. El furnizează parametrii definitorii și ajută la rezolvarea problemelor." },
+  { category:"Noțiuni de Bază – Proiect", question:"Care sunt cele trei categorii de audiență ale managerului de proiect?", options:["Sponsor, programator, tester","Oameni direct implicați; clienții proiectului; alte persoane cointeresate","Client intern, client extern, utilizator final","Finanțator, beneficiar, operator"], answer:1, explanation:"Cele trei mari categorii: (1) Oameni direct implicați (echipa, furnizorii); (2) Clienții proiectului; (3) Alte persoane cointeresate." },
+  { category:"Noțiuni de Bază – Proiect", question:"Definiția managementului de proiect este:", options:["Arta de a programa activitățile unei echipe","O metodologie formală anume elaborată pentru gestionarea proiectelor","Procesul de alocare a resurselor umane și financiare","Tehnica de monitorizare a progresului"], answer:1, explanation:"Managementul de proiect este o metodologie formală anume elaborată pentru gestionarea proiectelor, aplicabilă într-o gamă foarte diversă de întreprinderi economice." },
+
+  { category:"Comunicarea în Proiecte", question:"Cele 17 lecții de comunicare pentru managerul de proiect sunt structurate în trei categorii. Care sunt acestea?", options:["Verbal, scris, nonverbal","Planificarea comunicațiilor; stilul și metoda de comunicare; regulile de la baza comunicațiilor","Comunicare internă, externă și de criză","Comunicare formală, informală și de urgență"], answer:1, explanation:"Cele 17 lecții: (1) Planificarea comunicațiilor și modul de abordare (lecțiile 1-4); (2) Stilul și metoda de comunicare (lecțiile 5-13); (3) Regulile care trebuie să stea la baza comunicațiilor (lecțiile 14-17)." },
+  { category:"Comunicarea în Proiecte", question:"Care este recomandarea privind e-mailurile pentru conversații în doi?", options:["E-mailul este întotdeauna cel mai eficient mijloc de comunicare","Pentru conversații în doi este întotdeauna de preferat să dai telefon, dacă nu poți avea o întâlnire față în față","E-mailul trebuie trimis în copie la cât mai mulți oameni","E-mailul trebuie folosit pentru toate comunicările formale"], answer:1, explanation:"Lecția 11 – Nu vă bazați pe e-mailuri: pentru conversații în doi, este întotdeauna de preferat să pui mâna pe telefon (dacă nu poți o întâlnire față în față)." },
+  { category:"Comunicarea în Proiecte", question:"Ce înseamnă 'a gestiona așteptările' clientului?", options:["A promite mereu mai mult decât poți livra","A te asigura că ceea ce se materializează în final este ceea ce așteaptă clientul, gestionând activ informația despre riscuri și schimbări","A reduce constant cerințele clientului","A evita comunicarea veștilor proaste"], answer:1, explanation:"Gestionarea așteptărilor înseamnă să te asiguri că ceea ce se materializează în final este ceea ce așteaptă clientul, comunicând proactiv despre riscuri, schimbări și stadiul proiectului." },
+  { category:"Comunicarea în Proiecte", question:"Lecția de comunicare nr. 15 spune că:", options:["Comunicarea prin e-mail este suficientă","Nu trebuie să existe decât o singură variantă a adevărului","Trebuie să comunici doar informații pozitive","Comunicarea formală este mai importantă decât cea informală"], answer:1, explanation:"Lecția 15 – Nu trebuie să existe decât o singură variantă a adevărului: toți membrii echipei trebuie să comunice consecvent aceleași informații despre stadiul proiectului." },
+
+  { category:"Estimarea Efortului", question:"Ce reprezintă KLOC în modelele de estimare a costului software?", options:["Kilo Lines Of Code – kilo-linii de cod","Key Lines Of Control – linii cheie de control","Knowledge Level Of Complexity","Key Logical Operations Count"], answer:0, explanation:"KLOC = Kilo-Lines Of Code (kilo-linii de cod). Este unitatea principală de măsură a dimensiunii unui program în modelele de estimare." },
+  { category:"Estimarea Efortului", question:"Formula modelului BASIC COCOMO (Boehm) pentru clasa de proiecte ORGANICE este:", options:["E = 2.4 × KLOC^1.05","E = 3.0 × KLOC^1.12","E = 3.6 × KLOC^1.20","E = 5.2 × KLOC^0.91"], answer:0, explanation:"COCOMO Basic – clasa Organică: E = 2.4 × KLOC^1.05 (Semidetașată: E = 3.0 × KLOC^1.12; Integrată: E = 3.6 × KLOC^1.20)" },
+  { category:"Estimarea Efortului", question:"COCOMO distinge 3 clase de proiecte. Proiectele INTEGRATE se caracterizează prin:", options:["Echipă mică, mediu cunoscut, proiecte relativ mici","Mediu impune constrângeri severe (ex: control trafic aerian, aplicații militare)","Formă intermediară cu echipă mixtă","Proiecte comerciale cu cerințe stabile"], answer:1, explanation:"Proiectele Integrate: mediu impune constrângeri severe. Exemple: programe de control al traficului aerian sau aplicații militare. Organice = echipă mică, mediu cunoscut. Semidetașate = formă intermediară." },
+  { category:"Estimarea Efortului", question:"Metoda Delphi de estimare a costului software este folosită pentru:", options:["Calcularea automată a numărului de linii de cod","Obținerea unui consens între mai mulți experți fără a fi influențați reciproc","Estimarea costurilor hardware","Calcularea punctelor funcționale"], answer:1, explanation:"Metoda Delphi: fiecare expert îşi exprimă opinia în scris; moderatorul colectează și redistribuie estimările anonim; procesul continuă până la consens. Previne influența unor membri dominanți." },
+  { category:"Estimarea Efortului", question:"Formula pentru efortul estimat cu 3 estimări (optimistă a, realistă m, pesimistă b) folosind distribuția beta este:", options:["E = (a + b) / 2","E = (a + 4m + b) / 6","E = (a + m + b) / 3","E = m + (b − a) / 4"], answer:1, explanation:"Formula: E = (a + 4m + b) / 6, unde a = estimare optimistă, m = estimare realistă, b = estimare pesimistă. Această estimare este mai bună decât media aritmetică." },
+  { category:"Estimarea Efortului", question:"Legea lui Brooks afirmă că:", options:["Mai mulți programatori duc la mai multă productivitate","Adăugarea de personal la un proiect întârziat îl va întârzia și mai mult","Dimensiunea echipei optime este de 10 persoane","Productivitatea crește liniar cu dimensiunea echipei"], answer:1, explanation:"Legea lui Brooks: adăugarea de personal la un proiect întârziat îl va întârzia și mai mult, deoarece noii membri necesită instruire (consumând din timpul celor existenți) și cresc nevoia de comunicare." },
+  { category:"Estimarea Efortului", question:"Analiza Punctelor Funcționale (APF) se bazează pe:", options:["Numărul de linii de cod scrise","Numărarea structurilor de date utilizate (fișiere interne, externe, intrări/ieșiri/cereri externe)","Complexitatea algoritmilor","Numărul de programatori implicați"], answer:1, explanation:"APF (Albrecht, 1983) se bazează pe 5 funcții fundamentale: FIL, FEI, IE, EE, CE. Formula: PFN = 10·FIL + 7·FEI + 4·IE + 5·EE + 4·CE." },
+  { category:"Estimarea Efortului", question:"Modelul Walston-Felix a fost creat prin analiza a 60 de proiecte de la:", options:["Microsoft","IBM","NASA","Bell Labs"], answer:1, explanation:"Ecuația Walston-Felix: E = 5.2 × KLOC^0.91, creată prin analiza a 60 de proiecte de la IBM. Modelul identifică 29 de variabile care influențează productivitatea." },
+  { category:"Estimarea Efortului", question:"Conform regulii euristice Putnam (curba Rayleigh), ce procent din efortul total este cheltuit pentru dezvoltarea efectivă?", options:["20%","40%","60%","80%"], answer:1, explanation:"Regula euristică: aproximativ 40% din efortul total este cheltuit pentru dezvoltarea efectivă, în timp ce 60% este cheltuit pentru întreținere." },
+
+  { category:"Procese, Activități și Resurse (ISO 12207)", question:"Conform standardului ISO/CEI 12207:1995, un proiect software constă în:", options:["Faze, subproiecte și iterații","Procese, activități și sarcini (tasks)","Cerințe, proiectare și implementare","Planificare, execuție și control"], answer:1, explanation:"ISO 12207: un proiect SW constă în Procese (ansamblu de resurse și activități interdependente), Activități (părți ale proceselor) și Sarcini/Tasks (componente ale activităților)." },
+  { category:"Procese, Activități și Resurse (ISO 12207)", question:"Care sunt cele 3 tipuri de procese conform ISO 12207?", options:["Tehnice, manageriale, organizaționale","Primare, de suport, organizaționale","De dezvoltare, de testare, de întreținere","Interne, externe, mixte"], answer:1, explanation:"ISO 12207 definește: Procese Primare (achiziție, furnizare, dezvoltare, utilizare, mentenanță); Procese de Suport (documentare, QA, testare, validare); Procese Organizaționale (management, infrastructură, instruire, îmbunătățire)." },
+  { category:"Procese, Activități și Resurse (ISO 12207)", question:"Procesul SCM (Software Configuration Management) include:", options:["Testarea software-ului","Identificarea/controlul elementelor de configurație, gestiunea versiunilor, controlul modificărilor","Asigurarea calității produselor","Gestionarea cerințelor utilizatorilor"], answer:1, explanation:"SCM include: identificarea și definirea elementelor de configurație (componente, module, fișiere); controlul modificărilor de la o versiune la alta; stabilirea versiunilor produsului." },
+  { category:"Procese, Activități și Resurse (ISO 12207)", question:"Diferența dintre Procesul de Testare și Procesul de Validare este:", options:["Nu există nicio diferență","Testarea verifică produsele față de cerințe impuse; Validarea verifică dacă produsul FINAL satisface cerințele de utilizare planificate","Testarea se face intern, validarea extern","Validarea precede întotdeauna testarea"], answer:1, explanation:"Testarea – verifică produsele față de cerințe impuse. Validarea – verifică dacă produsul final satisface cerințele de utilizare planificate (acoperă nevoile utilizatorului din faza de analiză)." },
+
+  { category:"Managementul Configurațiilor", question:"Care este scopul baseline-ului (liniei de bază) în managementul configurațiilor?", options:["Reprezintă bugetul inițial al proiectului","Este structura software controlată (componente, interfețe, documentație) față de care se măsoară orice modificare","Reprezintă termenul de livrare agreat","Este setul de cerințe inițiale ale clientului"], answer:1, explanation:"Baseline-ul reprezintă structura software controlată față de care se măsoară orice modificare. Managerul de configurații îl construiește la faza de proiectare." },
+  { category:"Managementul Configurațiilor", question:"Procedura de 'charge-out/charge-in' din managementul configurațiilor servește pentru:", options:["Facturarea orelor de muncă ale programatorilor","Controlul accesului exclusiv la fișiere (cine le modifică și când), prevenind modificări simultane","Arhivarea documentației proiectului","Testarea automată a codului"], answer:1, explanation:"Charge-out/charge-in: permite unui designer să obțină o copie a unui fișier în spațiul privat, înregistrează cine a efectuat operația și blochează fișierul împotriva modificărilor simultane." },
+
+  { category:"Planificare Strategică în Informatica Medicală", question:"Planificarea strategică (PS) reprezintă:", options:["Planificarea operațională pe termen scurt a activităților","Dezvoltarea unui plan coerent, pe termen lung pentru controlarea activităților dintr-o instituție, stabilind direcții și priorități","Alocarea bugetului anual al departamentului IT","Selecția furnizorilor de echipamente medicale"], answer:1, explanation:"PS = dezvoltarea unui plan coerent, pe termen lung pentru controlarea activităților dintr-o instituție, stabilind direcții și priorități în conformitate cu resursele existente." },
+  { category:"Planificare Strategică în Informatica Medicală", question:"Misiunea unei instituții reprezintă:", options:["Obiectivele pe termen scurt ale instituției","Rațiunea existenței instituției, relevând unicitatea ei ('cine suntem' și 'ce facem')","Lista de servicii oferite clienților","Strategia financiară a instituției"], answer:1, explanation:"Misiunea reflectă scopul sau rațiunea existenței unei instituții și este exprimată printr-o declarație care arată personalului și clienților 'cine suntem' și 'ce facem'." },
+  { category:"Planificare Strategică în Informatica Medicală", question:"Care sunt etapele procesului de Planificare Strategică (PS) conform cursului?", options:["Analiză → Planificare → Execuție → Control","Organizare dept. → Scopul/sfera de acțiune → Condiții interne/externe → Analiza datelor → Soluții → Alegere direcție → Implementare/evaluare","Cerințe → Proiectare → Implementare → Testare → Livrare","Identificare probleme → Selectare soluții → Implementare → Monitorizare"], answer:1, explanation:"Etapele PS: (1) Organizare la nivelul departamentelor; (2) Stabilirea scopului și sferei de acțiune; (3) Studiul condițiilor interne și externe; (4) Analiza datelor; (5) Identificarea soluțiilor posibile; (6) Alegerea direcției de acțiune; (7) Implementare și evaluare." },
+  { category:"Planificare Strategică în Informatica Medicală", question:"La alegerea unei direcții de acțiune în PS, ce coeficient se dă caracteristicilor ESENȚIALE vs. dorite?", options:["Esențiale = 10, dorite = 5","Esențiale = 5, dorite = 3","Esențiale = 3, dorite = 1","Esențiale = 100, dorite = 50"], answer:1, explanation:"Caracteristicilor esențiale li se atribuie coeficient de ponderare 5, iar celor dorite (dar nu esențiale) coeficient 3." },
+
+  { category:"Calitate Software și Aspecte Etice", question:"Modelul de calitate al lui McCall leagă:", options:["Costul de calitate","Perspectiva proiectantului (calitate internă) de cea a utilizatorului (calitate externă)","Calitatea codului de calitatea documentației","Viteza de dezvoltare de numărul de erori"], answer:1, explanation:"Modelul McCall leagă perspectiva proiectantului (perspectiva internă – caracteristici interne: nr. și tipul erorilor) de cea a utilizatorului (perspectiva externă – căderi, ușurința utilizării etc.)." },
+  { category:"Calitate Software și Aspecte Etice", question:"CMM (Capability Maturity Model) și ISO 9000 sunt standarde de:", options:["Securitate software","Calitate a procesului software","Documentație tehnică","Interfețe de programare"], answer:1, explanation:"CMM/CMMI, ISO 9000 și SPICE sunt standarde de calitate a procesului software, utilizate pentru îmbunătățirea calității produsului prin metodologii de calitate." },
+  { category:"Calitate Software și Aspecte Etice", question:"Care este un exemplu de problemă etică în ingineria software menționat în curs (mașina Therac-25)?", options:["Depășirea bugetului cu 20%","Software-ul defectuos pentru mașina de radioterapie a provocat moartea unor pacienți","Nerespectarea termenelor de livrare","Copierea neautorizată a unor module software"], answer:1, explanation:"Software-ul pentru Therac-25 (mașină de raze X): utilizarea neașteptată a tastelor săgeți a cauzat doze letale de radiații, omorând câțiva pacienți. Exemplu de software cu erori în sisteme safety-critical." },
+  { category:"Calitate Software și Aspecte Etice", question:"Aspectele etice în activitatea de proiectare software includ (conform cursului):", options:["Prioritizarea profitului față de siguranța utilizatorilor","a) să nu creeze alte probleme clienților; b) să nu creeze false necesități; c) să orienteze corect resursele; d) să nu uite că produsul e pentru oameni","Utilizarea celor mai noi tehnologii indiferent de cost","Copierea soluțiilor existente pentru economisirea timpului"], answer:1, explanation:"Aspectele etice: a) înlocuirea rezolvării problemelor clientului prin alte probleme; b) să nu creăm false necesități; c) să orientăm corect resursele disponibile; d) să nu uităm că produsul este realizat pentru oameni." },
+
+  { category:"Echipa de Dezvoltare Software", question:"Care sunt cele 3 'valuri' de activitate a rolurilor în echipa de dezvoltare OO?", options:["Analist → Programator → Tester","Arhitect (primul și tot timpul) → Abstractioniști (din faza de analiză) → Ingineri de aplicații (vârf în faza de evoluție)","Manager → Senior Developer → Junior Developer","Cerințe → Design → Cod"], answer:1, explanation:"3 valuri: (1) mai întâi intră în acțiune Arhitectul (rămâne pe toată durata); (2) urmează Abstractioniștii (din faza de analiză); (3) al 3-lea val – Inginerii de aplicații (vârf în faza de evoluție)." },
+  { category:"Echipa de Dezvoltare Software", question:"Conceptul de 'echipă fluidă' presupune:", options:["O echipă cu membri care se schimbă frecvent","Membrii nu sunt 'încremeniti' pe anumite responsabilități, ci sunt repartizați pe roluri în funcție de necesitățile proiectului și aptitudinile personale","O echipă fără structură ierarhică","O echipă care lucrează remote"], answer:1, explanation:"Echipa fluidă: membrii nu sunt încremeniti pe anumite responsabilități, ci sunt repartizați pe roluri în funcție de necesitățile proiectului și aptitudinile personale. Mai întâi se stabilesc rolurile, apoi se identifică persoanele potrivite." },
+  { category:"Echipa de Dezvoltare Software", question:"Echipa de intervenție rapidă ('tiger team') are dimensiunea medie de:", options:["5-7 persoane","1-2 persoane, cu durată de viață de 1-2 săptămâni","10-15 persoane","3-5 persoane, permanent"], answer:1, explanation:"Echipa de intervenție: 1-2 persoane, durată de 1-2 săptămâni. Scop: investigarea aspectelor neclare, validarea alternativelor de proiectare, depistarea și înlăturarea bug-urilor." },
+
+  { category:"Abordarea Sistemică", question:"Un sistem (în contextul ingineriei software) este definit ca:", options:["Un set de programe care rulează simultan","O colecție de obiecte și activități plus relațiile dintre ele, cu intrări, acțiuni și ieșiri","Un hardware specific și software-ul asociat","O bază de date cu informațiile proiectului"], answer:1, explanation:"Un sistem = o colecție de obiecte și activități plus o descriere a relațiilor care leagă obiectivele și activitățile împreună (intrări, acțiuni, ieșiri)." },
+  { category:"Abordarea Sistemică", question:"Elementele unui sistem sunt:", options:["Hardware, software și documentație","Activități (events inițiate de un trigger), obiecte/entități și relații (inclusiv marginile sistemului)","Intrări, procesare și ieșiri","Utilizatori, date și funcții"], answer:1, explanation:"Elementele unui sistem: Activități (ceva ce se întâmplă, inițiate de un trigger – transformă ceva), Obiecte/Entități (elementele implicate în activități) și Relații (inclusiv marginile sistemului)." }
+];
+
+// ── State ──────────────────────────────────────────────────────────────────
+const allCategories = ["Toate", ...Array.from(new Set(questions.map(q => q.category)))];
+
+const badgeClass = (() => {
+  const map = {};
+  allCategories.slice(1).forEach((c, i) => { map[c] = "badge-" + i; });
+  return c => map[c] || "badge-0";
+})();
+
+let state = {
+  mode: "quiz",           // quiz | results | review
+  category: "Toate",
+  filtered: [...questions],
+  current: 0,
+  selected: null,
+  score: 0,
+  answered: [],           // [{qi, sel, correct}]
+};
+
+function filteredList(cat) {
+  return cat === "Toate" ? questions : questions.filter(q => q.category === cat);
+}
+
+function resetQuiz(cat) {
+  state.category = cat;
+  state.filtered = filteredList(cat);
+  state.current = 0;
+  state.selected = null;
+  state.score = 0;
+  state.answered = [];
+  state.mode = "quiz";
+  render();
+}
+
+function selectAnswer(idx) {
+  if (state.selected !== null) return;
+  const q = state.filtered[state.current];
+  const correct = idx === q.answer;
+  state.selected = idx;
+  if (correct) state.score++;
+  state.answered.push({ qi: state.current, sel: idx, correct });
+  render();
+}
+
+function nextQuestion() {
+  if (state.current < state.filtered.length - 1) {
+    state.current++;
+    state.selected = null;
+    render();
+  } else {
+    state.mode = "results";
+    render();
+  }
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function render() {
+  const app = document.getElementById("app");
+  if (state.mode === "results") { app.innerHTML = renderResults(); return; }
+  if (state.mode === "review")  { app.innerHTML = renderReview();  return; }
+  app.innerHTML = renderQuiz();
+}
+
+function renderQuiz() {
+  const { filtered, current, selected, score, category } = state;
+  const q = filtered[current];
+  const pct = Math.round(((current + 1) / filtered.length) * 100);
+
+  const catButtons = allCategories.map(c => {
+    const label = c === "Toate" ? `Toate (${questions.length})` : (c.length > 26 ? c.slice(0, 26) + "…" : c);
+    return `<button class="cat-btn${c === category ? " active" : ""}" onclick="resetQuiz('${esc(c)}')">${label}</button>`;
+  }).join("");
+
+  const optButtons = q.options.map((opt, idx) => {
+    let cls = "";
+    if (selected !== null) {
+      if (idx === q.answer) cls = " correct";
+      else if (idx === selected) cls = " wrong";
+      else cls = " dimmed";
+    }
+    const letter = String.fromCharCode(65 + idx);
+    return `<button class="option-btn${cls}" onclick="selectAnswer(${idx})" ${selected !== null ? "disabled" : ""}>
+      <span class="letter">${letter}.</span>${esc(opt)}
+    </button>`;
+  }).join("");
+
+  const expl = selected !== null ? `
+    <div class="explanation ${selected === q.answer ? 'ok' : 'bad'}">
+      <strong>${selected === q.answer ? "✅ Corect!" : "❌ Greșit!"}</strong>
+      ${esc(q.explanation)}
+    </div>` : "";
+
+  const nextBtn = selected !== null ? `
+    <button class="next-btn" onclick="nextQuestion()">
+      ${current < filtered.length - 1 ? "Următoarea întrebare →" : "Vezi rezultatele 🏁"}
+    </button>` : "";
+
+  return `
+    <div class="container">
+      <div class="card header">
+        <h1>📋 Grile MPSAM</h1>
+        <p>Managementul Proiectelor Software în Aplicații Medicale</p>
+        <div class="cats">${catButtons}</div>
+      </div>
+
+      <div class="card">
+        <div class="progress-row">
+          <span>Întrebarea ${current + 1} din ${filtered.length}</span>
+          <span class="score">✓ ${score} corecte</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" style="width:${pct}%"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="cat-badge ${badgeClass(q.category)}">${esc(q.category)}</span>
+        <div class="question-text">${esc(q.question)}</div>
+        <div class="options">${optButtons}</div>
+        ${expl}
+      </div>
+
+      ${nextBtn}
+    </div>`;
+}
+
+function renderResults() {
+  const { filtered, score, category } = state;
+  const pct = Math.round((score / filtered.length) * 100);
+  const emoji = pct >= 80 ? "🎉" : pct >= 60 ? "👍" : "📚";
+  const color = pct >= 80 ? "#16a34a" : pct >= 60 ? "#d97706" : "#dc2626";
+
+  return `
+    <div class="results-center">
+      <div class="results-card">
+        <div class="results-emoji">${emoji}</div>
+        <h2>Rezultate finale</h2>
+        <p class="sub">Categorie: ${esc(category)}</p>
+        <div class="score-big" style="color:${color}">${score} / ${filtered.length}</div>
+        <div class="score-pct">${pct}% corect</div>
+        <div class="results-bar-bg">
+          <div class="results-bar-fill" style="width:${pct}%; background:${color}"></div>
+        </div>
+        <div class="btn-group">
+          <button class="btn-primary btn-dark" onclick="resetQuiz('${esc(state.category)}')">🔄 Reia testul</button>
+          <button class="btn-primary btn-indigo" onclick="goReview()">📖 Revizuiește răspunsurile</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderReview() {
+  const { filtered, score, answered } = state;
+  const pct = Math.round((score / filtered.length) * 100);
+
+  const items = filtered.map((q, qi) => {
+    const ans = answered.find(a => a.qi === qi);
+    if (!ans) return "";
+    const opts = q.options.map((opt, oi) => {
+      let cls = "";
+      if (oi === q.answer) cls = " r-correct";
+      else if (oi === ans.sel && !ans.correct) cls = " r-wrong";
+      const mark = oi === q.answer ? "✓ " : (oi === ans.sel && !ans.correct ? "✗ " : "");
+      return `<div class="review-opt${cls}">${mark}${esc(opt)}</div>`;
+    }).join("");
+
+    return `
+      <div class="review-item ${ans.correct ? 'correct-item' : 'wrong-item'}">
+        <span class="cat-badge ${badgeClass(q.category)}" style="font-size:.65rem">${esc(q.category)}</span>
+        <div class="q-text">${esc(q.question)}</div>
+        ${opts}
+        <div class="review-expl">💡 ${esc(q.explanation)}</div>
+      </div>`;
+  }).join("");
+
+  return `
+    <div class="container">
+      <div class="card review-header">
+        <h2>📖 Revizuire răspunsuri</h2>
+        <p>Score: ${score}/${filtered.length} (${pct}%)</p>
+        <button class="btn-back" onclick="resetQuiz('${esc(state.category)}')">← Reia testul</button>
+      </div>
+      ${items}
+    </div>`;
+}
+
+function goReview() { state.mode = "review"; render(); }
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+// Boot
+render();
+</script>
+</body>
+</html>
