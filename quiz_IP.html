@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz IP — Ingineria Programării</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+  :root {
+    --bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3350;
+    --accent:#5b7fff;--accent2:#a78bfa;--correct:#22c55e;--wrong:#ef4444;
+    --text:#e2e8f0;--muted:#7c85a2;
+    --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem 4rem;}
+  header{width:100%;max-width:760px;margin-bottom:2.5rem;border-bottom:1px solid var(--border);padding-bottom:1.5rem;}
+  .tag{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem;}
+  h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:600;letter-spacing:-.02em;line-height:1.2;}
+  h1 span{color:var(--accent2);}
+  .meta{margin-top:.5rem;font-size:.85rem;color:var(--muted);}
+  .progress-bar-wrap{width:100%;max-width:760px;margin-bottom:1.5rem;}
+  .progress-info{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-family:var(--mono);margin-bottom:.4rem;}
+  .progress-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s ease;border-radius:2px;}
+  .card{width:100%;max-width:760px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;}
+  .q-number{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.8rem;}
+  .q-category{display:inline-block;font-size:.68rem;font-family:var(--mono);color:var(--accent2);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);border-radius:4px;padding:.15rem .5rem;margin-bottom:1rem;letter-spacing:.05em;}
+  .question-text{font-size:1.05rem;font-weight:500;line-height:1.6;margin-bottom:1.5rem;}
+  .options{display:flex;flex-direction:column;gap:.6rem;}
+  .option-btn{display:flex;align-items:flex-start;gap:.9rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;width:100%;color:var(--text);font-family:var(--sans);font-size:.92rem;line-height:1.5;}
+  .option-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(91,127,255,.07);}
+  .option-btn:disabled{cursor:default;}
+  .opt-label{font-family:var(--mono);font-size:.75rem;color:var(--accent);min-width:1.5rem;padding-top:.05rem;font-weight:600;}
+  .option-btn.correct{border-color:var(--correct);background:rgba(34,197,94,.08);}
+  .option-btn.correct .opt-label{color:var(--correct);}
+  .option-btn.wrong{border-color:var(--wrong);background:rgba(239,68,68,.08);}
+  .option-btn.wrong .opt-label{color:var(--wrong);}
+  .option-btn.dimmed{opacity:.4;}
+  .feedback{margin-top:1.2rem;padding:.9rem 1rem;border-radius:8px;font-size:.88rem;line-height:1.5;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#86efac;}
+  .feedback.fail{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5;}
+  .controls{margin-top:1.5rem;display:flex;justify-content:flex-end;gap:.75rem;}
+  .btn{font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;padding:.6rem 1.2rem;border-radius:6px;border:none;cursor:pointer;transition:opacity .15s,transform .1s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{opacity:.85;}
+  .btn-secondary{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+  .btn-secondary:hover{color:var(--text);border-color:var(--accent);}
+  .btn:disabled{opacity:.4;cursor:default;}
+  #results{width:100%;max-width:760px;display:none;flex-direction:column;gap:1.5rem;}
+  .score-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center;}
+  .score-big{font-family:var(--mono);font-size:clamp(3rem,10vw,5rem);font-weight:600;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .score-label{color:var(--muted);font-size:.9rem;margin-top:.4rem;}
+  .score-grade{margin-top:1rem;font-size:1rem;font-weight:500;}
+  .review-list{display:flex;flex-direction:column;gap:.8rem;}
+  .review-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;font-size:.85rem;line-height:1.5;}
+  .review-item.rv-correct{border-left:3px solid var(--correct);}
+  .review-item.rv-wrong{border-left:3px solid var(--wrong);}
+  .rv-q{font-weight:500;margin-bottom:.4rem;}
+  .rv-your{color:var(--muted);font-size:.82rem;}
+  .rv-correct-ans{color:#86efac;font-size:.82rem;}
+  #restart-btn{align-self:center;font-size:.85rem;padding:.7rem 2rem;}
+  .stats-row{display:flex;gap:1rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap;}
+  .stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem 1.2rem;font-family:var(--mono);font-size:.8rem;color:var(--muted);}
+  .stat-box strong{color:var(--text);display:block;font-size:1.2rem;}
+  @media(max-width:500px){.card{padding:1.4rem 1rem;}.question-text{font-size:.95rem;}.option-btn{font-size:.85rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">Facultate · Ingineria Programării</div>
+  <h1>Quiz <span>IP</span></h1>
+  <div class="meta" id="meta-info">Toate întrebările din grilele de examen · Selectează răspunsul corect</div>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-info">
+    <span id="prog-text">Întrebarea 1</span>
+    <span id="score-live">0 corecte</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+</div>
+<div class="card" id="quiz-card">
+  <div class="q-number" id="q-num">Q01</div>
+  <div class="q-category" id="q-cat"></div>
+  <div class="question-text" id="q-text"></div>
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls">
+    <button class="btn btn-secondary" id="skip-btn" onclick="skipQuestion()">Sari</button>
+    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Următoarea →</button>
+  </div>
+</div>
+<div id="results">
+  <div class="score-card">
+    <div class="score-big" id="res-score"></div>
+    <div class="score-label" id="res-label"></div>
+    <div class="score-grade" id="res-grade"></div>
+    <div class="stats-row">
+      <div class="stat-box"><strong id="st-correct"></strong>corecte</div>
+      <div class="stat-box"><strong id="st-wrong"></strong>greșite</div>
+      <div class="stat-box"><strong id="st-skip"></strong>sărite</div>
+    </div>
+  </div>
+  <div class="review-list" id="review-list"></div>
+  <button class="btn btn-primary" id="restart-btn" onclick="restart()">↺ Reîncepe quiz-ul</button>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  // ── TEORIE GENERALĂ ──────────────────────────────────────────────────────
+  {cat:"Timp real",q:"Noțiunea de timp real implică:",opts:["Proprietatea de a reacționa în condiții reale ale sistemului","Reacția sistemului în condiții precizate","Proprietatea sistemului de a reacționa la schimbări în proces, într-un timp mai mic decât o limită prestabilită","Timp minim de reacție"],correct:2},
+  {cat:"Conducere proces",q:"Într-un sistem de conducere de proces interacționează următoarele componente:",opts:["Software, hardware","Programe, calculatoare, interfețe de proces, manuale de utilizare","Echipamente, software, proceduri de operare, operator uman","Interfețe, sisteme de reglare, sisteme de calcul, software"],correct:2},
+  {cat:"Ingineria programării",q:"Ingineria programării se ocupă cu:",opts:["Aplicarea unor principii de programare structurată, astfel încât să crească fiabilitatea produselor-program","Folosirea unor instrumente software adecvate, astfel încât să crească productivitatea activității de programare","Utilizarea într-o manieră disciplinată, sistematică și cu pricepere a unor metode și instrumente asociate, adecvate, având în vedere anumite obiective și principii de bază","Organizarea corectă a activității de programare într-o firmă de software"],correct:2},
+  {cat:"Ingineria programării",q:"Obiectivele ingineriei programării stabilesc:",opts:["Dezideratele activității de proiectare software","Modele de proiectare","Principiile care trebuie urmate la proiectare","Modelele și principiile de proiectare"],correct:2},
+  {cat:"Ingineria programării",q:"Obiectivele ingineriei programării sunt:",opts:["Modularitatea, confirmabilitatea, adaptabilitatea, eficiența","Adaptabilitatea, eficiența, fiabilitatea, perceptibilitatea","Adaptabilitatea, eficiența, modularitatea, confirmabilitatea","Modularitatea, abstractizarea, ascunderea, eficiența, fiabilitatea, perceptibilitatea, confirmabilitatea"],correct:1},
+  {cat:"Ingineria programării",q:"Adaptabilitatea se referă la:",opts:["Principiul de programare prin care programul trebuie să fie ușor de modificat","Obiectivul de realizare a unor programe adaptate unor situații concrete de funcționare","Obiectivul de realizare a unor programe care să poată fi ușor adaptate pentru condiții diferite de funcționare","Principiul de proiectare prin care se cere proiectantului să se adapteze ușor la noi cerințe"],correct:2},
+  {cat:"Ingineria programării",q:"Modularitatea înseamnă:",opts:["Stabilirea unor ierarhii în program","Determinarea unor secvențe de program","Stabilirea riguroasă a intrărilor și ieșirilor","Delimitarea unor secvențe de program, cu intrări și ieșiri bine precizate, între care se stabilesc relații ierarhice sau de colaborare"],correct:3},
+  {cat:"Ingineria programării",q:"Principiile ingineriei programării se referă la:",opts:["Modalitățile de atingere a obiectivelor ingineriei programării","Modele folosite în procesul de proiectare","Scopurile programării","Destinația activității de programare"],correct:0},
+  {cat:"Ingineria programării",q:"'Ascunderea' este utilă pentru:",opts:["Mai buna structurare a programului","Definirea unor interfețe complexe","Definirea unor restricții de acces și 'ascunderea' detaliilor nesemnificative ale unui modul de program","Ascunderea detaliilor referitoare la tratarea erorilor"],correct:2},
+  // ── PARADIGME & MODELE DE DEZVOLTARE ────────────────────────────────────
+  {cat:"Paradigme",q:"Prototipizarea este o paradigmă a ingineriei programării care se referă la:",opts:["Construirea aplicațiilor prin metoda top-down","Dezvoltarea rapidă a unui model simplificat al programului, interacțiunea cu clientul și adăugarea ulterioară a funcțiilor omise","Construirea unui prototip al programului și modificarea acestuia","Proiectarea folosind descrieri-tip ale modulelor de program disponibile"],correct:1},
+  {cat:"Paradigme",q:"O paradigmă în ingineria software este:",opts:["Un model de date folosit în procesul de proiectare","O anumită abordare a procesului de proiectare software, care descrie cum se realizează elemente de proiectare, ce metode, unelte și proceduri se aplică la fiecare fază","Un set de reguli euristice aplicate în proiectarea modulelor","Un standard internațional de proiectare software"],correct:1},
+  {cat:"Modele de dezvoltare",q:"Modelul de dezvoltare în spirală presupune:",opts:["O abordare euristică în cadrul căreia la fiecare etapă, conceptul este validat prin metode euristice","O abordare iterativă în cadrul căreia, la fiecare iterație, prin analiza riscurilor se compară diferitele alternative din punct de vedere al cerințelor și constrângerilor, iar prototipizarea verifică fezabilitatea înainte ca o anumită alternativă să fie aleasă","Realizarea unui produs dezvoltat parțial, care să permită clienților și proiectanților să examineze anumite aspecte ale produsului","O abordare iterativă în care analiza riscurilor cântărește alternativele din punct de vedere al validării prin testare"],correct:1},
+  {cat:"Modele de dezvoltare",q:"Caracteristica esențială a modelului în V de dezvoltare software este:",opts:["Testele de acceptanță validează cerințele prin asocierea testelor cu specificațiile, prin conlucrarea dintre client și dezvoltator","Fiecare pas de proiectare este asociat cu pasul corespunzător din etapa de testare pentru verificarea corectei implementări a cerințelor, asociere realizată prin conlucrarea directă a echipelor implicate; aripa stângă poate fi reexecutată","Realizarea unui produs dezvoltat parțial, care să permită clienților și proiectanților să examineze anumite aspecte; codarea este în vârful V-ului","Fiecare increment conține o descriere a cerințelor și se face proiectare formală"],correct:1},
+  {cat:"Modele de dezvoltare",q:"Dezvoltarea iterativă furnizează clientului o versiune de program care:",opts:["Conține de la început toate funcțiile și cu fiecare versiune nouă acestea sunt perfecționate și performanțele îmbunătățite","Conține de la început un set restrâns de funcționalități și cu fiecare versiune nouă se adaugă altele noi","Permite instruirea clientului și adăugarea de funcții noi","Este livrată o dată la două luni"],correct:0},
+  {cat:"Modele de dezvoltare",q:"Metoda de dezvoltare software Cleanroom este bazată pe:",opts:["Metode orientate pe obiecte","Metode euristice","Metode formale","Metode stocastice"],correct:2},
+  // ── PROIECTARE ───────────────────────────────────────────────────────────
+  {cat:"Proiectare",q:"Ce sunt regulile euristice de proiectare?",opts:["Reguli rezultate din aplicarea teoriilor euristice","Reguli rezultate din experiența practică","Metodologii de proiectare ale organizațiilor software","Metode sistematice de proiectare"],correct:1},
+  {cat:"Proiectare",q:"Câte module de program pot fi subordonate unui modul, conform regulilor euristice de proiectare?",opts:["Maxim 5 și minim 2","Între 3 și 6","Mai mult de 4","De obicei între 3-4 și 7, iar dacă fan-out este mai mare de 9 sau mai mic de 3-4, este necesară reproiectarea"],correct:3},
+  {cat:"Proiectare",q:"Proiectarea structurată se realizează prin:",opts:["Proiectarea îngrijită a programelor, astfel încât acestea să aibă o structură clară","Folosirea unor structuri standard de control al programului: procesare secvențială, decizie, reunire","Folosirea proiectării top-down și a unor structuri standard de control al programului: procesare secvențială, decizie, reunire","Proiectarea top-down și modularizare structurală"],correct:2},
+  {cat:"Proiectare",q:"Activitățile de proiectare software cuprind următoarele:",opts:["Analiza cerințelor, codificarea, testarea, livrarea","Specificații, programare, implementare, testare","Proiectarea arhitecturii, specificarea abstractă, proiectarea componentelor și a interfețelor, proiectarea structurilor de date, proiectarea algoritmilor","Analiza de risc, planificarea, implementarea, validarea"],correct:2},
+  {cat:"Proiectare",q:"Obiectivul primordial al proiectării software este să se ajungă la o descriere care să permită:",opts:["Delimitarea exactă a muncii în cadrul echipei și pe de altă parte continuarea cu acțiunea de codificare în cadrul căreia fiecare proiectant să știe exact ce să facă pentru a scrie codul ca activitate de rutină","Prezentarea produsului clienților","Testarea automată a tuturor modulelor","Generarea automată a documentației"],correct:0},
+  // ── MASCOT & DIAGRAME ACR ────────────────────────────────────────────────
+  {cat:"MASCOT",q:"Metoda MASCOT presupune, printre altele, elaborarea unei diagrame (numite ACR) care reflectă:",opts:["Structurile de date și de apel folosite în program","Relațiile dintre structurile de date și structurile de program","Tranzacțiile de sistem","Fluxurile de date din program, care își au obârșiile în dispozitivele de intrare și se termină întotdeauna la dispozitive de ieșire"],correct:3},
+  {cat:"MASCOT",q:"Etapele de aplicare a metodologiei MASCOT sunt:",opts:["Proiectare generală, proiectare în detaliu, asistență tehnică","Proiectare preliminară de ansamblu, proiectare detaliată, implementare și testare","Specificații, programare, implementare","Analiză de sistem, analiză de proces, proiectare de detaliu"],correct:1},
+  {cat:"MASCOT",q:"Într-o diagramă ACR apar reprezentate următoarele entități:",opts:["Taskuri și dispozitive","Taskuri, conducte, cutii poștale, dispozitive, semafoare, blocuri eveniment","Module de program, funcții, canale, rezervoare","Taskuri (activități), dispozitive, canale, rezervoare"],correct:3},
+  // ── TELEMECANICĂ & REDUNDANȚĂ ────────────────────────────────────────────
+  {cat:"Telemecanică",q:"De ce sunt necesare taskurile de 'luare la cunoștință' într-un sistem de telemecanică?",opts:["Deoarece evenimentele din proces trebuie aduse la cunoștința sistemului","Deoarece telecomenzile trebuie confirmate de către operator","Deoarece operatorul trebuie să confirme că a luat la cunoștință de evenimentele din proces și sunt necesare alte taskuri decât cele de tratare a evenimentelor, din pricina asincronismului reacțiilor operatorului cu evenimentele din proces","Deoarece sistemul trebuie să reacționeze suficient de rapid la evenimentele din proces"],correct:2},
+  {cat:"Telemecanică",q:"Într-un sistem de telemecanică, efectuarea unei telecomenzi parcurge următoarele etape:",opts:["Selecție, execuție","Selecție, confirmare","Selecție, execuție, confirmare din proces","Trimiterea telecomenzii, răspunsul procesului"],correct:2},
+  {cat:"Redundanță",q:"Redundanța statică se aplică prin:",opts:["Multiplicarea paralelă a unei funcții de procesare și compararea rezultatelor","Dublarea unei funcții","Verificarea unor condiții de funcționare corectă","Compararea unor rezultate"],correct:0},
+  {cat:"Redundanță",q:"Redundanța dinamică se realizează prin:",opts:["Dublarea unei funcții","Efectuarea unor teste de acceptanță și eventuala rulare a unei versiuni alternative","Efectuarea unor teste de acceptanță și rularea obligatorie a unei versiuni alternative","Testarea stării taskurilor"],correct:1},
+  {cat:"Redundanță",q:"Redundanța dinamică pentru măsurarea poziției poate fi astfel implementată:",opts:["Poziția este citită dinamic de două secvențe software distincte și o altă secvență compară rezultatele; dacă acestea nu sunt egale, se semnalează eroare","Poziția este citită dinamic de trei module software distincte și o altă secvență compară rezultatele; rezultatul corect este indicat de votul majoritar","O secvență software apelată după măsurarea poziției verifică dacă de la precedenta apelare poziția s-a modificat cu o valoare 'plauzibilă'; dacă testul semnalează că măsurarea este suspicioasă, se semnalează eroare de măsură","Poziția este verificată de un senzor de rezervă independent"],correct:2},
+  // ── WATCHDOG ─────────────────────────────────────────────────────────────
+  {cat:"Watchdog",q:"Mecanismul watchdog funcționează astfel:",opts:["Periodic, o secvență software verifică dacă procesul principal rulează și dacă nu, îl repornește","Un timer hardware oprește sistemul dacă nu primește un semnal de la software în intervalul fixat","Periodic, o secvență software apelată printr-o întrerupere de la un ceas hw verifică dacă un indicator a fost resetat de la precedentul apel; dacă nu a fost resetat înseamnă că secvența principală de program s-a blocat și în acest caz secvența produce un restart special","Un modul de monitorizare extern verifică periodic starea sistemului"],correct:2},
+  // ── SISTEME DE OPERARE ───────────────────────────────────────────────────
+  {cat:"Sisteme de operare",q:"Penetrabilitatea sistemelor de operare este:",opts:["Calitatea sistemelor de operare de a fi ușor de utilizat și de înțeles de către utilizatori","Răspândirea și asimilarea de către dezvoltatorii software","Răspândirea și asimilarea de către specialiști și utilizatori","Capacitatea sistemului de a rula pe hardware diferit"],correct:2},
+  {cat:"Sisteme de operare",q:"Sistemele de operare dedicate folosesc pentru comunicare între taskuri:",opts:["Cutii poștale și semafoare","Mesaje și variabile comune","Mesaje","Zone tampon și conducte"],correct:1},
+  {cat:"Sisteme de operare",q:"Sistemele de operare dedicate folosesc pentru alocarea unității centrale:",opts:["Priorități fixe","256 priorități","Mesaje și variabile","Planificarea circulară (round-robin)"],correct:0},
+  {cat:"Sisteme de operare",q:"Familiile mai reprezentative de sisteme de operare dedicate sunt:",opts:["OS-2, WARP, QNX, OS-9","OS-9, QNX, Windows 95 CE","OS-9, QNX, VxWorks/Microworks","OS-900, QTRM, RTS"],correct:2},
+  {cat:"Sisteme de operare",q:"Sistemul UNIX nu este foarte răspândit în conducerea de proces deoarece prezintă:",opts:["Preț ridicat","Lipsă de unitate, sintaxă criptică, lipsă de interfețe grafice și de software","Nepotrivire cu necesitățile de timp real","Imposibilitatea implementării multitaskingului"],correct:1},
+  {cat:"Sisteme de operare",q:"La Windows NT 4 concurența era implementată prin:",opts:["Preemptiune, cu ordonarea după 31 priorități pe câte 4 paliere (IDLE, NORMAL, REALTIME)","Preemptiune, cu ordonarea după 31 priorități, ordonate pe 2 paliere: 4 clase de prioritate și 5 niveluri pe fiecare clasă","Multithreading","Întreruperi event-driven cu planificare circulară (round-robin)"],correct:0},
+  {cat:"Sisteme de operare",q:"Un fir de execuție în Windows NT 4 este:",opts:["Un proces","Un task","Un modul de program care realizează apeluri DLL","O cale de execuție în interiorul unui proces"],correct:3},
+  {cat:"Sisteme de operare",q:"Categoriile de prestatori (server) în arhitectura client-server la Windows NT 4 sunt:",opts:["Monitorul, WIN32, DLL","Windows NT Executive, WIN32","I/O Manager, Win NT Executive, WIN32","NTFS, HPFS, FAT"],correct:1},
+  {cat:"Sisteme de operare",q:"Configurația larg distribuită utilizează:",opts:["Legătură multipunct","Field-bus","Rețele WAN și protocoale de comunicații potrivite","Protocoale de comunicație Novell și rețele LAN"],correct:2},
+  // ── UML ──────────────────────────────────────────────────────────────────
+  {cat:"UML",q:"În accepțiunea UML, relațiile între clase sunt:",opts:["Moduri, constrângeri, stereotipuri, asociații, compoziții, generalizare, dependență, multiplicitate","Asocieri, agregare, compoziții, generalizare, dependență","Asociații, agregare, cazuri de utilizare, actori, compoziție, generalizare, multiplicitate","Moștenire, interfețe, pachete"],correct:1},
+  {cat:"UML",q:"Ce este o stare în abordarea UML?",opts:["O diagramă reprezentând relațiile dintre diferitele componente ale unui sistem","O condiție de existență a unui sistem care persistă pentru o perioadă semnificativă de timp și este reprezentată prin relațiile din cadrul arhitecturii sistemului","O condiție de existență a unui obiect care persistă pentru o perioadă semnificativă de timp și poate fi distinsă într-un anumit mod de altă astfel de condiție de existență","O descriere a comportamentului unui obiect în timpul intrării, ieșirii sau persistenței"],correct:2},
+  {cat:"UML",q:"În UML, o operație este:",opts:["Specificarea unui mesaj","Descrierea unei secvențe de apeluri de metode","Specificarea unui comportament","Definirea unui atribut al unei clase"],correct:2},
+  {cat:"UML",q:"Un mesaj (UML) este:",opts:["O funcție definită într-o clasă","Descrierea unei secvențe de apeluri de metode","O abstractizare a unei unități de comunicare între un obiect sursă și un obiect destinație","O metodă statică a unei clase"],correct:2},
+  {cat:"UML",q:"Când o clasă trebuie să gestioneze un număr de obiecte de aceeași clasă, o abordare potrivită în proiectare ar fi să se adauge:",opts:["Un model (pattern) de proiectare","O clasă observator între clasa primară și setul de obiecte","O clasă container între clasa primară și setul de obiecte","O interfață între clasa primară și setul de obiecte"],correct:2},
+  {cat:"UML",q:"Agregarea este:",opts:["Un tip special de asociere care implică proprietatea logică sau fizică","O relație de tip clasă părinte/clasă descendent","O formă tare de compoziție în care părțile sunt în întregime în responsabilitatea clasei compozite","O relație de dependență între două clase"],correct:0},
+  {cat:"UML",q:"În UML, conectarea modelului de obiecte cu modelul cazurilor de utilizare se realizează prin aceea că:",opts:["Fiecare caz de utilizare va fi realizat de un set de obiecte care lucrează împreună","Fiecare model de obiecte este realizat de un set de cazuri de utilizare care trimit secvențe de mesaje","Fiecare caz de utilizare corespunde câte unui obiect","Fiecare obiect corespunde unui actor"],correct:0},
+  {cat:"UML",q:"Cerințele funcționale în UML:",opts:["Sunt codificate prin note text","Sunt reprezentate prin diagrame de secvență și prin diagrame de stare","Sunt reprezentate direct de cazurile de utilizare","Sunt descrise prin diagrame de clasă"],correct:2},
+  {cat:"UML",q:"Asocierile sunt:",opts:["Codificate prin existența unei clase asociative","Relații de colaborare definite prin existența unui server și respectiv a unui pachet de metode","Relații care se manifestă la rulare pentru a permite schimb de mesaje între obiecte","Relații statice între clase definite la compilare"],correct:2},
+  {cat:"UML",q:"Strategia de identificare a obiectelor numită 'sublinierea substantivelor' permite depistarea:",opts:["Unor taskuri și a dispozitivelor de intrare/ieșire","Unor relații de moștenire între clase","Unor asociații, unor obiecte, clase, atribute, metode și generalizări","Unor interfețe și pachete de clase"],correct:2},
+  // ── DESIGN PATTERNS ──────────────────────────────────────────────────────
+  {cat:"Design Patterns",q:"Un șablon (pattern):",opts:["Abstractizează și identifică aspectele cheie ale unei structuri comune de proiectare în care o singură sursă de informație acționează ca un server pentru mai mulți clienți","Abstractizează și identifică aspectele cheie ale unei structuri comune de proiectare prin utilizarea claselor abstracte și a moștenirii și funcțiilor virtuale","Abstractizează și identifică aspectele cheie ale unei structuri comune de proiectare pe care o face utilă pentru crearea unui design OO, reutilizabil","Definește un set de reguli euristice pentru proiectarea modulelor"],correct:2},
+  {cat:"Design Patterns",q:"Șablonul Factory:",opts:["Oferă o interfață unificată pentru un set de interfețe dintr-un subsistem","Oferă un surogat local al unui obiect","Definește o interfață pentru crearea unui obiect, dar lasă subclasele să decidă ce clasă trebuie instanțiată","Abstractizează și identifică aspectele cheie ale unei structuri comune de proiectare"],correct:2},
+  {cat:"Design Patterns",q:"Un șablon facade oferă:",opts:["Un acces unificat la o colecție de obiecte, prin intermediul pointerilor","O interfață unificată pentru un set de interfețe dintr-un subsistem","O modalitate de a vizualiza unitar orice obiecte dintr-o colecție","Un mecanism de caching pentru accesul la date"],correct:1},
+  {cat:"Design Patterns",q:"Model-View-Controller este:",opts:["Un șablon de proiectare arhitecturală bazat pe separarea datelor de interfață","Un cadru compus din două șabloane Observer","Un pattern care definește o interfață pentru crearea obiectelor","Un șablon pentru gestionarea bazelor de date"],correct:1},
+  {cat:"Design Patterns",q:"Șablonul Smart Pointer elimină unele surse de erori din practica utilizării pointerilor obișnuiți, astfel:",opts:["Testarea validității pointerilor prin contorizarea numărului de instanțieri și testarea valorii de NULL","Folosirea operatorilor new și delete definiți de utilizator pentru a evita accesarea unor zone de memorie nefolosite","Folosesc constructorii pentru a inițializa cu NULL sau a forța precondiții pentru ca pointerii să indice spre obiecte valide; determină dacă memoria trebuie eliberată când nu mai e necesară; pot automat detecta condiția că obiectul nu mai există și să refuze accesul","Folosesc funcții virtuale pentru a verifica dacă obiectul pointat este valid"],correct:2},
+  {cat:"Design Patterns",q:"Soluția pentru șablonul Real-Time Observer constă în aceea că:",opts:["Un singur obiect (Server) furnizează automat date pentru clienții săi (Observers) care în prealabil s-au înregistrat la Server cu Subscribe(); acestea sunt clase abstracte care au clase derivate ce adaugă comportamentul specializat","Un singur obiect (Server) decuplează clienții săi (Observers) de la accesul la un alt fir de execuție prin crearea unui surogat al obiectului","Obiectul Server furnizează la cerere asincronă sau episodică date pentru clienții săi care s-au înregistrat cu Attach()","Serverul trimite notificări prin mesaje clienților înregistrați periodic"],correct:0},
+  {cat:"Design Patterns",q:"Șablonul Observer rezolvă problema:",opts:["În care o singură sursă de informație acționează ca un server pentru mai mulți clienți care trebuie să își actualizeze autonom datele când acestea se schimbă","În care un obiect trebuie să afișeze periodic schimbările survenite în valorile citite de la un senzor","În care un server trebuie să furnizeze la cerere date citite din proces","În care mai mulți clienți trebuie să partajeze aceeași bază de date"],correct:0},
+  {cat:"Design Patterns",q:"Șablonul Container este o bună soluție pentru cazul:",opts:["Când un obiect are asociere 1-la-mai mulți și dorim să îmbunătățim reutilizabilitatea; acea clasă de la capătul '1' va gestiona un set de obiecte stocate într-un container","Când devine mai ușoară adăugarea unui nou container printr-o interfață care asigură clienților serviciile cerute","Când un obiect are nevoie de o implementare comună potrivită pentru o varietate de utilizări","Când două clase trebuie să comunice fără a se cunoaște reciproc"],correct:0},
+  {cat:"Design Patterns",q:"Când, în cadrul șablonului Observer, serverul primește un apel Subscribe:",opts:["Creează un obiect de tip ConcreteObserver care adaugă stocarea locală în atributele dorite","Creează un obiect NotificationHandle care include adresa obiectului","Apelează periodic o metodă Gimme() de interogare directă a valorii urmărite","Blochează accesul altor clienți până la confirmarea înregistrării"],correct:1},
+  {cat:"Design Patterns",q:"În modelul (pattern) Rendezvous participă următoarele obiecte:",opts:["Rendezvous, Lock, Thread","Rendezvous, Lock, Client, Context, Thread","Rendezvous, Wait, Semaphore, Client, Context, Thread","Rendezvous, Monitor, Semaphore, Thread"],correct:0},
+  // ── GESTIUNEA CONFIGURAȚIILOR ────────────────────────────────────────────
+  {cat:"Gestiunea configurațiilor",q:"Problema dublei întrețineri rezultă dacă:",opts:["Mai mulți proiectanți au drepturi pentru acces și modificare simultană a acelorași date","Se mențin copii multiple ale aceluiași cod sursă","Doi proiectanți actualizează simultan același cod sursă și astfel este posibil să se suprascrie unele modificări","Un singur proiectant are acces la cod"],correct:1},
+  {cat:"Gestiunea configurațiilor",q:"Ce este o revizie?",opts:["O nouă versiune destinată a înlocui versiunea veche și care reflectă evoluția în depanarea și îmbunătățirea modulului ca funcționalitate și performanțe","O nouă versiune care realizează aceleași funcționalități pentru situații ușor diferite și care este destinată a fi o alternativă interschimbabilă","Un mecanism care arată organizarea unui set de variații și relațiile dintre acestea","O copie de siguranță a codului sursă"],correct:0},
+  {cat:"Gestiunea configurațiilor",q:"Un sistem Delta de stocare de versiuni:",opts:["Cuprinde convențiile de nume care sunt folosite pentru a discerne între situațiile în care fișiere diferite reprezintă versiuni diferite","Reprezintă toate versiunile prin utilizarea unei singure copii ale codului sursă și diferențele sunt marcate prin compilare condiționată","Memorează o singură versiune completă și le reprezintă pe celelalte prin reținerea diferențelor de la una la alta","Stochează toate versiunile în mod independent"],correct:2},
+  {cat:"Gestiunea configurațiilor",q:"Un proces de descărcare (charge-out) în cadrul unui sistem de gestiune a configurațiilor realizează:",opts:["Copierea unui modul de program din depozitul de bază în spațiul de lucru al programatorului și apoi ștergerea acestuia din depozit","Copierea unui modul din depozitul de bază în spațiul de lucru al programatorului și apoi blocarea accesului (lock) la acest modul astfel încât nimeni altcineva să nu mai poată realiza un alt proces de descărcare","Crearea unei noi revizii în depozit și eliminarea blocării accesului astfel încât alți programatori să poată realiza mai departe revizii","Ștergerea modulului din depozit după finalizarea modificărilor"],correct:1},
+  {cat:"Gestiunea configurațiilor",q:"O aplicație informatică de gestiune a configurațiilor permite stocarea:",opts:["Numai a fișierelor cod-sursă ale proiectului, în forma versiunii curente","Tuturor fișierelor unui proiect, indiferent de destinația informației (cod-sursă, documentații, planificări etc.), stocate într-un depozit și sub forma tuturor versiunilor create de proiectanții din cadrul echipei","Numai a documentației tehnice a proiectului","Numai a fișierelor de configurare ale aplicației"],correct:1},
+  // ── TESTARE ──────────────────────────────────────────────────────────────
+  {cat:"Testare",q:"Atingerea unui prag fixat pentru încrederea în software este:",opts:["O modalitate de implementare a îmbunătățirii siguranței în funcționare","Un criteriu de oprire a testării","Un criteriu de optimizare a proiectării software","O metodă de validare a cerințelor"],correct:1},
+  {cat:"Testare",q:"Inspecția codului:",opts:["Este o metodă de testare utilizată la testele de acceptanță și presupune inspecția codului de către client","Se folosește la testele de modul și presupune analiza de colegii din echipa de testare, cărora li se explică cele realizate","Se folosește la testele de modul și presupune pregătirea acțiunii prin desemnarea unei echipe, prezentarea prealabilă a codului, studiul acesteia, formularea unei liste de obiective și organizarea unei ședințe de analiză; se verifică inclusiv corectitudinea algoritmilor, performanțele, interfețele etc.","Se realizează automat de compilator"],correct:2},
+  {cat:"Testare",q:"În cadrul testelor de acceptanță:",opts:["Sistemul este testat dacă funcțiile sunt implementate după instalarea softului","Sistemul este testat conform descrierii cerințelor clientului","Aplicația este comparată cu lista cerințelor software și hardware","Codul este verificat de o echipă externă"],correct:1},
+  {cat:"Testare",q:"Testele de integrare verifică dacă:",opts:["Aplicația funcționează corect în mediul în care va fi folosită","Fiecare modul funcționează corect în mod izolat","Cerințele clientului au fost implementate","Codul nu conține erori de sintaxă"],correct:0},
+  {cat:"Testare",q:"Pentru testare se utilizează ca și criteriu de oprire a testării atingerea unui prag de încredere fixat. Programul a fost 'plantat' cu 22 de erori. În timpul testării sunt depistate 12 erori, din care 8 sunt 'plantate' și 4 sunt alte erori. Câte erori estimăm că mai sunt în program (nedetectate)?",opts:["7","11","14","9"],correct:1},
+  // ── ANALIZĂ & CERINȚE ────────────────────────────────────────────────────
+  {cat:"Analiză software",q:"Analiza software este:",opts:["Activitatea de scriere a codului sursă conform specificațiilor","Aceea dintre disciplinele existente în domeniul Software care determină ce trebuie făcut, preluând problema clientului și exprimând-o într-un mod inteligibil de către dezvoltator","Procesul de testare a software-ului după implementare","Documentarea arhitecturii software a unui sistem"],correct:1},
+  {cat:"Analiză software",q:"Analiza orientată pe obiecte (OOA) este:",opts:["Analiza problemei plecând de la cerințele externe, prin discuții cu clientul, urmând să se obțină diagrame de clase și diagrame de cazuri de utilizare","Crearea unui model OO plecând de la cerințele externe (un model al domeniului problemei)","Crearea unui set de specificații OO plecând de la cerințele externe (un model al domeniului soluției problemei)","Proiectarea claselor și a relațiilor dintre ele"],correct:1},
+  {cat:"Cerințe",q:"Nivelurile cerințelor software sunt următoarele:",opts:["De business, utilizator, funcționale","De business, de proiectare, de testare","De sistem, de program, de modul","Funcționale, nefuncționale, de performanță"],correct:0},
+  {cat:"Cerințe",q:"Tipurile de informații furnizate de clienți (în cadrul activității de analiză software) sunt:",opts:["Cerințe de business, scenarii de business, restricții asupra echipamentelor disponibile, cerințe funcționale, structuri de date","Specificații, sugestii de arhitectură software, structuri de date, funcții ale sistemului, interfața cu utilizatorul","Cerințe de business, scenarii de business, reguli de business, cerințe funcționale, atribute de calitate, constrângeri externe, structuri de date, sugestii pentru posibile soluții","Diagrame de clasă, cazuri de utilizare, diagrame de secvență"],correct:2},
+  {cat:"Cerințe",q:"Pentru scrierea cerințelor sistemului, vom organiza ședințe-interviu cu clienții. O ședință nu va dura mai mult de:",opts:["1 oră","2-3 ore","4-5 ore","O zi întreagă"],correct:1},
+  {cat:"Cerințe",q:"În ședința de interviu cu clientul, ca reprezentanți ai proiectantului software, ne vom strădui să ascultăm doleanțele clientului mai mult de:",opts:["Un sfert din timpul alocat","Cel puțin jumătate din timp","Patru cincimi din timp (80%)","Întregul timp"],correct:2},
+  {cat:"Cerințe",q:"Specificațiile urmăresc:",opts:["Descrierea structurii aplicației software și a comunicării acesteia cu mediul","Descrierea comunicării dintre aplicația software (văzută ca o cutie neagră) și mediul (mulțimea tuturor actorilor – a entităților exterioare cu care aplicația interacționează în mod semnificativ)","Descrierea elementelor de arhitectură și de detaliu din aplicația software, a structurii bazelor de date și a interfețelor utilizator","Definirea testelor de acceptanță"],correct:1},
+  {cat:"Cerințe",q:"Pentru identificarea cazurilor de utilizare analistul stă de vorbă cu clientul și îi adresează întrebări cheie precum:",opts:["Care sunt actorii? Care sunt mesajele pe care le trimit și recepționează? Care sunt grupele care alcătuiesc cazuri de utilizare?","Care este rolul actorilor și al sistemului în fiecare scenariu? Care sunt interacțiunile (fluxurile)? Care sunt secvențele de evenimente și date? și posibilele variații","Care sunt funcțiile primare ale sistemului? Care sunt funcțiile secundare? De ce a fost construit sistemul? Ce înlocuiește și de ce?","Care este bugetul proiectului? Care sunt termenele?"],correct:2},
+  // ── ARHITECTURI ──────────────────────────────────────────────────────────
+  {cat:"Arhitecturi",q:"Middleware este:",opts:["Un software care este conceput pentru a rula într-un nivel ierarhic de mijloc (three-tier) între utilizatori și bazele de date","Un software de conectivitate care constă dintr-un set de servicii care permit rularea proceselor multiple pe una sau mai multe echipamente/mașini în vederea interacțiunii de-a lungul unei rețele","Un software de conectivitate care constă dintr-un set de servicii de tip proxy","Un sistem de operare special pentru sisteme embedded"],correct:1},
+  {cat:"Arhitecturi",q:"Uzual, Service Oriented Architecture (SOA) se bazează pe:",opts:["Standarde de acces specifice Serviciilor WEB (SOAP – Simple Object Access Protocol, REST), interfețele Serviciilor WEB sunt descrise în termeni de WSDL pentru a putea fi înregistrate în directori publici și căutate în depozite UDDI, iar suportul pentru transportul informației este formatul XML","Standarde de acces specifice Serviciilor WEB (XML – Extensible Markup Language), interfețele sunt descrise în termeni de WSDL, iar suportul pentru transportul informației este formatul SOAP","Standarde de acces specifice Serviciilor WEB (SOAP, REST), interfețele sunt descrise în termeni de XML pentru a putea fi căutate în depozite UDDI, iar mediul de dezvoltare este Microsoft Studio.NET sau JAVA","Protocoale proprietare ale fiecărui furnizor de servicii"],correct:0},
+  {cat:"Arhitecturi",q:"În cadrul arhitecturii three-tier, nivelele aplicației sunt:",opts:["Prezentare, Logica aplicației (business logic), acces la date","Client, Server, Bază de date","Interfață, Procesare, Stocare","Frontend, Backend, API"],correct:0},
+  {cat:"Arhitecturi",q:"Documentul de proiectare arhitecturală trebuie să:",opts:["Specifice rolul fiecărei componente, cerințele care i-au fost alocate, interfața de comunicare cu celelalte componente ale sistemului","Descrie rolul fiecărei componente, cerințele de memorie și timp de calcul alocate, interfața de comunicare cu celelalte componente ale sistemului","Descrie rolul fiecărui programator și al fiecărei componente, respectiv interfața de comunicare","Specifice rolul fiecărei funcții, cerințele care i-au fost alocate, interfața de comunicare cu utilizatorul"],correct:0},
+  // ── AUTOSAR & INDUSTRIE ──────────────────────────────────────────────────
+  {cat:"AUTOSAR",q:"Obiectivul partenerilor furnizori pentru industria auto care au definit împreună AUTOSAR (Automotive Open System Architecture) este de:",opts:["A crea și stabili un sistem de operare (OSEK-VDK) pentru software pentru vehicule, care să fie universal, deschis, scalabil","A dezvolta un mediu interactiv de dezvoltare și testare care să poată fi folosit pe scară largă pentru aplicații orientate pe obiecte","A crea și stabili standarde deschise pentru arhitecturile software, care vor oferi o infrastructură de bază, pentru a ajuta la dezvoltarea de software de vehicule, interfețe utilizator și de management pentru toate domeniile specifice industriei auto","A standardiza protocoalele de comunicare între ECU-urile unui autovehicul"],correct:2},
+  // ── CONDUCERE PROCES ─────────────────────────────────────────────────────
+  {cat:"Conducere proces",q:"Sistemele pentru conducere de proces ridică probleme speciale, care măresc gradul de dificultate al proiectării și implementării, deoarece:",opts:["Necesită echipamente hardware foarte scumpe","Impun cerințe speciale privind siguranța în funcționare (sisteme safety-critical), respectiv cele mai multe au cerințe privind răspunsul în timp real","Necesită echipe mari de programatori specializați","Sunt incompatibile cu sistemele de operare standard"],correct:1},
+  {cat:"Conducere proces",q:"Sistemele de conducere de proces prezintă anumite particularități, printre acestea numărându-se:",opts:["Prezența interfețelor cu utilizatorul, puterea foarte mare de procesare, utilizarea memoriilor statice, includerea unui mecanism de watch-dog, sisteme de operare speciale (OSEK sau AUTOSAR) și funcționarea în condiții grele de lucru","Proiectarea folosind redundanța statică sau dinamică, utilizarea unor microcontrollere speciale, prezența interfețelor de proces și a interfețelor de vizualizare de semnal, funcționarea în condiții grele de lucru","Prezența interfețelor de proces, utilizarea memoriilor statice, includerea unui mecanism de watch-dog, eventual existența mai multor procesoare, modularitatea, toleranța la defectare, fiabilitatea foarte bună, sisteme de operare în timp real, câteodată lipsesc interfețele standard de vizualizare și funcționarea în condiții grele de lucru","Comunicare daisy-chain, stea sau multipunct, existența unor interfețe speciale cu operatorul, sisteme de operare UNIX, Linux sau QNX, toleranța la defectare, funcționarea în condiții grele de lucru"],correct:2},
+  // ── DOCUMENTAȚIE & ÎNTREȚINERE ───────────────────────────────────────────
+  {cat:"Documentație",q:"Documentația software de proiectare este necesară pentru:",opts:["Prezentarea produsului","Prezentarea produsului și relațiile cu clienții","Elaborarea unui prototip","Activitatea de asistență tehnică și refolosire software"],correct:3},
+  {cat:"Întreținere",q:"În depanarea aplicațiilor în cadrul întreținerii, este bine dacă:",opts:["Introducem în meniul aplicației o comandă numită 'Lista erorilor înregistrate'","Avem un log al utilizatorilor, al activităților, al erorilor, al utilizatorilor care au modificat înregistrări în baza de date","Avem acces la un simulator de proces","Utilizăm un debugger specializat"],correct:1},
+  // ── PROBLEMA ANTENEI ─────────────────────────────────────────────────────
+  {cat:"Problemă: Antenă",q:"Regulatorul numeric din sistemul de poziționare a antenei este:",opts:["Un microprocesor care comandă rotația antenei","Un calcul care se efectuează în buclă infinită, furnizând o comandă către sistemul de poziționare pe baza intrării de poziție și a unei prescrieri","Un calcul care se efectuează periodic, furnizând o comandă către sistemul de poziționare pe baza intrării de poziție și a unei prescrieri","Un PID implementat hardware"],correct:1},
+  {cat:"Problemă: Antenă",q:"Dispozitivele de intrare pentru sistemul de poziționare a antenei sunt:",opts:["Tastatura și afișajul cu cristale lichide","Contorul de impulsuri de la traductorul de poziție, convertorul analog numeric care preia poziția de la traductorul potențiometric, tastatura, convertoarele analog numerice pentru senzorul de temperatură și de suprasarcină, intrare numerică pentru senzorii antiefracție și limitatoarele de cursă, unitate serială pentru comunicarea cu PC","Numai senzorii de temperatură și de suprasarcină","Unitatea serială și tastatura"],correct:1},
+  {cat:"Problemă: Antenă",q:"Actorii în sistemul de poziționare a antenei, în accepțiunea UML, sunt:",opts:["Antena, utilizatorul, calculatorul PC","Senzorii, sistemul de acționare, traductoarele de măsură, utilizatorul, unitatea serială","Sistemul de acționare al antenei, sistemul de măsură de poziție, interfața cu utilizatorul, unitatea serială de comunicare cu calculatorul PC, utilizatorul","Regulatorul numeric, interfața de proces, utilizatorul"],correct:2},
+  {cat:"Problemă: Antenă",q:"În cadrul diagramei ACR pentru sistemul antenei, avem următoarele fluxuri de informație:",opts:["De poziție și de la operator (de la tastatură)","De poziție, de prelucrare a semnalului de suprasarcină, de semnalizare (de la senzorii antiefracție și de limitare de cursă), de la operator (de la tastatură), de la PC (de la unitatea serială), de măsurare a temperaturii","Numai fluxul de poziție și cel de comandă","De la PC și de la operator"],correct:1},
+  {cat:"Problemă: Antenă",q:"Pentru dezvoltarea produsului de poziționare a antenei se va folosi dezvoltarea agilă SCRUM. În timpul Sprint-ului:",opts:["Se admit modificări dacă sunt aprobate de Product Owner","Nu se admit modificări care ar putea afecta ținta Sprint-ului","Se organizează ședințe zilnice de 1 oră","Se livrează produsul final clientului"],correct:1},
+  // ── AGILE ────────────────────────────────────────────────────────────────
+  {cat:"Agile",q:"Pentru dezvoltarea agilă 'uzuală', principiile călăuzitoare sunt:",opts:["Software-ul se livrează frecvent (săptămânal), chiar și schimbări târzii sunt acceptate, cooperarea cu clientul este apropiată (dacă se poate, zilnică), forma de comunicare dorită este conversația față în față, echipa se auto-organizează","Software-ul este livrat o dată la două luni, schimbări după două săptămâni nu se acceptă, cooperarea cu clientul se face prin întâlniri săptămânale, forma de comunicare predilectă este e-mailul","Software-ul se livrează frecvent (săptămânal), se definesc pentru fiecare increment specificații funcționale, se face proiectarea formală, verificarea corectitudinii, testarea statistică și certificarea","Echipa este structurată după metoda echipei programatorului-șef, cu livrări lunare"],correct:0}
+];
+
+let questions=[], current=0, score=0, answered=false, userAnswers=[], skipped=0;
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function init(){
+  questions=shuffle(ALL_QUESTIONS);
+  current=0;score=0;answered=false;skipped=0;
+  userAnswers=new Array(questions.length).fill(null);
+  document.getElementById('quiz-card').style.display='';
+  document.getElementById('results').style.display='none';
+  document.getElementById('meta-info').textContent=`${questions.length} întrebări unice din grilele de examen · Selectează răspunsul corect`;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=questions[current];answered=false;
+  document.getElementById('q-num').textContent=`Q${String(current+1).padStart(2,'0')}`;
+  document.getElementById('q-cat').textContent=q.cat;
+  document.getElementById('q-text').textContent=q.q;
+  const labels=['A','B','C','D'];
+  const optsEl=document.getElementById('options');
+  optsEl.innerHTML='';
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML=`<span class="opt-label">${labels[i]}</span><span>${opt}</span>`;
+    btn.onclick=()=>selectAnswer(i);
+    optsEl.appendChild(btn);
+  });
+  const fb=document.getElementById('feedback');
+  fb.className='feedback';fb.textContent='';
+  document.getElementById('next-btn').disabled=true;
+  document.getElementById('skip-btn').disabled=false;
+  updateProgress();
+}
+
+function selectAnswer(idx){
+  if(answered)return;answered=true;
+  const q=questions[current];
+  const btns=document.querySelectorAll('.option-btn');
+  const fb=document.getElementById('feedback');
+  btns.forEach(b=>b.disabled=true);
+  if(idx===q.correct){
+    btns[idx].classList.add('correct');
+    fb.textContent='✓ Corect!';fb.className='feedback show ok';score++;
+    userAnswers[current]={chosen:idx,correct:true};
+  } else {
+    btns[idx].classList.add('wrong');btns[q.correct].classList.add('correct');
+    btns.forEach((b,i)=>{if(i!==idx&&i!==q.correct)b.classList.add('dimmed');});
+    fb.textContent=`✗ Răspuns greșit. Corect era: ${['A','B','C','D'][q.correct]}) ${q.opts[q.correct]}`;
+    fb.className='feedback show fail';
+    userAnswers[current]={chosen:idx,correct:false};
+  }
+  document.getElementById('next-btn').disabled=false;
+  document.getElementById('skip-btn').disabled=true;
+  updateProgress();
+}
+
+function skipQuestion(){
+  if(answered)return;skipped++;
+  userAnswers[current]={chosen:null,correct:false};
+  nextQuestion();
+}
+
+function nextQuestion(){
+  current++;
+  if(current>=questions.length)showResults();
+  else renderQuestion();
+}
+
+function updateProgress(){
+  const total=questions.length;
+  const pct=(current/total)*100;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=`Întrebarea ${current+1} din ${total}`;
+  document.getElementById('score-live').textContent=`${score} corecte`;
+}
+
+function showResults(){
+  document.getElementById('quiz-card').style.display='none';
+  const res=document.getElementById('results');
+  res.style.display='flex';
+  const total=questions.length;
+  const pct=Math.round((score/total)*100);
+  document.getElementById('res-score').textContent=`${score}/${total}`;
+  document.getElementById('res-label').textContent=`${pct}% răspunsuri corecte`;
+  let grade='';
+  if(pct>=90)grade='🏆 Excelent! Pregătit pentru examen!';
+  else if(pct>=75)grade='👍 Bine! Mai studiază câteva subiecte.';
+  else if(pct>=60)grade='📚 Acceptabil, dar mai ai de lucru.';
+  else grade='📖 Mai multă studiere este necesară.';
+  document.getElementById('res-grade').textContent=grade;
+  const wrong=userAnswers.filter(a=>a&&!a.correct).length;
+  document.getElementById('st-correct').textContent=score;
+  document.getElementById('st-wrong').textContent=wrong;
+  document.getElementById('st-skip').textContent=skipped;
+  const rl=document.getElementById('review-list');rl.innerHTML='';
+  questions.forEach((q,i)=>{
+    const ua=userAnswers[i];if(!ua)return;
+    const div=document.createElement('div');
+    div.className=`review-item ${ua.correct?'rv-correct':'rv-wrong'}`;
+    const chosenText=ua.chosen!==null?`Ales: ${['A','B','C','D'][ua.chosen]}) ${q.opts[ua.chosen]}`:'Sărit';
+    div.innerHTML=`<div class="rv-q"><span style="margin-right:.4rem">${ua.correct?'✓':'✗'}</span>Q${i+1}. ${q.q}</div><div class="rv-your">${chosenText}</div>${!ua.correct?`<div class="rv-correct-ans">Corect: ${['A','B','C','D'][q.correct]}) ${q.opts[q.correct]}</div>`:''}`;
+    rl.appendChild(div);
+  });
+  document.getElementById('prog-fill').style.width='100%';
+  document.getElementById('prog-text').textContent='Quiz finalizat!';
+  document.getElementById('score-live').textContent=`${score}/${total} corecte`;
+}
+
+function restart(){init();window.scrollTo(0,0);}
+init();
+</script>
+</body>
+</html>
